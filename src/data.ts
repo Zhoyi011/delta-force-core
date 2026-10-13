@@ -176,21 +176,25 @@ export const WEAPONS: WeaponCategory[] = [
 export const EQUIPMENT: Equipment = {
   armors: [
     {
-      tier: 1,
-      allowNormal: true,
-      items: [{ id: 'armor_l1_nylon', name: '尼龙防弹衣', features: '极轻无惩罚' }],
-      items: [{ id: 'armor_l1_bike', name: '电单车背心', features: '极轻无惩罚' }],
-      items: [{ id: 'armor_l1_clean', name: '轻型防弹衣', features: '极轻无惩罚' }],
-      items: [{ id: 'armor_l1_baoan', name: '保安防弹衣', features: '极轻无惩罚' }],
-    },
-    {
-      tier: 2,
-      allowNormal: true,
-      items: [{ id: 'armor_l2_tg', name: 'TG战术防弹衣', features: '不护腹' }],
-      items: [{ id: 'armor_l2_ht', name: 'HT战术背心', features: '不护腹' }],
-      items: [{ id: 'armor_l2_stab', name: '简易防刺背心', features: '不护腹' }],
-      items: [{ id: 'armor_l2_standard', name: '通用战术背心', features: '不护腹' }],
-    },
+  tier: 1,
+  allowNormal: true,
+  items: [
+    { id: 'armor_l1_nylon', name: '尼龙防弹衣', features: '极轻无惩罚' },
+    { id: 'armor_l1_bike',  name: '电单车背心', features: '极轻无惩罚' },
+    { id: 'armor_l1_clean', name: '轻型防弹衣', features: '极轻无惩罚' },
+    { id: 'armor_l1_baoan', name: '保安防弹衣', features: '极轻无惩罚' },
+  ],
+},
+{
+  tier: 2,
+  allowNormal: true,
+  items: [
+    { id: 'armor_l2_tg',       name: 'TG战术防弹衣', features: '不护腹' },
+    { id: 'armor_l2_ht',       name: 'HT战术背心',   features: '不护腹' },
+    { id: 'armor_l2_stab',     name: '简易防刺背心', features: '不护腹' },
+    { id: 'armor_l2_standard', name: '通用战术背心', features: '不护腹' },
+  ],
+},
     {
       tier: 3,
       allowNormal: true,
