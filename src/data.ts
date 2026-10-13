@@ -23,7 +23,7 @@ export const OPERATORS: OperatorCategory[] = [
       { id: 'honglang', name: '红狼', features: '爆发移速' },
       { id: 'weilong', name: '威龙', features: '破门震荡' },
       { id: 'jifeng', name: '疾风', features: '机动位移' },
-      { id: 'wuming', name: '无名', features: '偷袭！' },
+      { id: 'wuming', name: '无名', features: '静步偷袭' },
     ],
   },
   {
