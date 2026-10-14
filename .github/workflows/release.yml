@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write     # ← 新增：OIDC 需要
 
     steps:
       - name: Checkout (full history)
@@ -39,16 +40,12 @@ jobs:
           MSG="${{ github.event.head_commit.message }}"
           echo "Commit message: $MSG"
 
-          # 默认：不发布
           BUMP="none"
 
-          # BREAKING CHANGE 或 feat! / fix! => major
           if echo "$MSG" | grep -qE "BREAKING CHANGE|^[a-z]+(\(.+\))?!:"; then
             BUMP="major"
-          # feat: => minor
           elif echo "$MSG" | grep -qE "^feat(\(.+\))?:"; then
             BUMP="minor"
-          # fix: / data: / refactor: / perf: => patch
           elif echo "$MSG" | grep -qE "^(fix|data|refactor|perf)(\(.+\))?:"; then
             BUMP="patch"
           fi
@@ -87,11 +84,10 @@ jobs:
           git commit -m "chore(release): ${{ steps.version.outputs.new_version }} [skip ci]"
           git push
 
-      - name: Publish to npm
+      - name: Publish to npm (OIDC / Trusted Publisher)
         if: steps.bump.outputs.bump != 'none'
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # ⚠️ 不再需要 env: NODE_AUTH_TOKEN
 
       - name: Create GitHub Release
         if: steps.bump.outputs.bump != 'none'
@@ -136,7 +132,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to npm
+      - name: Publish to npm (OIDC / Trusted Publisher)
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # ⚠️ 不再需要 env: NODE_AUTH_TOKEN
