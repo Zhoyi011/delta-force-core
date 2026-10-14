@@ -1,4 +1,3 @@
-```
 <div align="center">
 
 <img src="./assets/logo.svg" alt="delta-force-core logo" width="200" />
@@ -1192,4 +1191,3 @@ Released under the [MIT License](./LICENSE).
 git add README.md README.en.md llms.txt llms-full.txt
 git commit -m "docs: 更新 README + 新增 llms.txt/llms-full.txt"
 git push origin main
-```
