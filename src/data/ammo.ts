@@ -11,9 +11,11 @@ import type { Ammo } from '../types.js';
 export const AMMO: Ammo[] = [
   { id: 'ammo_357_magnum', name: '.357 Magnum',  caliber: '.357 Magnum' },
   { id: 'ammo_45_acp',     name: '.45 ACP',      caliber: '.45 ACP' },
-  { id: 'ammo_58_ae',      name: '.58 AE',       caliber: '.58 AE' },
+  { id: 'ammo_50_ae',      name: '.50 AE',       caliber: '.50 AE' },
+  { id: 'ammo_338',        name: '.338',         caliber: '.338' },
   { id: 'ammo_12_gauge',   name: '12 Gauge',     caliber: '12 Gauge' },
   { id: 'ammo_127x55',     name: '12.7x55mm',    caliber: '12.7x55mm' },
+  { id: 'ammo_127x99',     name: '12.7x99mm',    caliber: '12.7x99mm' },
   { id: 'ammo_545x39',     name: '5.45x39mm',    caliber: '5.45x39mm' },
   { id: 'ammo_556x45',     name: '5.56x45mm',    caliber: '5.56x45mm' },
   { id: 'ammo_57x28',      name: '5.7x28mm',     caliber: '5.7x28mm' },
