@@ -1,4 +1,3 @@
-```
 <div align="center">
 
 <img src="./assets/logo.svg" alt="delta-force-core logo" width="200" />
@@ -1215,4 +1214,3 @@ const data = require('delta-force-core/index.json');
 [⬆ 回到顶部](#delta-force-core)
 
 </div>
-```
