@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
   "version": "0.2.0",
-  "generatedAt": "2026-10-14T00:34:01.102Z",
+  "generatedAt": "2026-10-14T04:34:20.642Z",
   "operators": [
     {
       "category": "突击兵",
@@ -116,122 +116,170 @@
         {
           "id": "m4a1",
           "name": "M4A1突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m4a1.png"
         },
         {
           "id": "k416",
           "name": "K416突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/k416.png"
         },
         {
           "id": "akm",
           "name": "AKM突击步枪",
-          "allowNormal": true
+          "caliber": "7.62x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/akm.png"
         },
         {
           "id": "qbz95_1",
           "name": "QBZ-95-1突击步枪",
-          "allowNormal": true
+          "caliber": "5.8x42mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qbz95_1.png"
         },
         {
           "id": "as_val",
           "name": "AS Val「巨浪」突击步枪",
-          "allowNormal": true
+          "caliber": "9x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/as_val.png"
         },
         {
           "id": "tenglong",
           "name": "腾龙突击步枪（QBZ-191）",
-          "allowNormal": true
+          "caliber": "5.8x42mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/tenglong.png"
         },
         {
           "id": "m7",
           "name": "M7战斗步枪",
-          "allowNormal": true
+          "caliber": "6.8x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m7.png"
         },
         {
           "id": "scar_h",
           "name": "SCAR-H战斗步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/scar_h.png"
         },
         {
           "id": "g3",
           "name": "G3战斗步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/g3.png"
         },
         {
           "id": "ak12",
           "name": "AK-12突击步枪",
-          "allowNormal": true
+          "caliber": "5.45x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ak12.png"
         },
         {
           "id": "aug",
           "name": "AUG突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/aug.png"
         },
         {
           "id": "sg552",
           "name": "SG552突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sg552.png"
         },
         {
           "id": "m16a4",
           "name": "M16A4突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m16a4.png"
         },
         {
           "id": "car15",
           "name": "CAR-15突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/car15.png"
         },
         {
           "id": "aks74u",
           "name": "AKS-74U突击步枪",
-          "allowNormal": true
+          "caliber": "5.45x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/aks74u.png"
         },
         {
           "id": "k437",
           "name": "K437突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/k437.png"
         },
         {
           "id": "ptr32",
           "name": "PTR-32突击步枪",
-          "allowNormal": true
+          "caliber": "7.62x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ptr32.png"
         },
         {
           "id": "ash12",
           "name": "ASh-12战斗步枪",
-          "allowNormal": true
+          "caliber": "12.7x55mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ash12.png"
         },
         {
           "id": "kc17",
           "name": "KC17突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/kc17.png"
         },
         {
           "id": "mk47",
           "name": "MK47突击步枪",
-          "allowNormal": true
+          "caliber": "7.62x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mk47.png"
         },
         {
           "id": "mcx_lt",
           "name": "MCX LT突击步枪",
-          "allowNormal": true
+          "caliber": ".300 Blackout",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mcx_lt.png"
         },
         {
           "id": "ar57",
           "name": "AR-57突击步枪",
-          "allowNormal": true
+          "caliber": "5.7x28mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ar57.png"
         },
         {
           "id": "rm277",
           "name": "RM277突击步枪",
-          "allowNormal": true
+          "caliber": "6.8x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/rm277.png"
         },
         {
           "id": "mdr",
           "name": "MDR突击步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mdr.png"
         }
       ]
     },
@@ -241,62 +289,86 @@
         {
           "id": "uzi",
           "name": "UZI冲锋枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/uzi.png"
         },
         {
           "id": "bizon",
           "name": "野牛冲锋枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/bizon.png"
         },
         {
           "id": "vityaz",
           "name": "勇士冲锋枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/vityaz.png"
         },
         {
           "id": "mp5",
           "name": "MP5冲锋枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mp5.png"
         },
         {
           "id": "smg45",
           "name": "SMG-45冲锋枪",
-          "allowNormal": true
+          "caliber": ".45 ACP",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/smg45.png"
         },
         {
           "id": "sr3m",
           "name": "SR-3M冲锋枪",
-          "allowNormal": true
+          "caliber": "9x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sr3m.png"
         },
         {
           "id": "p90",
           "name": "P90冲锋枪",
-          "allowNormal": true
+          "caliber": "5.7x28mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/p90.png"
         },
         {
           "id": "mp7",
           "name": "MP7冲锋枪",
-          "allowNormal": true
+          "caliber": "4.6x30mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mp7.png"
         },
         {
           "id": "vector",
           "name": "Vector冲锋枪",
-          "allowNormal": true
+          "caliber": ".45 ACP",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/vector.png"
         },
         {
           "id": "qcq171",
           "name": "QCQ171冲锋枪（二〇式）",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qcq171.png"
         },
         {
           "id": "mk4",
           "name": "MK4冲锋枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mk4.png"
         },
         {
           "id": "thompson",
           "name": "汤姆逊冲锋枪",
-          "allowNormal": true
+          "caliber": ".45 ACP",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/thompson.png"
         }
       ]
     },
@@ -306,52 +378,72 @@
         {
           "id": "sr9",
           "name": "SR9射手步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sr9.png"
         },
         {
           "id": "mini14",
           "name": "Mini-14射手步枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mini14.png"
         },
         {
           "id": "m14",
           "name": "M14战斗射手步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m14.png"
         },
         {
           "id": "sks",
           "name": "SKS射手步枪",
-          "allowNormal": true
+          "caliber": "7.62x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sks.png"
         },
         {
           "id": "psg1",
           "name": "PSG-1射手步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/psg1.png"
         },
         {
           "id": "vss",
           "name": "VSS射手步枪",
-          "allowNormal": true
+          "caliber": "9x39mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/vss.png"
         },
         {
           "id": "svd",
           "name": "SVD狙击步枪",
-          "allowNormal": true
+          "caliber": "7.62x54mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/svd.png"
         },
         {
           "id": "sr25",
           "name": "SR-25射手步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sr25.png"
         },
         {
           "id": "marlin",
           "name": "马林杠杆式步枪",
-          "allowNormal": true
+          "caliber": "45-70 Govt",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/marlin.png"
         },
         {
           "id": "svch",
           "name": "SVCH射手步枪",
-          "allowNormal": true
+          "caliber": "7.62x54mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/svch.png"
         }
       ]
     },
@@ -361,27 +453,37 @@
         {
           "id": "sv98",
           "name": "SV-98狙击步枪",
-          "allowNormal": true
+          "caliber": "7.62x54mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sv98.png"
         },
         {
           "id": "r93",
           "name": "R93狙击步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/r93.png"
         },
         {
           "id": "m700",
           "name": "M700狙击步枪",
-          "allowNormal": true
+          "caliber": "7.62x51mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m700.png"
         },
         {
           "id": "awm",
           "name": "AWM重型狙击步枪",
-          "allowNormal": false
+          "caliber": ".338",
+          "allowNormal": false,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/awm.png"
         },
         {
           "id": "m82",
           "name": "M82重型狙击步枪",
-          "allowNormal": false
+          "caliber": "12.7x99mm",
+          "allowNormal": false,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m82.png"
         }
       ]
     },
@@ -391,22 +493,30 @@
         {
           "id": "m249",
           "name": "M249轻机枪",
-          "allowNormal": true
+          "caliber": "5.56x45mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m249.png"
         },
         {
           "id": "pkm",
           "name": "PKM通用机枪",
-          "allowNormal": true
+          "caliber": "7.62x54mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/pkm.png"
         },
         {
           "id": "qjb201",
           "name": "QJB-201轻机枪",
-          "allowNormal": true
+          "caliber": "5.8x42mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qjb201.png"
         },
         {
           "id": "m250",
           "name": "M250通用机枪",
-          "allowNormal": false
+          "caliber": "6.8x51mm",
+          "allowNormal": false,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m250.png"
         }
       ]
     },
@@ -416,27 +526,37 @@
         {
           "id": "m870",
           "name": "M870霰弹枪",
-          "allowNormal": true
+          "caliber": "12 Gauge",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m870.png"
         },
         {
           "id": "m1014",
           "name": "M1014半自动霰弹枪",
-          "allowNormal": true
+          "caliber": "12 Gauge",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m1014.png"
         },
         {
           "id": "s12k",
           "name": "S12K连发霰弹枪",
-          "allowNormal": true
+          "caliber": "12 Gauge",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/s12k.png"
         },
         {
           "id": "double_barrel_725",
           "name": "725双管霰弹枪",
-          "allowNormal": true
+          "caliber": "12 Gauge",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/double_barrel_725.png"
         },
         {
           "id": "fs12",
           "name": "FS12霰弹枪",
-          "allowNormal": true
+          "caliber": "12 Gauge",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/fs12.png"
         }
       ]
     },
@@ -446,37 +566,51 @@
         {
           "id": "g17",
           "name": "G17手枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/g17.png"
         },
         {
           "id": "qsz92g",
           "name": "QSZ92G手枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qsz92g.png"
         },
         {
           "id": "desert_eagle",
           "name": "沙漠之鹰",
-          "allowNormal": true
+          "caliber": ".50 AE",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/desert_eagle.png"
         },
         {
           "id": "93r",
           "name": "93R手枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/93r.png"
         },
         {
           "id": "g18",
           "name": "G18手枪",
-          "allowNormal": true
+          "caliber": "9x19mm",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/g18.png"
         },
         {
           "id": "revolver_357",
           "name": ".357左轮手枪",
-          "allowNormal": true
+          "caliber": ".357 Magnum",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/revolver_357.png"
         },
         {
           "id": "m1911",
           "name": "M1911手枪",
-          "allowNormal": true
+          "caliber": ".45 ACP",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m1911.png"
         }
       ]
     },
@@ -486,7 +620,9 @@
         {
           "id": "compound_bow",
           "name": "战术复合弓",
-          "allowNormal": true
+          "caliber": "箭矢",
+          "allowNormal": true,
+          "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/compound_bow.png"
         }
       ]
     }
@@ -1057,9 +1193,14 @@
       "caliber": ".45 ACP"
     },
     {
-      "id": "ammo_58_ae",
-      "name": ".58 AE",
-      "caliber": ".58 AE"
+      "id": "ammo_50_ae",
+      "name": ".50 AE",
+      "caliber": ".50 AE"
+    },
+    {
+      "id": "ammo_338",
+      "name": ".338",
+      "caliber": ".338"
     },
     {
       "id": "ammo_12_gauge",
@@ -1070,6 +1211,11 @@
       "id": "ammo_127x55",
       "name": "12.7x55mm",
       "caliber": "12.7x55mm"
+    },
+    {
+      "id": "ammo_127x99",
+      "name": "12.7x99mm",
+      "caliber": "12.7x99mm"
     },
     {
       "id": "ammo_545x39",
