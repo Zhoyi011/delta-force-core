@@ -1,0 +1,142 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  # ---------- 自动发布（基于 commit message 判断）----------
+  auto-release:
+    name: Auto Release (by commit message)
+    # 只在 push 到 main、且不是由 bot 自动提交时触发
+    if: |
+      github.ref == 'refs/heads/main' &&
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Determine version bump from commit message
+        id: bump
+        run: |
+          MSG="${{ github.event.head_commit.message }}"
+          echo "Commit message: $MSG"
+
+          # 默认：不发布
+          BUMP="none"
+
+          # BREAKING CHANGE 或 feat! / fix! => major
+          if echo "$MSG" | grep -qE "BREAKING CHANGE|^[a-z]+(\(.+\))?!:"; then
+            BUMP="major"
+          # feat: => minor
+          elif echo "$MSG" | grep -qE "^feat(\(.+\))?:"; then
+            BUMP="minor"
+          # fix: / data: / refactor: / perf: => patch
+          elif echo "$MSG" | grep -qE "^(fix|data|refactor|perf)(\(.+\))?:"; then
+            BUMP="patch"
+          fi
+
+          echo "bump=$BUMP" >> $GITHUB_OUTPUT
+          echo "Determined bump: $BUMP"
+
+      - name: Skip if no release needed
+        if: steps.bump.outputs.bump == 'none'
+        run: |
+          echo "⏭️ No version bump needed (commit message doesn't match feat/fix/data/refactor)"
+          echo "Skipping publish."
+
+      - name: Install dependencies
+        if: steps.bump.outputs.bump != 'none'
+        run: npm ci
+
+      - name: Bump version
+        if: steps.bump.outputs.bump != 'none'
+        id: version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          NEW_VERSION=$(npm version ${{ steps.bump.outputs.bump }} --no-git-tag-version)
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "Bumped to $NEW_VERSION"
+
+      - name: Build package
+        if: steps.bump.outputs.bump != 'none'
+        run: npm run build
+
+      - name: Commit & push bumped version
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          git add package.json package-lock.json index.json
+          git commit -m "chore(release): ${{ steps.version.outputs.new_version }} [skip ci]"
+          git push
+
+      - name: Publish to npm
+        if: steps.bump.outputs.bump != 'none'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        if: steps.bump.outputs.bump != 'none'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.new_version }}
+          name: ${{ steps.version.outputs.new_version }}
+          generate_release_notes: true
+
+  # ---------- 手动发布（打 tag 时触发）----------
+  tag-release:
+    name: Tag Release (manual)
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify tag matches package.json
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          PKG="v$(node -p "require('./package.json').version")"
+          if [ "$TAG" != "$PKG" ]; then
+            echo "❌ Tag $TAG does not match package.json version $PKG"
+            exit 1
+          fi
+          echo "✅ Tag matches package version"
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
