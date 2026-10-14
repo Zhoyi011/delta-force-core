@@ -1,21 +1,29 @@
 {
   "name": "delta-force-core",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "三角洲行动核心数据与随机抽签库（干员 / 武器 / 装备 / 子弹）",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "delta-force-mcp": "./bin/mcp.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./mcp": {
+      "types": "./dist/mcp.d.ts",
+      "import": "./dist/mcp.js"
     },
     "./index.json": "./index.json",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
+    "bin",
     "index.json",
     "README.md",
     "README.en.md"
@@ -25,6 +33,7 @@
     "build": "tsc && npm run emit-json",
     "dev": "tsc --watch",
     "emit-json": "node scripts/emit-json.mjs",
+    "mcp": "node bin/mcp.js",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -41,13 +50,20 @@
     "game-data",
     "random",
     "loadout",
-    "typescript"
+    "typescript",
+    "mcp",
+    "model-context-protocol",
+    "ai"
   ],
   "license": "MIT",
   "engines": {
     "node": ">=18"
   },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1"
+  },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "typescript": "^5.4.5"
   }
 }
