@@ -1,0 +1,451 @@
+# delta-force-core — Full AI Documentation
+
+> 三角洲行动核心数据与抽签工具库（干员 / 武器 / 装备 / 子弹）。
+
+This file is a comprehensive, machine-readable guide for AI assistants.
+For a shorter index, see /llms.txt.
+
+---
+
+## Table of Contents
+
+1. Overview
+2. Installation
+3. Import Patterns
+4. Type Definitions
+5. API — Random Picking
+6. API — Querying
+7. API — Listing
+8. API — Custom Engine
+9. Raw Data Exports
+10. Raw JSON Access
+11. MCP Server
+12. Common AI Tasks
+13. Data Summary
+
+---
+
+## 1. Overview
+
+delta-force-core is a TypeScript/JavaScript npm package providing:
+
+- Data: operators, weapons, equipment, ammo from the game Delta Force (三角洲行动)
+- Random picking: getRandomLoadout(), getRandomWeapon(), getRandomOperator()
+- Querying: findWeaponById(), findAmmoByCaliber(), etc.
+- User overrides: inject your own quality ratings, aliases, tags at runtime
+- MCP Server: for AI clients (Claude Desktop / Cursor / Cline)
+
+Package: delta-force-core
+Registry: https://registry.npmjs.org/delta-force-core
+GitHub: https://github.com/Zhoyi011/delta-force-core
+Wiki: https://github.com/Zhoyi011/delta-force-core/wiki
+Raw JSON: https://unpkg.com/delta-force-core/index.json
+License: MIT
+Runtime deps: none (zero-dependency)
+Node: >= 18
+
+---
+
+## 2. Installation
+
+npm install delta-force-core
+
+---
+
+## 3. Import Patterns
+
+// Lazy mode — use official data + default engine
+import {
+  getRandomWeapon,
+  getRandomOperator,
+  getRandomLoadout,
+  getRandomAmmo,
+  getRandomArmor,
+  getRandomHelmet,
+  getRandomBackpack,
+  getRandomChestRig,
+  findWeaponById,
+  findOperatorById,
+  findAmmoById,
+  findWeaponsByCaliber,
+  findAmmoByCaliber,
+  findWeaponByAlias,
+  listAllWeapons,
+  listAllOperators,
+  listWeaponCategories,
+  listOperatorCategories,
+  createEngine,
+  defaultEngine,
+  WEAPONS,
+  OPERATORS,
+  EQUIPMENT,
+  AMMO,
+} from 'delta-force-core';
+
+---
+
+## 4. Type Definitions
+
+### Weapon
+
+interface Weapon {
+  id: string;              // e.g. "m4a1"
+  name: string;            // e.g. "M4A1突击步枪"
+  caliber?: string;        // e.g. "5.56x45mm"
+  baseDamage?: number;     // raw gun damage
+  description?: string;
+  image?: string;          // URL to weapon image (png)
+  allowNormal?: boolean;   // whether usable in Normal mode (default true)
+}
+
+NOTE: Official Weapon does NOT contain quality. Quality is user-injected.
+
+### Operator
+
+interface Operator {
+  id: string;              // e.g. "honglang"
+  name: string;            // e.g. "红狼"
+  features?: string;       // e.g. "爆发移速"
+  description?: string;
+  image?: string;
+}
+
+### Ammo
+
+interface Ammo {
+  id: string;              // e.g. "ammo_556x45"
+  name: string;            // e.g. "5.56x45mm"
+  caliber: string;         // e.g. "5.56x45mm"
+  description?: string;
+  image?: string;
+}
+
+### EquipmentItem
+
+interface EquipmentItem {
+  id: string;
+  name: string;
+  features?: string;       // for armor/helmet
+  comment?: string;        // for backpack/chest rig
+  description?: string;
+  image?: string;
+}
+
+### EquipmentTier
+
+interface EquipmentTier {
+  tier: number;            // 1..6
+  allowNormal?: boolean;   // default true
+  items: EquipmentItem[];
+}
+
+### Loadout
+
+interface Loadout {
+  operator: Operator;
+  weapon: Weapon;
+  armor: EquipmentItem;
+  helmet: EquipmentItem;
+  backpack: EquipmentItem;
+  chestRig: EquipmentItem;
+}
+
+### WeaponQuality
+
+type WeaponQuality = '绿色' | '蓝色' | '紫色' | '金色';
+//                    green   blue    purple   gold
+
+---
+
+## 5. API — Random Picking
+
+All pickers use Math.random(). Empty pool throws an error.
+
+### getRandomOperator(category?: string): Operator
+
+getRandomOperator();          // any operator
+getRandomOperator('突击兵');   // assault only
+
+Categories: '突击兵', '支援兵', '工程兵', '侦察兵'
+
+### getRandomWeapon(options?: WeaponOptions): Weapon
+
+interface WeaponOptions {
+  category?: string;        // '突击步枪' | '冲锋枪' | ...
+  quality?: WeaponQuality;  // requires qualityOverride on the engine
+  allowNormal?: boolean;
+}
+
+getRandomWeapon();
+getRandomWeapon({ category: '突击步枪' });
+getRandomWeapon({ allowNormal: true });
+
+### getRandomAmmo(options?: AmmoOptions): Ammo
+
+interface AmmoOptions {
+  caliber?: string;         // '5.56x45mm' | '7.62x39mm' | ...
+}
+
+### getRandomArmor/Helmet/Backpack/ChestRig(options?: TierOptions): EquipmentItem
+
+interface TierOptions {
+  tier?: number;            // 1..6
+  allowNormal?: boolean;
+}
+
+### getRandomLoadout(options?: LoadoutOptions): Loadout
+
+interface LoadoutOptions {
+  allowNormal?: boolean;
+}
+
+const l = getRandomLoadout({ allowNormal: true });
+// l.operator, l.weapon, l.armor, l.helmet, l.backpack, l.chestRig
+
+---
+
+## 6. API — Querying
+
+findOperatorById(id: string): Operator | undefined
+findWeaponById(id: string): Weapon | undefined
+findAmmoById(id: string): Ammo | undefined
+findArmorById(id: string): EquipmentItem | undefined
+findHelmetById(id: string): EquipmentItem | undefined
+findBackpackById(id: string): EquipmentItem | undefined
+findChestRigById(id: string): EquipmentItem | undefined
+findWeaponsByCaliber(caliber: string): Weapon[]
+findAmmoByCaliber(caliber: string): Ammo[]
+findWeaponByAlias(alias: string): Weapon | undefined  // requires aliasOverride
+
+findWeaponById('m4a1');
+// { id: 'm4a1', name: 'M4A1突击步枪', caliber: '5.56x45mm', allowNormal: true }
+
+findWeaponsByCaliber('5.56x45mm');
+
+---
+
+## 7. API — Listing
+
+listOperatorCategories(): string[]
+// ['突击兵', '支援兵', '工程兵', '侦察兵']
+
+listWeaponCategories(): string[]
+// ['突击步枪', '冲锋枪', '精确射手步枪', '狙击步枪', '轻机枪', '霰弹枪', '手枪', '特殊武器']
+
+listAllOperators(): Operator[]
+listAllWeapons(): Weapon[]
+
+---
+
+## 8. API — Custom Engine
+
+import { createEngine } from 'delta-force-core';
+
+const engine = createEngine({
+  qualityOverride: {
+    m4a1: '金色',
+    akm: '紫色',
+  },
+  aliasOverride: {
+    m4a1: ['M4', 'M4卡宾枪'],
+  },
+  tagOverride: {
+    m4a1: ['classic', 'beginner'],
+  },
+});
+
+engine.getRandomWeapon({ quality: '金色' });
+engine.getWeaponQuality('m4a1');         // '金色'
+engine.findWeaponByAlias('M4');          // -> m4a1 weapon
+engine.getAliases('m4a1');               // ['M4', 'M4卡宾枪']
+
+IMPORTANT: Default engine has EMPTY overrides. getRandomWeapon({ quality: '金色' }) on default engine returns empty pool and throws. Use createEngine({ qualityOverride }) first.
+
+---
+
+## 9. Raw Data Exports
+
+import { OPERATORS, WEAPONS, EQUIPMENT, AMMO } from 'delta-force-core';
+
+OPERATORS: OperatorCategory[]
+// [{ category: '突击兵', operators: [...] }, ...]
+
+WEAPONS: WeaponCategory[]
+// [{ category: '突击步枪', weapons: [...] }, ...]
+
+EQUIPMENT: {
+  armors: EquipmentTier[];
+  helmets: EquipmentTier[];
+  backpacks: EquipmentTier[];
+  chest_rigs: EquipmentTier[];
+}
+
+AMMO: Ammo[]
+
+---
+
+## 10. Raw JSON Access
+
+https://unpkg.com/delta-force-core/index.json
+https://cdn.jsdelivr.net/npm/delta-force-core/index.json
+
+Structure:
+
+{
+  "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
+  "version": "0.4.0",
+  "generatedAt": "...",
+  "operators": [...],
+  "weapons": [...],
+  "equipment": {...},
+  "ammo": [...]
+}
+
+---
+
+## 11. MCP Server
+
+Install via npx (no manual install). Add to Claude Desktop / Cursor / Cline config:
+
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
+
+### MCP Tools
+
+- get_random_loadout — random full loadout
+- get_random_weapon — random weapon
+- get_random_operator — random operator
+- get_random_ammo — random ammo
+- find_weapon — find weapon by id
+- find_operator — find operator by id
+- find_ammo — find ammo by id
+- find_weapons_by_caliber — find weapons by caliber
+- find_ammo_by_caliber — find ammo by caliber
+- list_weapons — list all weapons (by category)
+- list_operators — list all operators (by category)
+- list_categories — list all categories
+
+### MCP Resources
+
+- delta-force://weapons
+- delta-force://operators
+- delta-force://equipment
+- delta-force://ammo
+
+---
+
+## 12. Common AI Tasks
+
+### Task 1: Generate a random full loadout
+
+import { getRandomLoadout } from 'delta-force-core';
+const l = getRandomLoadout({ allowNormal: true });
+console.log(l.operator.name + ' / ' + l.weapon.name + ' / ' + l.armor.name);
+
+### Task 2: List all weapons in a category
+
+import { WEAPONS } from 'delta-force-core';
+const cat = WEAPONS.find(g => g.category === '突击步枪');
+console.log(cat.weapons.map(w => w.name));
+
+### Task 3: Find weapons by caliber
+
+import { findWeaponsByCaliber } from 'delta-force-core';
+findWeaponsByCaliber('5.56x45mm');
+
+### Task 4: Pick a gold-rarity weapon (custom rating)
+
+import { createEngine } from 'delta-force-core';
+const engine = createEngine({
+  qualityOverride: { m4a1: '金色', k416: '金色' }
+});
+const w = engine.getRandomWeapon({ quality: '金色' });
+
+### Task 5: Fetch all data without installing
+
+const data = await fetch('https://unpkg.com/delta-force-core/index.json')
+  .then(r => r.json());
+console.log(data.weapons);
+
+### Task 6: Discord.js bot integration
+
+import { getRandomLoadout } from 'delta-force-core';
+const l = getRandomLoadout();
+interaction.reply({
+  content: l.operator.name + ' / ' + l.weapon.name + ' / ' + l.armor.name
+});
+
+---
+
+## 13. Data Summary
+
+### Operators (17 total)
+
+- 突击兵 (Assault): 红狼, 威龙, 疾风, 无名
+- 支援兵 (Support): 蜂医, 蛊, 蝶, 旅人
+- 工程兵 (Engineer): 牧羊人, 乌鲁鲁, 深蓝, 液氮, 比特
+- 侦察兵 (Recon): 露娜, 骇爪, 回响, 银翼
+
+### Weapons (68 total, 8 categories)
+
+- 突击步枪 (Assault Rifles): 24
+- 冲锋枪 (SMGs): 12
+- 精确射手步枪 (DMRs): 10
+- 狙击步枪 (Sniper Rifles): 5
+- 轻机枪 (LMGs): 4
+- 霰弹枪 (Shotguns): 5
+- 手枪 (Pistols): 7
+- 特殊武器 (Special): 1
+
+### Ammo (21 calibers)
+
+.357 Magnum, .45 ACP, .50 AE, .338, 12 Gauge, 12.7x55mm, 12.7x99mm, 5.45x39mm, 5.56x45mm, 5.7x28mm, 5.8x42mm, 6.8x51mm, 7.62x39mm, 7.62x51mm, 7.62x54mm, 9x19mm, 9x39mm, 4.6x30mm, .300 Blackout, 箭矢, 45-70 Govt
+
+### Equipment
+
+- Armor: tiers 1~6
+- Helmet: tiers 1~6
+- Backpack: tiers 1~6
+- Chest rig: tiers 1~5
+
+---
+
+## 14. Versioning
+
+Follows Semantic Versioning (https://semver.org/):
+
+- feat: -> minor bump
+- fix: / data: / refactor: / perf: -> patch bump
+- feat!: or BREAKING CHANGE -> major bump
+
+Published with provenance (signed by GitHub Actions OIDC).
+
+---
+
+## 15. Links
+
+- npm: https://www.npmjs.com/package/delta-force-core
+- GitHub: https://github.com/Zhoyi011/delta-force-core
+- Wiki: https://github.com/Zhoyi011/delta-force-core/wiki
+- Raw JSON: https://unpkg.com/delta-force-core/index.json
+- Issues: https://github.com/Zhoyi011/delta-force-core/issues
+
+---
+
+## For AI Indexing
+
+- Package name: delta-force-core
+- Language: TypeScript
+- Module system: ES Module
+- Runtime deps: none
+- Node: >= 18
+- Data categories: operators, weapons, equipment, ammo
+- Game: Delta Force (三角洲行动)
+- Primary use cases: random loadout generator, game data wiki, Discord/QQ bots, gacha apps
+- Exports: getRandomOperator, getRandomWeapon, getRandomAmmo, getRandomArmor, getRandomHelmet, getRandomBackpack, getRandomChestRig, getRandomLoadout, findOperatorById, findWeaponById, findAmmoById, findArmorById, findHelmetById, findBackpackById, findChestRigById, findWeaponsByCaliber, findAmmoByCaliber, findWeaponByAlias, getWeaponQuality, getAliases, getTags, listOperatorCategories, listWeaponCategories, listAllOperators, listAllWeapons, createEngine, defaultEngine, OPERATORS, WEAPONS, EQUIPMENT, AMMO

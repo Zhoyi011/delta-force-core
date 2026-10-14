@@ -1,0 +1,88 @@
+# delta-force-core
+
+> 三角洲行动核心数据与抽签工具库（干员 / 武器 / 装备 / 子弹）。
+> Delta Force core data & random-pick toolkit for TypeScript/JavaScript.
+
+## 是什么
+
+- npm 包：`delta-force-core`
+- GitHub：https://github.com/Zhoyi011/delta-force-core
+- 数据：干员 / 武器 / 装备 / 子弹
+- 功能：抽签（`getRandomLoadout`）、查询（`findWeaponById`）
+- MCP Server：`npx delta-force-mcp`（给 AI 客户端用）
+
+## 关键链接
+
+- Wiki（AI Usage Guide）：https://github.com/Zhoyi011/delta-force-core/wiki
+- README（中文）：https://github.com/Zhoyi011/delta-force-core/blob/main/README.md
+- README（英文）：https://github.com/Zhoyi011/delta-force-core/blob/main/README.en.md
+- Raw JSON 数据：https://unpkg.com/delta-force-core/index.json
+- 完整 AI 文档：https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/llms-full.txt
+- npm 页面：https://www.npmjs.com/package/delta-force-core
+
+## 安装
+
+npm install delta-force-core
+
+## 快速用法
+
+### 作为 JS 库
+
+import { getRandomLoadout } from 'delta-force-core';
+const l = getRandomLoadout({ allowNormal: true });
+// → { operator, weapon, armor, helmet, backpack, chestRig }
+
+### 作为 MCP Server（给 AI 客户端）
+
+在 Claude Desktop / Cursor / Cline 配置里加：
+
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
+
+## 主要 API
+
+- getRandomLoadout(options?) — 随机完整配装
+- getRandomWeapon(options?) — 随机武器
+- getRandomOperator(category?) — 随机干员
+- getRandomAmmo(options?) — 随机子弹
+- getRandomArmor(options?) / getRandomHelmet / getRandomBackpack / getRandomChestRig — 随机装备
+- findWeaponById(id) — 按 id 查武器
+- findWeaponsByCaliber(caliber) — 按口径查武器
+- createEngine({ qualityOverride }) — 自定义品质评估
+- WEAPONS / OPERATORS / EQUIPMENT / AMMO — 原始数据
+
+完整 API：见 Wiki 或 llms-full.txt。
+
+## 数据模块
+
+- operators：17 位干员，4 个分类（突击兵 / 支援兵 / 工程兵 / 侦察兵）
+- weapons：68 把武器，8 个分类
+- equipment：护甲 / 头盔 / 背包 / 胸挂
+- ammo：21 种口径
+
+## 技术栈
+
+- TypeScript
+- ES Module
+- 零运行时依赖
+- Node.js ≥ 18
+- MCP（可选）
+
+## License
+
+MIT
+
+## For AI Agents
+
+- 读 Wiki 获取完整用法
+- 读 llms-full.txt 获取全文
+- 用 MCP Server 直接调用工具
+- 用 index.json 直接消费数据
+- 包名：`delta-force-core`
+- 用途：三角洲数据查询、随机配装、抽卡应用、Discord/QQ Bot

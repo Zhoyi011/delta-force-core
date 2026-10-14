@@ -1,3 +1,4 @@
+```
 <div align="center">
 
 <img src="./assets/logo.svg" alt="delta-force-core logo" width="200" />
@@ -23,9 +24,23 @@
 <a id="status"></a>
 > ## 📢 Project Status
 >
-> **v0.2.x** — Stable. Covers **operators / weapons / equipment / ammo**.
+> **v0.4.x** — Stable. Covers **operators / weapons / equipment / ammo**.
+>
+> **New**: MCP Server (for AI clients).
 >
 > **Roadmap**: attachment system, ammo variants (T1–T6), image assets, i18n.
+
+---
+
+<a id="ai-agents"></a>
+## 🤖 For AI Agents
+
+- **Wiki (AI Usage Guide)**: https://github.com/Zhoyi011/delta-force-core/wiki
+- **`llms.txt` (AI index)**: [llms.txt](./llms.txt)
+- **`llms-full.txt` (AI full docs)**: [llms-full.txt](./llms-full.txt)
+- **Raw JSON data**: https://unpkg.com/delta-force-core/index.json
+- **MCP Server**: `npx -y -p delta-force-core delta-force-mcp`
+- **npm page**: https://www.npmjs.com/package/delta-force-core
 
 ---
 
@@ -36,6 +51,7 @@
 - [🎯 Use Cases](#use-cases)
 - [🧠 Design Philosophy](#design)
 - [📦 Installation](#install)
+- [🤖 MCP Server](#mcp)
 - [🚀 Quick Start](#quick-start)
 - [🧩 Core Concepts](#concepts)
 - [📘 API Reference](#api)
@@ -89,6 +105,7 @@
 - ✅ **Zero Dependencies** — Core library has no third-party deps
 - ✅ **Forward Compatible** — All optional fields use `?:`, no breaking changes
 - ✅ **Node + Browser** — Node.js ≥ 18 and modern browsers
+- ✅ **MCP Server** — Direct integration with Claude Desktop / Cursor / Cline
 
 ---
 
@@ -120,6 +137,10 @@
     <td>🌐 <b>Static Sites / CDN</b></td>
     <td>Fetch <code>index.json</code> directly, no build needed</td>
   </tr>
+  <tr>
+    <td>🧠 <b>AI Assistants</b></td>
+    <td>Via MCP Server, let Claude / Cursor call directly</td>
+  </tr>
 </table>
 
 ---
@@ -148,7 +169,7 @@
                    ▼
 ┌──────────────────────────────────────┐
 │  Engine                              │
-│  · Random picker  · Query            │
+│  · Random picker  · Query  · MCP     │
 └──────────────────────────────────────┘
 ```
 
@@ -172,7 +193,7 @@ All optional fields use `?:`. Adding new fields later (e.g., `caliber`, `image`,
 ## 📦 Installation
 
 <details open>
-<summary><b>npm / yarn / pnpm / bun</b></summary>
+<summary><b>As a JS library (npm / yarn / pnpm / bun)</b></summary>
 
 ```bash
 # npm
@@ -186,6 +207,44 @@ pnpm add delta-force-core
 
 # bun
 bun add delta-force-core
+```
+
+</details>
+
+<details>
+<summary><b>As an MCP Server (for AI clients)</b></summary>
+
+**Option 1: npx (recommended, no install)**
+
+Add to Claude Desktop / Cursor / Cline config:
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
+```
+
+**Option 2: Global install**
+
+```bash
+npm install -g delta-force-core
+```
+
+Config:
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "delta-force-mcp"
+    }
+  }
+}
 ```
 
 </details>
@@ -211,6 +270,57 @@ bun add delta-force-core
 </details>
 
 **Requirements**: Node.js ≥ 18 or any modern browser supporting ES Modules.
+
+---
+
+<a id="mcp"></a>
+## 🤖 MCP Server
+
+`delta-force-core` ships with an MCP Server that lets AI clients (Claude Desktop / Cursor / Cline) **directly call** your tools.
+
+### Config
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
+```
+
+### Available Tools
+
+| Tool | Description |
+|---|---|
+| `get_random_loadout` | Random full loadout |
+| `get_random_weapon` | Random weapon |
+| `get_random_operator` | Random operator |
+| `get_random_ammo` | Random ammo |
+| `find_weapon` | Find weapon by id |
+| `find_operator` | Find operator by id |
+| `find_ammo` | Find ammo by id |
+| `find_weapons_by_caliber` | Find weapons by caliber |
+| `find_ammo_by_caliber` | Find ammo by caliber |
+| `list_weapons` | List weapons (by category) |
+| `list_operators` | List operators (by category) |
+| `list_categories` | List all categories |
+
+### Available Resources
+
+- `delta-force://weapons` — All weapons JSON
+- `delta-force://operators` — All operators JSON
+- `delta-force://equipment` — All equipment JSON
+- `delta-force://ammo` — All ammo JSON
+
+### User Example
+
+User says in Claude Desktop:
+> "Generate a random Delta Force loadout for me"
+
+AI **automatically calls** `get_random_loadout` and returns **real data**.
 
 ---
 
@@ -264,6 +374,11 @@ console.log(data.weapons);
 console.log(data.equipment.helmets);
 ```
 
+### Scenario 5 · AI users
+
+Configure MCP Server (see [MCP Server](#mcp) section), then tell the AI:
+> "Generate a random Delta Force loadout"
+
 ---
 
 <a id="concepts"></a>
@@ -300,6 +415,8 @@ console.log(data.equipment.helmets);
 ## 📘 API Reference
 
 > 💡 **Tip**: All functions exported as `defaultEngine`-bound are equivalent to calling `createEngine()` first. Use `createEngine` for custom behavior.
+
+> 📖 **Full API**: see [Wiki](https://github.com/Zhoyi011/delta-force-core/wiki) or [llms-full.txt](./llms-full.txt).
 
 <a id="api-engine"></a>
 ### Engine
@@ -653,9 +770,9 @@ interface Ammo {
 import { AMMO } from 'delta-force-core';
 ```
 
-**19 calibers currently**:
+**21 calibers currently**:
 
-`.357 Magnum`, `.45 ACP`, `.58 AE`, `12 Gauge`, `12.7x55mm`, `5.45x39mm`, `5.56x45mm`, `5.7x28mm`, `5.8x42mm`, `6.8x51mm`, `7.62x39mm`, `7.62x51mm`, `7.62x54mm`, `9x19mm`, `9x39mm`, `4.6x30mm`, `.300 Blackout`, `箭矢`, `45-70 Govt`
+`.357 Magnum`, `.45 ACP`, `.50 AE`, `.338`, `12 Gauge`, `12.7x55mm`, `12.7x99mm`, `5.45x39mm`, `5.56x45mm`, `5.7x28mm`, `5.8x42mm`, `6.8x51mm`, `7.62x39mm`, `7.62x51mm`, `7.62x54mm`, `9x19mm`, `9x39mm`, `4.6x30mm`, `.300 Blackout`, `箭矢`, `45-70 Govt`
 
 ---
 
@@ -667,7 +784,7 @@ A full snapshot of the official data is generated at build time:
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "generatedAt": "2026-10-14T00:34:01.102Z",
   "operators": [...],
   "weapons": [...],
@@ -681,6 +798,7 @@ A full snapshot of the official data is generated at build time:
 - 🐍 Non-JS environments (e.g., Python scripts)
 - 🌐 Direct CDN fetch (`https://unpkg.com/delta-force-core/index.json`)
 - 📊 Data diffing
+- 🧠 AI reading data
 
 ```js
 // ESM
@@ -707,6 +825,10 @@ const data = await res.json();
 | **Bun** | `bun add delta-force-core` |
 | **Python** | Read `index.json` |
 | **Discord.js** | See example below |
+| **Claude Desktop** | MCP Server |
+| **Cursor** | MCP Server |
+| **Cline / Continue.dev** | MCP Server |
+| **AI Studio / ChatGPT** | Read `llms.txt` or fetch `index.json` |
 
 ### Discord.js Example
 
@@ -732,6 +854,19 @@ client.on(Events.InteractionCreate, async (interaction) => {
     ].join('\n'),
   });
 });
+```
+
+### Claude Desktop / Cursor MCP Config
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
 ```
 
 ---
@@ -839,14 +974,19 @@ delta-force-core/
 ├─ tsconfig.json
 ├─ README.md
 ├─ README.en.md
+├─ llms.txt                      ← AI index
+├─ llms-full.txt                 ← AI full docs
 ├─ LICENSE
 ├─ CONTRIBUTING.md
 ├─ index.json                    ← build artifact
+├─ bin/
+│  └─ mcp.js                     ← MCP CLI entry
 ├─ scripts/
 │  └─ emit-json.mjs              ← generate index.json
 ├─ src/
 │  ├─ types.ts                   ← all type definitions
 │  ├─ engine.ts                  ← engine (createEngine + all methods)
+│  ├─ mcp.ts                     ← MCP Server logic
 │  ├─ index.ts                   ← main entry
 │  └─ data/
 │     ├─ index.ts                ← data barrel export
@@ -854,6 +994,8 @@ delta-force-core/
 │     ├─ weapons.ts
 │     ├─ equipment.ts
 │     └─ ammo.ts
+├─ assets/
+│  └─ weapons/                   ← weapon images
 └─ .github/
    └─ workflows/                 ← CI / auto-publish
 ```
@@ -864,14 +1006,18 @@ delta-force-core/
 npm run build        # compile + generate index.json
 npm run dev          # watch mode
 npm run emit-json    # only generate index.json
+npm run mcp          # start MCP Server
 ```
 
 ### Publishing to npm
 
-```bash
-npm version patch    # or minor / major
-npm publish          # auto-runs prepublishOnly → npm run build
-```
+**GitHub Actions auto-publish is configured**:
+
+- `feat:` prefix → minor bump
+- `fix:` / `data:` / `refactor:` / `perf:` → patch bump
+- `feat!:` or `BREAKING CHANGE` → major bump
+
+Published via **OIDC Trusted Publisher** (no token), with **Provenance signature**.
 
 ---
 
@@ -886,10 +1032,11 @@ npm publish          # auto-runs prepublishOnly → npm run build
   </tr>
   <tr><td>✅ Done</td><td>Operators / Weapons / Equipment / Ammo</td><td>v0.1</td></tr>
   <tr><td>✅ Done</td><td>Engine + user overrides (quality / alias / tag)</td><td>v0.2</td></tr>
-  <tr><td>🔄 In progress</td><td>Full README + docs</td><td>v0.2.x</td></tr>
-  <tr><td>📋 Planned</td><td>Attachment system (slots / compatibility)</td><td>v0.3</td></tr>
-  <tr><td>📋 Planned</td><td>Ammo variants (T1–T6, damage / pen)</td><td>v0.3</td></tr>
-  <tr><td>📋 Planned</td><td>Image assets</td><td>v0.4</td></tr>
+  <tr><td>✅ Done</td><td>Full README + Wiki + AI docs</td><td>v0.3</td></tr>
+  <tr><td>✅ Done</td><td>MCP Server (AI client integration)</td><td>v0.4</td></tr>
+  <tr><td>📋 Planned</td><td>Attachment system (slots / compatibility)</td><td>v0.5</td></tr>
+  <tr><td>📋 Planned</td><td>Ammo variants (T1–T6, damage / pen)</td><td>v0.5</td></tr>
+  <tr><td>📋 Planned</td><td>Image assets</td><td>v0.6</td></tr>
   <tr><td>💭 Considering</td><td>i18n (English / 日本語)</td><td>v1.0</td></tr>
 </table>
 
@@ -965,24 +1112,40 @@ const data = require('delta-force-core/index.json');
 </details>
 
 <details>
-<summary><b>Q7: How to deploy my own <code>index.json</code>?</b></summary>
+<summary><b>Q7: What is MCP? How to use it?</b></summary>
 
-```bash
-# fork the repo → edit data → build
-npm run build
-# output in dist/, index.json at root
+**MCP (Model Context Protocol)** is a "tool-calling protocol" for AI clients.
+
+After configuring, Claude Desktop / Cursor / Cline can **directly call** `delta-force-core`'s tools:
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
 ```
 
-Or use the one from the npm package:
-
-```
-https://unpkg.com/delta-force-core/index.json
-```
+Then tell the AI: "Generate a random Delta Force loadout" — AI **directly calls** your tools.
 
 </details>
 
 <details>
-<summary><b>Q8: How to contribute data fixes?</b></summary>
+<summary><b>Q8: How to make AI use my library?</b></summary>
+
+**Three ways**:
+
+1. **MCP** (recommended): configure MCP Server → AI directly calls
+2. **AI reads docs**: let AI read the [Wiki](https://github.com/Zhoyi011/delta-force-core/wiki) or [llms.txt](./llms.txt)
+3. **AI reads data**: let AI fetch `https://unpkg.com/delta-force-core/index.json`
+
+</details>
+
+<details>
+<summary><b>Q9: How to contribute data fixes?</b></summary>
 
 1. Fork the repo
 2. Edit `src/data/*.ts`
@@ -1008,6 +1171,7 @@ Released under the [MIT License](./LICENSE).
 - Thanks to all community members who contributed Delta Force data
 - Thanks to [Shields.io](https://shields.io/) for badges
 - Thanks to [unpkg](https://unpkg.com/) / [esm.sh](https://esm.sh/) for CDN
+- Thanks to [Anthropic MCP](https://modelcontextprotocol.io/) for the AI tool protocol
 
 ---
 
@@ -1018,3 +1182,14 @@ Released under the [MIT License](./LICENSE).
 [⬆ Back to Top](#delta-force-core)
 
 </div>
+```
+
+---
+
+## 保存后提交
+
+```bash
+git add README.md README.en.md llms.txt llms-full.txt
+git commit -m "docs: 更新 README + 新增 llms.txt/llms-full.txt"
+git push origin main
+```

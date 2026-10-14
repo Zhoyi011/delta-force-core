@@ -1,3 +1,4 @@
+```
 <div align="center">
 
 <img src="./assets/logo.svg" alt="delta-force-core logo" width="200" />
@@ -23,9 +24,23 @@
 <a id="status"></a>
 > ## 📢 项目状态
 >
-> **v0.2.x** — 稳定版本，覆盖 **干员 / 武器 / 装备 / 子弹** 四大模块。
+> **v0.4.x** — 稳定版本，覆盖 **干员 / 武器 / 装备 / 子弹** 四大模块。
+>
+> **新增**：MCP Server（给 AI 客户端用）
 >
 > **路线图**：配件系统、子弹细分（1~6 弹）、图片资源、多语言支持。
+
+---
+
+<a id="ai-agents"></a>
+## 🤖 For AI Agents
+
+- **Wiki（AI 使用指南）**：https://github.com/Zhoyi011/delta-force-core/wiki
+- **`llms.txt`（AI 索引）**：[llms.txt](./llms.txt)
+- **`llms-full.txt`（AI 全文）**：[llms-full.txt](./llms-full.txt)
+- **Raw JSON 数据**：https://unpkg.com/delta-force-core/index.json
+- **MCP Server**：`npx -y -p delta-force-core delta-force-mcp`
+- **npm 页面**：https://www.npmjs.com/package/delta-force-core
 
 ---
 
@@ -36,6 +51,7 @@
 - [🎯 使用场景](#use-cases)
 - [🧠 设计理念](#design)
 - [📦 安装](#install)
+- [🤖 MCP Server](#mcp)
 - [🚀 快速开始](#quick-start)
 - [🧩 核心概念](#concepts)
 - [📘 API 参考](#api)
@@ -89,6 +105,7 @@
 - ✅ **零依赖** —— 核心库不依赖任何第三方包
 - ✅ **向前兼容** —— 所有可选字段 `?:`，新版本不破坏老用户
 - ✅ **Node + 浏览器** —— 同时支持 Node.js ≥ 18 和现代浏览器
+- ✅ **MCP Server** —— 支持 Claude Desktop / Cursor / Cline 直接调用
 
 ---
 
@@ -120,6 +137,10 @@
     <td>🌐 <b>静态网站 / CDN</b></td>
     <td>通过 <code>index.json</code> 直接 fetch，无需构建</td>
   </tr>
+  <tr>
+    <td>🧠 <b>AI 助手</b></td>
+    <td>通过 MCP Server，让 Claude / Cursor 直接调用</td>
+  </tr>
 </table>
 
 ---
@@ -148,7 +169,7 @@
                    ▼
 ┌──────────────────────────────────────┐
 │  引擎（Engine）                       │
-│  · 抽签  · 查询                        │
+│  · 抽签  · 查询  · MCP                │
 └──────────────────────────────────────┘
 ```
 
@@ -172,7 +193,7 @@
 ## 📦 安装
 
 <details open>
-<summary><b>npm / yarn / pnpm / bun</b></summary>
+<summary><b>作为 JS 库（npm / yarn / pnpm / bun）</b></summary>
 
 ```bash
 # npm
@@ -186,6 +207,44 @@ pnpm add delta-force-core
 
 # bun
 bun add delta-force-core
+```
+
+</details>
+
+<details>
+<summary><b>作为 MCP Server（给 AI 客户端）</b></summary>
+
+**方式 1：npx（推荐，不安装）**
+
+在 Claude Desktop / Cursor / Cline 配置里加：
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
+```
+
+**方式 2：全局安装**
+
+```bash
+npm install -g delta-force-core
+```
+
+配置：
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "delta-force-mcp"
+    }
+  }
+}
 ```
 
 </details>
@@ -211,6 +270,57 @@ bun add delta-force-core
 </details>
 
 **环境要求**：Node.js ≥ 18 或任何支持 ES Module 的现代浏览器。
+
+---
+
+<a id="mcp"></a>
+## 🤖 MCP Server
+
+`delta-force-core` 内置 MCP Server，可以让 AI 客户端（Claude Desktop / Cursor / Cline）**直接调用**你的工具。
+
+### 配置
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
+```
+
+### 可用工具（Tools）
+
+| 工具 | 说明 |
+|---|---|
+| `get_random_loadout` | 随机完整配装 |
+| `get_random_weapon` | 随机武器 |
+| `get_random_operator` | 随机干员 |
+| `get_random_ammo` | 随机子弹 |
+| `find_weapon` | 按 id 查武器 |
+| `find_operator` | 按 id 查干员 |
+| `find_ammo` | 按 id 查子弹 |
+| `find_weapons_by_caliber` | 按口径查武器 |
+| `find_ammo_by_caliber` | 按口径查子弹 |
+| `list_weapons` | 列出武器（可按分类） |
+| `list_operators` | 列出干员（可按分类） |
+| `list_categories` | 列出所有分类 |
+
+### 可用资源（Resources）
+
+- `delta-force://weapons` — 全部武器 JSON
+- `delta-force://operators` — 全部干员 JSON
+- `delta-force://equipment` — 全部装备 JSON
+- `delta-force://ammo` — 全部子弹 JSON
+
+### 用户示例
+
+用户在 Claude Desktop 说：
+> "帮我抽一套三角洲配装"
+
+AI 会**自动调用** `get_random_loadout`，返回**真实数据**。
 
 ---
 
@@ -264,6 +374,11 @@ console.log(data.weapons);
 console.log(data.equipment.helmets);
 ```
 
+### 场景 5 · 我是 AI 用户
+
+配置 MCP Server（见 [MCP Server](#mcp) 段），然后对 AI 说：
+> "帮我抽一套三角洲配装"
+
 ---
 
 <a id="concepts"></a>
@@ -300,6 +415,8 @@ console.log(data.equipment.helmets);
 ## 📘 API 参考
 
 > 💡 **提示**：所有以 `defaultEngine` 形式导出的函数，等价于先 `createEngine()` 再调用。想自定义行为用 `createEngine`。
+
+> 📖 **完整 API**：见 [Wiki](https://github.com/Zhoyi011/delta-force-core/wiki) 或 [llms-full.txt](./llms-full.txt)。
 
 <a id="api-engine"></a>
 ### 引擎（Engine）
@@ -662,16 +779,17 @@ interface Ammo {
 import { AMMO } from 'delta-force-core';
 ```
 
-**当前口径**（19 种）：
+**当前口径**（21 种）：
 
 | 手枪 / 霰弹 | 中间威力 | 全威力 | 其它 |
 |---|---|---|---|
 | `.357 Magnum` | `5.45x39mm` | `7.62x51mm` | `4.6x30mm` |
 | `.45 ACP` | `5.56x45mm` | `7.62x54mm` | `.300 Blackout` |
-| `.58 AE` | `5.7x28mm` | `12.7x55mm` | `箭矢` |
-| `12 Gauge` | `5.8x42mm` | | `45-70 Govt` |
-| `9x19mm` | `6.8x51mm` | | |
-| `9x39mm` | `7.62x39mm` | | |
+| `.50 AE` | `5.7x28mm` | `12.7x55mm` | `箭矢` |
+| `.338` | `5.8x42mm` | `12.7x99mm` | `45-70 Govt` |
+| `12 Gauge` | `6.8x51mm` | | |
+| `9x19mm` | `7.62x39mm` | | |
+| `9x39mm` | | | |
 
 ---
 
@@ -683,7 +801,7 @@ import { AMMO } from 'delta-force-core';
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "generatedAt": "2026-10-14T00:34:01.102Z",
   "operators": [...],
   "weapons": [...],
@@ -697,6 +815,7 @@ import { AMMO } from 'delta-force-core';
 - 🐍 非 JS 环境（如 Python 脚本）直接消费
 - 🌐 CDN 直接 fetch（`https://unpkg.com/delta-force-core/index.json`）
 - 📊 数据 diff 检查
+- 🧠 AI 直接读数据
 
 ```js
 // ESM
@@ -723,6 +842,10 @@ const data = await res.json();
 | **Bun** | `bun add delta-force-core` |
 | **Python** | 读 `index.json` |
 | **Discord.js** | 见下方示例 |
+| **Claude Desktop** | MCP Server |
+| **Cursor** | MCP Server |
+| **Cline / Continue.dev** | MCP Server |
+| **AI Studio / ChatGPT** | 读 `llms.txt` 或 fetch `index.json` |
 
 ### Discord.js 示例
 
@@ -748,6 +871,19 @@ client.on(Events.InteractionCreate, async (interaction) => {
     ].join('\n'),
   });
 });
+```
+
+### Claude Desktop / Cursor MCP 配置
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
 ```
 
 ---
@@ -869,14 +1005,19 @@ delta-force-core/
 ├─ tsconfig.json
 ├─ README.md
 ├─ README.en.md
+├─ llms.txt                      ← AI 索引
+├─ llms-full.txt                 ← AI 全文
 ├─ LICENSE
 ├─ CONTRIBUTING.md
 ├─ index.json                    ← 构建产物
+├─ bin/
+│  └─ mcp.js                     ← MCP CLI 入口
 ├─ scripts/
 │  └─ emit-json.mjs              ← 生成 index.json
 ├─ src/
 │  ├─ types.ts                   ← 所有类型定义
 │  ├─ engine.ts                  ← 引擎（createEngine + 全部方法）
+│  ├─ mcp.ts                     ← MCP Server 逻辑
 │  ├─ index.ts                   ← 主入口
 │  └─ data/
 │     ├─ index.ts                ← 数据统一导出
@@ -884,6 +1025,8 @@ delta-force-core/
 │     ├─ weapons.ts              ← 武器数据
 │     ├─ equipment.ts            ← 装备数据
 │     └─ ammo.ts                 ← 子弹数据
+├─ assets/
+│  └─ weapons/                   ← 武器图片
 └─ .github/
    └─ workflows/                 ← CI / 自动发布
 ```
@@ -894,17 +1037,18 @@ delta-force-core/
 npm run build        # 编译 + 生成 index.json
 npm run dev          # 开发模式（watch）
 npm run emit-json    # 只生成 index.json
+npm run mcp          # 启动 MCP Server
 ```
 
 ### 发布到 npm
 
-```bash
-# 1. 更新版本号
-npm version patch    # 或 minor / major
+**已配置 GitHub Actions 自动发布**：
 
-# 2. 发布（会自动跑 prepublishOnly → npm run build）
-npm publish
-```
+- `feat:` 前缀 → minor bump
+- `fix:` / `data:` / `refactor:` / `perf:` → patch bump
+- `feat!:` 或 `BREAKING CHANGE` → major bump
+
+发布用 **OIDC Trusted Publisher**（无需 token），带 **Provenance 签名**。
 
 ---
 
@@ -919,10 +1063,11 @@ npm publish
   </tr>
   <tr><td>✅ 已完成</td><td>干员 / 武器 / 装备 / 子弹</td><td>v0.1</td></tr>
   <tr><td>✅ 已完成</td><td>引擎 + 用户覆盖层（quality / alias / tag）</td><td>v0.2</td></tr>
-  <tr><td>🔄 进行中</td><td>完整 README + 文档</td><td>v0.2.x</td></tr>
-  <tr><td>📋 计划中</td><td>配件系统（槽位 / 兼容关系）</td><td>v0.3</td></tr>
-  <tr><td>📋 计划中</td><td>子弹细分（1~6 弹，伤害 / 穿透）</td><td>v0.3</td></tr>
-  <tr><td>📋 计划中</td><td>图片资源（干员 / 武器 / 装备）</td><td>v0.4</td></tr>
+  <tr><td>✅ 已完成</td><td>完整 README + Wiki + AI 文档</td><td>v0.3</td></tr>
+  <tr><td>✅ 已完成</td><td>MCP Server（AI 客户端集成）</td><td>v0.4</td></tr>
+  <tr><td>📋 计划中</td><td>配件系统（槽位 / 兼容关系）</td><td>v0.5</td></tr>
+  <tr><td>📋 计划中</td><td>子弹细分（1~6 弹，伤害 / 穿透）</td><td>v0.5</td></tr>
+  <tr><td>📋 计划中</td><td>图片资源（干员 / 武器 / 装备）</td><td>v0.6</td></tr>
   <tr><td>💭 考虑中</td><td>多语言（English / 日本語）</td><td>v1.0</td></tr>
 </table>
 
@@ -1000,24 +1145,40 @@ const data = require('delta-force-core/index.json');
 </details>
 
 <details>
-<summary><b>Q7: 怎么自己部署一份 <code>index.json</code>？</b></summary>
+<summary><b>Q7: 什么是 MCP？怎么用？</b></summary>
 
-```bash
-# fork 仓库 → 改数据 → 构建
-npm run build
-# dist/ 里就是最新数据，index.json 在根目录
+**MCP（Model Context Protocol）** 是 AI 客户端的"工具调用协议"。
+
+配置后，Claude Desktop / Cursor / Cline 可以**直接调用** `delta-force-core` 的工具：
+
+```json
+{
+  "mcpServers": {
+    "delta-force": {
+      "command": "npx",
+      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
+    }
+  }
+}
 ```
 
-也可以直接用 npm 包自带的：
-
-```
-https://unpkg.com/delta-force-core/index.json
-```
+然后对 AI 说："帮我抽一套三角洲配装" → AI **直接调用**你的工具。
 
 </details>
 
 <details>
-<summary><b>Q8: 怎么贡献数据修正？</b></summary>
+<summary><b>Q8: 怎么让 AI 用我的库？</b></summary>
+
+**三种方式**：
+
+1. **MCP**（推荐）：配置 MCP Server → AI 直接调用
+2. **AI 读文档**：让 AI 读 [Wiki](https://github.com/Zhoyi011/delta-force-core/wiki) 或 [llms.txt](./llms.txt)
+3. **AI 读数据**：让 AI fetch `https://unpkg.com/delta-force-core/index.json`
+
+</details>
+
+<details>
+<summary><b>Q9: 怎么贡献数据修正？</b></summary>
 
 1. Fork 仓库
 2. 改 `src/data/*.ts`
@@ -1043,6 +1204,7 @@ https://unpkg.com/delta-force-core/index.json
 - 感谢所有为三角洲行动数据整理做出贡献的玩家社区
 - 感谢 [Shields.io](https://shields.io/) 提供徽章服务
 - 感谢 [unpkg](https://unpkg.com/) / [esm.sh](https://esm.sh/) 提供 CDN
+- 感谢 [Anthropic MCP](https://modelcontextprotocol.io/) 提供 AI 工具协议
 
 ---
 
@@ -1053,3 +1215,4 @@ https://unpkg.com/delta-force-core/index.json
 [⬆ 回到顶部](#delta-force-core)
 
 </div>
+```
