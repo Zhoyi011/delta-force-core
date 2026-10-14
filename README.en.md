@@ -1181,13 +1181,4 @@ Released under the [MIT License](./LICENSE).
 [⬆ Back to Top](#delta-force-core)
 
 </div>
-```
 
----
-
-## 保存后提交
-
-```bash
-git add README.md README.en.md llms.txt llms-full.txt
-git commit -m "docs: 更新 README + 新增 llms.txt/llms-full.txt"
-git push origin main
