@@ -7,7 +7,6 @@ on:
       - 'v*.*.*'
 
 jobs:
-  # ---------- 自动发布 ----------
   auto-release:
     name: Auto Release (by commit message)
     if: |
@@ -36,22 +35,10 @@ jobs:
       - name: Upgrade npm
         run: npm install -g npm@11
 
-      - name: Debug OIDC environment
+      - name: Clean ~/.npmrc
         run: |
-          echo "=== versions ==="
-          node --version
-          npm --version
-          echo "=== registry ==="
-          npm config get registry
-          echo "=== OIDC env (SET = exists) ==="
-          echo "ACTIONS_ID_TOKEN_REQUEST_URL=${ACTIONS_ID_TOKEN_REQUEST_URL:+SET}"
-          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN=${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+SET}"
-          echo "=== NODE_AUTH_TOKEN (should be EMPTY) ==="
-          echo "NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN:+SET}"
-          echo "=== ~/.npmrc ==="
-          cat ~/.npmrc 2>/dev/null || echo "(none)"
-          echo "=== project .npmrc ==="
-          cat .npmrc 2>/dev/null || echo "(none)"
+          rm -f ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" > ~/.npmrc
 
       - name: Determine version bump from commit message
         id: bump
@@ -82,7 +69,7 @@ jobs:
         if: steps.bump.outputs.bump != 'none'
         run: npm ci
 
-      - name: Bump version
+      - name: Bump version (local only, NOT committed yet)
         if: steps.bump.outputs.bump != 'none'
         id: version
         run: |
@@ -90,32 +77,24 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           NEW_VERSION=$(npm version ${{ steps.bump.outputs.bump }} --no-git-tag-version)
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "Bumped to $NEW_VERSION"
+          echo "Bumped to $NEW_VERSION (not committed yet)"
 
       - name: Build package
         if: steps.bump.outputs.bump != 'none'
         run: npm run build
 
-      - name: Commit & push bumped version
+      - name: Publish to npm (OIDC / Trusted Publisher)
+        if: steps.bump.outputs.bump != 'none'
+        run: npm publish --access public
+
+      # ⚠️ Commit & push ONLY after successful publish
+      # This prevents "version burnt" if publish fails.
+      - name: Commit & push bumped version (only if publish succeeded)
         if: steps.bump.outputs.bump != 'none'
         run: |
           git add package.json package-lock.json index.json
           git commit -m "chore(release): ${{ steps.version.outputs.new_version }} [skip ci]"
           git push
-
-      - name: Debug before publish
-        if: steps.bump.outputs.bump != 'none'
-        run: |
-          echo "=== Final pre-publish check ==="
-          echo "NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN:+SET}"
-          echo "ACTIONS_ID_TOKEN_REQUEST_URL=${ACTIONS_ID_TOKEN_REQUEST_URL:+SET}"
-          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN=${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+SET}"
-          cat ~/.npmrc 2>/dev/null || echo "(no ~/.npmrc)"
-          cat .npmrc 2>/dev/null || echo "(no .npmrc)"
-
-      - name: Publish to npm (OIDC / Trusted Publisher)
-        if: steps.bump.outputs.bump != 'none'
-        run: npm publish --access public
 
       - name: Create GitHub Release
         if: steps.bump.outputs.bump != 'none'
@@ -125,7 +104,7 @@ jobs:
           name: ${{ steps.version.outputs.new_version }}
           generate_release_notes: true
 
-  # ---------- 手动发布 ----------
+  # ---------- 手动发布（打 tag 时触发）----------
   tag-release:
     name: Tag Release (manual)
     if: startsWith(github.ref, 'refs/tags/v')
@@ -146,6 +125,11 @@ jobs:
 
       - name: Upgrade npm
         run: npm install -g npm@11
+
+      - name: Clean ~/.npmrc
+        run: |
+          rm -f ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" > ~/.npmrc
 
       - name: Install dependencies
         run: npm ci
