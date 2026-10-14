@@ -2,107 +2,150 @@
 // delta-force-core 类型定义
 // =====================================================
 
-/** 干员 */
+/** 品质 —— 官方数据不提供，由用户层评估 */
+export type WeaponQuality = '绿色' | '蓝色' | '紫色' | '金色';
+
+// ---------- 干员 ----------
 export interface Operator {
   id: string;
   name: string;
-  features: string;
+  features?: string;
+  description?: string;
+  image?: string;
 }
-
-/** 干员分类（如：突击兵 / 支援兵 / 工程兵 / 侦察兵） */
 export interface OperatorCategory {
   category: string;
   operators: Operator[];
 }
 
-/** 武器 */
+// ---------- 武器 ----------
+// ⚠️ 官方 Weapon 里没有 quality —— 品质是用户层的事
 export interface Weapon {
   id: string;
   name: string;
-  /** 品质：绿色 / 蓝色 / 紫色 / 金色 */
-  quality: string;
-  /** 是否允许在普通模式使用 */
-  allowNormal: boolean;
+  caliber?: string;
+  baseDamage?: number;
+  description?: string;
+  image?: string;
+  /** 是否允许在普通模式使用（缺省视为 true） */
+  allowNormal?: boolean;
 }
-
-/** 武器分类（如：突击步枪 / 冲锋枪 / ...） */
 export interface WeaponCategory {
   category: string;
   weapons: Weapon[];
 }
 
-/** 防具 / 头盔条目 */
-export interface ArmorItem {
+// ---------- 子弹 ----------
+export interface Ammo {
+  id: string;
+  name: string;
+  /** 口径，如 '5.56x45mm' */
+  caliber: string;
+  description?: string;
+  image?: string;
+}
+
+// ---------- 装备（护甲/头盔/背包/胸挂通用）----------
+export interface EquipmentItem {
   id: string;
   name: string;
   features?: string;
   comment?: string;
+  description?: string;
+  image?: string;
 }
-
-/** 防具 / 头盔 等级分组 */
-export interface ArmorTier {
+export interface EquipmentTier {
   tier: number;
-  /** 是否允许在普通模式使用（缺省视为允许） */
   allowNormal?: boolean;
-  items: ArmorItem[];
+  items: EquipmentItem[];
 }
-
-/** 背包条目 */
-export interface BackpackItem {
-  id: string;
-  name: string;
-  comment?: string;
-}
-
-/** 背包等级分组 */
-export interface BackpackTier {
-  tier: number;
-  items: BackpackItem[];
-}
-
-/** 弹挂条目 */
-export interface ChestRigItem {
-  id: string;
-  name: string;
-  comment?: string;
-}
-
-/** 弹挂等级分组 */
-export interface ChestRigTier {
-  tier: number;
-  items: ChestRigItem[];
-}
-
-/** 装备总览 */
 export interface Equipment {
-  armors: ArmorTier[];
-  helmets: ArmorTier[];
-  backpacks: BackpackTier[];
-  chest_rigs: ChestRigTier[];
+  armors: EquipmentTier[];
+  helmets: EquipmentTier[];
+  backpacks: EquipmentTier[];
+  chest_rigs: EquipmentTier[];
 }
 
-/** 一套完整战术配置 */
+// ---------- 完整配装 ----------
 export interface Loadout {
   operator: Operator;
   weapon: Weapon;
-  armor: ArmorItem;
-  helmet: ArmorItem;
-  backpack: BackpackItem;
-  chestRig: ChestRigItem;
+  armor: EquipmentItem;
+  helmet: EquipmentItem;
+  backpack: EquipmentItem;
+  chestRig: EquipmentItem;
 }
 
-/** getRandomWeapon 过滤选项 */
+// ---------- 引擎选项 ----------
+/** 用户偏好覆盖层（全部可选） */
+export interface EngineOptions {
+  /** 用户对武器品质的评估：weaponId → 品质 */
+  qualityOverride?: Record<string, WeaponQuality>;
+  /** 别名：entityId → 别名数组（可用于查询） */
+  aliasOverride?: Record<string, string[]>;
+  /** 个人标签：entityId → 标签数组（纯元数据，不影响抽签） */
+  tagOverride?: Record<string, string[]>;
+}
+
+// ---------- 抽签 / 查询选项 ----------
 export interface WeaponOptions {
-  /** 武器大类，如 "突击步枪" */
   category?: string;
-  /** 品质，如 "金色" / "紫色" / "蓝色" / "绿色" */
-  quality?: string;
-  /** true 只返回普通模式可用；false 只返回普通模式不可用；undefined 全部返回 */
+  /** 需要引擎启用了 qualityOverride 才有意义 */
+  quality?: WeaponQuality;
   allowNormal?: boolean;
 }
 
-/** getRandomLoadout 选项 */
-export interface LoadoutOptions {
-  /** 是否只使用普通模式可用的装备（武器 / 护甲 / 头盔） */
+export interface TierOptions {
+  tier?: number;
   allowNormal?: boolean;
+}
+
+export interface AmmoOptions {
+  caliber?: string;
+}
+
+export interface LoadoutOptions {
+  allowNormal?: boolean;
+}
+
+// ---------- 引擎接口 ----------
+export interface Engine {
+  // 数据视图（只读）
+  getOperators(): readonly OperatorCategory[];
+  getWeapons(): readonly WeaponCategory[];
+  getAmmo(): readonly Ammo[];
+  getEquipment(): Equipment;
+
+  // 抽签
+  getRandomOperator(category?: string): Operator;
+  getRandomWeapon(options?: WeaponOptions): Weapon;
+  getRandomAmmo(options?: AmmoOptions): Ammo;
+  getRandomArmor(options?: TierOptions): EquipmentItem;
+  getRandomHelmet(options?: TierOptions): EquipmentItem;
+  getRandomBackpack(options?: TierOptions): EquipmentItem;
+  getRandomChestRig(options?: TierOptions): EquipmentItem;
+  getRandomLoadout(options?: LoadoutOptions): Loadout;
+
+  // 查询
+  findOperatorById(id: string): Operator | undefined;
+  findWeaponById(id: string): Weapon | undefined;
+  findAmmoById(id: string): Ammo | undefined;
+  findArmorById(id: string): EquipmentItem | undefined;
+  findHelmetById(id: string): EquipmentItem | undefined;
+  findBackpackById(id: string): EquipmentItem | undefined;
+  findChestRigById(id: string): EquipmentItem | undefined;
+  findWeaponsByCaliber(caliber: string): Weapon[];
+  findAmmoByCaliber(caliber: string): Ammo[];
+  findWeaponByAlias(alias: string): Weapon | undefined;
+
+  // 用户层
+  getWeaponQuality(weaponId: string): WeaponQuality | undefined;
+  getAliases(id: string): readonly string[];
+  getTags(id: string): readonly string[];
+
+  // 列表
+  listOperatorCategories(): string[];
+  listWeaponCategories(): string[];
+  listAllOperators(): Operator[];
+  listAllWeapons(): Weapon[];
 }

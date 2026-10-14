@@ -1,7 +1,7 @@
 {
   "name": "delta-force-core",
-  "version": "0.1.3",
-  "description": "三角洲行动核心数据与随机抽签库（干员 / 武器 / 防具 / 头盔 / 背包 / 弹挂）",
+  "version": "0.2.0",
+  "description": "三角洲行动核心数据与随机抽签库（干员 / 武器 / 装备 / 子弹）",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -10,10 +10,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    },
-    "./data": {
-      "types": "./dist/data.d.ts",
-      "import": "./dist/data.js"
     },
     "./index.json": "./index.json",
     "./package.json": "./package.json"
