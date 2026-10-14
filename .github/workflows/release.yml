@@ -10,7 +10,6 @@ jobs:
   # ---------- 自动发布（基于 commit message 判断）----------
   auto-release:
     name: Auto Release (by commit message)
-    # 只在 push 到 main、且不是由 bot 自动提交时触发
     if: |
       github.ref == 'refs/heads/main' &&
       !contains(github.event.head_commit.message, '[skip ci]') &&
@@ -18,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      id-token: write     # ← 新增：OIDC 需要
+      id-token: write
 
     steps:
       - name: Checkout (full history)
@@ -33,6 +32,26 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
+
+      - name: Upgrade npm to latest
+        run: npm install -g npm@latest
+
+      - name: Debug OIDC environment
+        run: |
+          echo "=== versions ==="
+          node --version
+          npm --version
+          echo "=== registry ==="
+          npm config get registry
+          echo "=== OIDC env (SET = exists) ==="
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL=${ACTIONS_ID_TOKEN_REQUEST_URL:+SET}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN=${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+SET}"
+          echo "=== NODE_AUTH_TOKEN (should be EMPTY) ==="
+          echo "NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN:+SET}"
+          echo "=== ~/.npmrc ==="
+          cat ~/.npmrc 2>/dev/null || echo "(none)"
+          echo "=== project .npmrc ==="
+          cat .npmrc 2>/dev/null || echo "(none)"
 
       - name: Determine version bump from commit message
         id: bump
@@ -56,7 +75,7 @@ jobs:
       - name: Skip if no release needed
         if: steps.bump.outputs.bump == 'none'
         run: |
-          echo "⏭️ No version bump needed (commit message doesn't match feat/fix/data/refactor)"
+          echo "⏭️ No version bump needed"
           echo "Skipping publish."
 
       - name: Install dependencies
@@ -84,10 +103,19 @@ jobs:
           git commit -m "chore(release): ${{ steps.version.outputs.new_version }} [skip ci]"
           git push
 
+      - name: Debug before publish
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          echo "=== Final pre-publish check ==="
+          echo "NODE_AUTH_TOKEN=${NODE_AUTH_TOKEN:+SET}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL=${ACTIONS_ID_TOKEN_REQUEST_URL:+SET}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN=${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+SET}"
+          cat ~/.npmrc 2>/dev/null || echo "(no ~/.npmrc)"
+          cat .npmrc 2>/dev/null || echo "(no .npmrc)"
+
       - name: Publish to npm (OIDC / Trusted Publisher)
         if: steps.bump.outputs.bump != 'none'
         run: npm publish --access public
-        # ⚠️ 不再需要 env: NODE_AUTH_TOKEN
 
       - name: Create GitHub Release
         if: steps.bump.outputs.bump != 'none'
@@ -116,6 +144,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
+      - name: Upgrade npm to latest
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         run: npm ci
 
@@ -134,4 +165,3 @@ jobs:
 
       - name: Publish to npm (OIDC / Trusted Publisher)
         run: npm publish --access public
-        # ⚠️ 不再需要 env: NODE_AUTH_TOKEN
