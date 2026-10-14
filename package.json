@@ -17,7 +17,8 @@
   "files": [
     "dist",
     "index.json",
-    "README.md"
+    "README.md",
+    "README.en.md"
   ],
   "sideEffects": false,
   "scripts": {
@@ -25,6 +26,14 @@
     "dev": "tsc --watch",
     "emit-json": "node scripts/emit-json.mjs",
     "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zhoyi011/delta-force-core.git"
+  },
+  "homepage": "https://github.com/Zhoyi011/delta-force-core#readme",
+  "bugs": {
+    "url": "https://github.com/Zhoyi011/delta-force-core/issues"
   },
   "keywords": [
     "delta-force",
