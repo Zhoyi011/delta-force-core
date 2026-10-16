@@ -5,6 +5,13 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.5.1](https://github.com/Zhoyi011/delta-force-core/compare/v0.5.0...v0.5.1) (2026-10-16)
+
+
+### 📊 数据更新
+
+* 测试 Release Please 流程 ([86da42d](https://github.com/Zhoyi011/delta-force-core/commit/86da42d7cda65edc3dbe521a4de774e9f7841fdf))
+
 ## [0.5.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.4.0...v0.5.0) (2026-10-16)
 
 ### ✨ 新功能
