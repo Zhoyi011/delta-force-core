@@ -55,6 +55,12 @@ export const {
   findAmmoByCaliber,
   findWeaponByAlias,
 
+  // 搜索
+  searchWeapons,
+  searchWeaponsAdvanced,
+  searchOperators,
+  searchOperatorsAdvanced,
+
   // 用户层
   getWeaponQuality,
   getAliases,

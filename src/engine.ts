@@ -17,6 +17,8 @@ import type {
   Weapon,
   WeaponCategory,
   WeaponOptions,
+  WeaponSearchOptions,
+  OperatorSearchOptions,
   WeaponQuality,
   Ammo,
   AmmoOptions,
@@ -62,6 +64,12 @@ function findInTiers(tiers: readonly EquipmentTier[], id: string): EquipmentItem
     if (hit) return hit;
   }
   return undefined;
+}
+
+/** 判断字符串是否包含关键字（不区分大小写） */
+function containsIgnoreCase(haystack: string | undefined, needle: string): boolean {
+  if (!haystack) return false;
+  return haystack.toLowerCase().includes(needle.toLowerCase());
 }
 
 // -----------------------------------------------------
@@ -164,6 +172,80 @@ export function createEngine(options: EngineOptions = {}): Engine {
     return findWeaponById(hit[0]);
   }
 
+  // ---------- 搜索 ----------
+
+  /** 关键字搜索武器：匹配 id / name / caliber（不区分大小写） */
+  function searchWeapons(keyword: string): Weapon[] {
+    const kw = keyword.trim();
+    if (!kw) return [];
+    return listAllWeapons().filter(
+      (w) =>
+        containsIgnoreCase(w.id, kw) ||
+        containsIgnoreCase(w.name, kw) ||
+        containsIgnoreCase(w.caliber, kw),
+    );
+  }
+
+  /** 高级筛选武器：多条件 AND */
+  function searchWeaponsAdvanced(opt: WeaponSearchOptions): Weapon[] {
+    const { keyword, category, caliber, allowNormal, minDamage, maxDamage } = opt;
+    const kw = keyword?.trim();
+
+    return listAllWeapons().filter((w) => {
+      // category 筛选：需要在 WEAPONS 分组里匹配
+      if (category) {
+        const group = WEAPONS.find((g) => g.category === category);
+        if (!group || !group.weapons.some((x) => x.id === w.id)) return false;
+      }
+      if (caliber && w.caliber !== caliber) return false;
+      if (!matchAllowNormal(allowNormal, w.allowNormal)) return false;
+      if (minDamage !== undefined && (w.baseDamage ?? 0) < minDamage) return false;
+      if (maxDamage !== undefined && (w.baseDamage ?? Infinity) > maxDamage) return false;
+      if (kw) {
+        const hit =
+          containsIgnoreCase(w.id, kw) ||
+          containsIgnoreCase(w.name, kw) ||
+          containsIgnoreCase(w.caliber, kw);
+        if (!hit) return false;
+      }
+      return true;
+    });
+  }
+
+  /** 关键字搜索干员：匹配 id / name / features（不区分大小写） */
+  function searchOperators(keyword: string): Operator[] {
+    const kw = keyword.trim();
+    if (!kw) return [];
+    return listAllOperators().filter(
+      (o) =>
+        containsIgnoreCase(o.id, kw) ||
+        containsIgnoreCase(o.name, kw) ||
+        containsIgnoreCase(o.features, kw),
+    );
+  }
+
+  /** 高级筛选干员：多条件 AND */
+  function searchOperatorsAdvanced(opt: OperatorSearchOptions): Operator[] {
+    const { keyword, category } = opt;
+    const kw = keyword?.trim();
+
+    let pool = listAllOperators();
+    if (category) {
+      const group = OPERATORS.find((g) => g.category === category);
+      if (!group) return [];
+      pool = group.operators;
+    }
+    if (kw) {
+      pool = pool.filter(
+        (o) =>
+          containsIgnoreCase(o.id, kw) ||
+          containsIgnoreCase(o.name, kw) ||
+          containsIgnoreCase(o.features, kw),
+      );
+    }
+    return pool;
+  }
+
   // ---------- 用户层 ----------
 
   const getWeaponQuality = (id: string): WeaponQuality | undefined => qualityOverride[id];
@@ -186,6 +268,10 @@ export function createEngine(options: EngineOptions = {}): Engine {
     findOperatorById, findWeaponById, findAmmoById,
     findArmorById, findHelmetById, findBackpackById, findChestRigById,
     findWeaponsByCaliber, findAmmoByCaliber, findWeaponByAlias,
+
+    // 搜索
+    searchWeapons, searchWeaponsAdvanced,
+    searchOperators, searchOperatorsAdvanced,
 
     // 用户层
     getWeaponQuality, getAliases, getTags,

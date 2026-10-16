@@ -24,7 +24,12 @@ export interface Weapon {
   id: string;
   name: string;
   caliber?: string;
+  /** 裸枪伤害（霰弹枪为单颗弹丸伤害） */
   baseDamage?: number;
+  /** 护甲伤害（霰弹枪为单颗弹丸护甲伤害） */
+  armorDamage?: number;
+  /** 弹丸数（仅霰弹枪；普通枪缺省视为 1） */
+  pelletCount?: number;
   description?: string;
   image?: string;
   /** 是否允许在普通模式使用（缺省视为 true） */
@@ -95,6 +100,30 @@ export interface WeaponOptions {
   allowNormal?: boolean;
 }
 
+/** 武器高级搜索选项（全部可选，多个条件为 AND） */
+export interface WeaponSearchOptions {
+  /** 关键字：匹配 id / name / caliber（不区分大小写） */
+  keyword?: string;
+  /** 武器大类，如 "突击步枪" */
+  category?: string;
+  /** 口径，如 "5.56x45mm" */
+  caliber?: string;
+  /** 普通模式筛选 */
+  allowNormal?: boolean;
+  /** 最小裸枪伤害（含） */
+  minDamage?: number;
+  /** 最大裸枪伤害（含） */
+  maxDamage?: number;
+}
+
+/** 干员搜索选项 */
+export interface OperatorSearchOptions {
+  /** 关键字：匹配 id / name / features（不区分大小写） */
+  keyword?: string;
+  /** 兵种分类，如 "突击兵" */
+  category?: string;
+}
+
 export interface TierOptions {
   tier?: number;
   allowNormal?: boolean;
@@ -137,6 +166,16 @@ export interface Engine {
   findWeaponsByCaliber(caliber: string): Weapon[];
   findAmmoByCaliber(caliber: string): Ammo[];
   findWeaponByAlias(alias: string): Weapon | undefined;
+
+  // 搜索
+  /** 关键字搜索武器（匹配 id / name / caliber，不区分大小写） */
+  searchWeapons(keyword: string): Weapon[];
+  /** 高级筛选武器（多条件 AND） */
+  searchWeaponsAdvanced(options: WeaponSearchOptions): Weapon[];
+  /** 关键字搜索干员（匹配 id / name / features，不区分大小写） */
+  searchOperators(keyword: string): Operator[];
+  /** 高级筛选干员（多条件 AND） */
+  searchOperatorsAdvanced(options: OperatorSearchOptions): Operator[];
 
   // 用户层
   getWeaponQuality(weaponId: string): WeaponQuality | undefined;
