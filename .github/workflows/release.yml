@@ -1,113 +1,13 @@
-name: Release
+name: Release to npm
 
 on:
   push:
-    branches: [main]
     tags:
       - 'v*.*.*'
 
 jobs:
-  auto-release:
-    name: Auto Release (by commit message)
-    if: |
-      github.ref == 'refs/heads/main' &&
-      !contains(github.event.head_commit.message, '[skip ci]') &&
-      github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-
-    steps:
-      - name: Checkout (full history)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'npm'
-
-      - name: Upgrade npm
-        run: npm install -g npm@11
-
-      - name: Clean ~/.npmrc
-        run: |
-          rm -f ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" > ~/.npmrc
-
-      - name: Determine version bump from commit message
-        id: bump
-        run: |
-          MSG="${{ github.event.head_commit.message }}"
-          echo "Commit message: $MSG"
-
-          BUMP="none"
-
-          if echo "$MSG" | grep -qE "BREAKING CHANGE|^[a-z]+(\(.+\))?!:"; then
-            BUMP="major"
-          elif echo "$MSG" | grep -qE "^feat(\(.+\))?:"; then
-            BUMP="minor"
-          elif echo "$MSG" | grep -qE "^(fix|data|refactor|perf)(\(.+\))?:"; then
-            BUMP="patch"
-          fi
-
-          echo "bump=$BUMP" >> $GITHUB_OUTPUT
-          echo "Determined bump: $BUMP"
-
-      - name: Skip if no release needed
-        if: steps.bump.outputs.bump == 'none'
-        run: |
-          echo "⏭️ No version bump needed"
-          echo "Skipping publish."
-
-      - name: Install dependencies
-        if: steps.bump.outputs.bump != 'none'
-        run: npm ci
-
-      - name: Bump version (local only, NOT committed yet)
-        if: steps.bump.outputs.bump != 'none'
-        id: version
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          NEW_VERSION=$(npm version ${{ steps.bump.outputs.bump }} --no-git-tag-version)
-          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "Bumped to $NEW_VERSION (not committed yet)"
-
-      - name: Build package
-        if: steps.bump.outputs.bump != 'none'
-        run: npm run build
-
-      - name: Publish to npm (OIDC / Trusted Publisher)
-        if: steps.bump.outputs.bump != 'none'
-        run: npm publish --access public
-
-      # ⚠️ Commit & push ONLY after successful publish
-      # This prevents "version burnt" if publish fails.
-      - name: Commit & push bumped version (only if publish succeeded)
-        if: steps.bump.outputs.bump != 'none'
-        run: |
-          git add package.json package-lock.json index.json
-          git commit -m "chore(release): ${{ steps.version.outputs.new_version }} [skip ci]"
-          git push
-
-      - name: Create GitHub Release
-        if: steps.bump.outputs.bump != 'none'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.version.outputs.new_version }}
-          name: ${{ steps.version.outputs.new_version }}
-          generate_release_notes: true
-
-  # ---------- 手动发布（打 tag 时触发）----------
-  tag-release:
-    name: Tag Release (manual)
-    if: startsWith(github.ref, 'refs/tags/v')
+  publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
     permissions:
       contents: read
