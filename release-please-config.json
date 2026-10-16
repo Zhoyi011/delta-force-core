@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "packages": {
+    ".": {
+      "changelog-path": "CHANGELOG.md",
+      "release-type": "node",
+      "include-component-in-tag": false,
+      "include-v-in-tag": true,
+      "changelog-sections": [
+        { "type": "feat",     "section": "✨ 新功能",   "hidden": false },
+        { "type": "fix",      "section": "🐛 Bug 修复", "hidden": false },
+        { "type": "data",     "section": "📊 数据更新", "hidden": false },
+        { "type": "perf",     "section": "⚡ 性能优化", "hidden": false },
+        { "type": "refactor", "section": "♻️ 重构",     "hidden": false },
+        { "type": "docs",     "section": "📝 文档",     "hidden": true  },
+        { "type": "chore",    "section": "🔧 杂项",     "hidden": true  },
+        { "type": "ci",       "section": "🔁 CI",       "hidden": true  },
+        { "type": "test",     "section": "✅ 测试",     "hidden": true  },
+        { "type": "style",    "section": "💄 样式",     "hidden": true  }
+      ]
+    }
+  }
+}
