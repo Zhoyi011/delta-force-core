@@ -5,6 +5,13 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.6.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.5.1...v0.6.0) (2026-10-17)
+
+
+### ✨ 新功能
+
+* 新增 154 个配件（弹匣/瞄准镜/护木） + MCP 搜索 + 图片 ([8bb9299](https://github.com/Zhoyi011/delta-force-core/commit/8bb92994f15e085f143795b1ec27d5edffbc5c48))
+
 ## [0.5.1](https://github.com/Zhoyi011/delta-force-core/compare/v0.5.0...v0.5.1) (2026-10-16)
 
 
