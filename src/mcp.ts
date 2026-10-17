@@ -1,12 +1,5 @@
 // =====================================================
 // delta-force-core —— MCP Server 入口
-//
-// 使用方式（在 AI 客户端配置里）：
-//   "command": "npx",
-//   "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
-//
-// 本地运行：
-//   node bin/mcp.js
 // =====================================================
 
 import {
@@ -23,6 +16,8 @@ import {
   listAllOperators,
   listWeaponCategories,
   listOperatorCategories,
+  searchWeapons,       // 🆕
+  searchOperators,     // 🆕
   WEAPONS,
   OPERATORS,
   EQUIPMENT,
@@ -31,9 +26,6 @@ import {
 
 /**
  * 启动 MCP Server（stdio 传输）。
- *
- * 注意：`@modelcontextprotocol/sdk` 是 optionalDependency，
- * 并且采用**动态 import**，所以纯 JS 用户 import 本包时**不会**加载它。
  */
 export async function startMcpServer(): Promise<void> {
   let Server: any;
@@ -46,7 +38,6 @@ export async function startMcpServer(): Promise<void> {
   };
 
   try {
-    // 动态 import —— 只有真正跑 MCP 时才加载 SDK
     ({ Server } = await import('@modelcontextprotocol/sdk/server/index.js'));
     ({ StdioServerTransport } = await import('@modelcontextprotocol/sdk/server/stdio.js'));
     const types = await import('@modelcontextprotocol/sdk/types.js');
@@ -62,49 +53,39 @@ export async function startMcpServer(): Promise<void> {
         '[delta-force-core] 无法加载 @modelcontextprotocol/sdk。',
         '请运行：',
         '  npm install @modelcontextprotocol/sdk',
-        '或者忽略此错误（如果你只是用 delta-force-core 作为 JS 库）。',
       ].join('\n'),
     );
     throw err;
   }
 
   const server = new Server(
-    { name: 'delta-force-core', version: '0.3.0' },
+    { name: 'delta-force-core', version: '0.5.1' },
     { capabilities: { tools: {}, resources: {} } },
   );
 
   // ---------------------------------------------------
-  // Tools
+  // Tools 定义（🚨 这里是定义列表）
   // ---------------------------------------------------
   server.setRequestHandler(schemas.ListToolsRequestSchema, async () => ({
     tools: [
       {
         name: 'get_random_loadout',
-        description:
-          'Randomly generate a full Delta Force loadout (operator + weapon + armor + helmet + backpack + chest rig).',
+        description: 'Randomly generate a full Delta Force loadout (operator + weapon + armor + helmet + backpack + chest rig).',
         inputSchema: {
           type: 'object',
           properties: {
-            allowNormal: {
-              type: 'boolean',
-              description: 'Only items allowed in Normal mode',
-            },
+            allowNormal: { type: 'boolean', description: 'Only items allowed in Normal mode' },
           },
         },
       },
       {
         name: 'get_random_weapon',
-        description:
-          'Pick a random weapon, optionally filtered by category / quality / normal-mode.',
+        description: 'Pick a random weapon, optionally filtered by category / quality / normal-mode.',
         inputSchema: {
           type: 'object',
           properties: {
             category: { type: 'string', description: "e.g. '突击步枪'" },
-            quality: {
-              type: 'string',
-              enum: ['绿色', '蓝色', '紫色', '金色'],
-              description: 'Requires qualityOverride on a custom engine; ignored on default engine.',
-            },
+            quality: { type: 'string', enum: ['绿色', '蓝色', '紫色', '金色'] },
             allowNormal: { type: 'boolean' },
           },
         },
@@ -115,10 +96,7 @@ export async function startMcpServer(): Promise<void> {
         inputSchema: {
           type: 'object',
           properties: {
-            category: {
-              type: 'string',
-              description: "'突击兵' | '支援兵' | '工程兵' | '侦察兵'",
-            },
+            category: { type: 'string', description: "'突击兵' | '支援兵' | '工程兵' | '侦察兵'" },
           },
         },
       },
@@ -202,57 +180,66 @@ export async function startMcpServer(): Promise<void> {
         description: 'List available weapon and operator categories.',
         inputSchema: { type: 'object', properties: {} },
       },
+      // 🆕 新增搜索工具
+      {
+        name: 'search_weapons',
+        description: 'Search weapons by keyword (matches id / name / caliber, case-insensitive).',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            keyword: { type: 'string', description: 'Search keyword' },
+          },
+          required: ['keyword'],
+        },
+      },
+      {
+        name: 'search_operators',
+        description: 'Search operators by keyword (matches id / name / features, case-insensitive).',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            keyword: { type: 'string', description: 'Search keyword' },
+          },
+          required: ['keyword'],
+        },
+      },
     ],
   }));
 
+  // ---------------------------------------------------
+  // Tools 执行逻辑（🚨 这里是 switch）
+  // ---------------------------------------------------
   server.setRequestHandler(schemas.CallToolRequestSchema, async (request: any) => {
     const { name, arguments: args } = request.params;
     const a = (args ?? {}) as Record<string, unknown>;
 
     const wrap = (payload: unknown) => ({
-      content: [
-        { type: 'text' as const, text: JSON.stringify(payload, null, 2) },
-      ],
+      content: [{ type: 'text' as const, text: JSON.stringify(payload, null, 2) }],
     });
 
     switch (name) {
       case 'get_random_loadout':
-        return wrap(
-          getRandomLoadout({
-            allowNormal: a.allowNormal as boolean | undefined,
-          }),
-        );
-
+        return wrap(getRandomLoadout({ allowNormal: a.allowNormal as boolean | undefined }));
       case 'get_random_weapon':
-        return wrap(
-          getRandomWeapon({
-            category: a.category as string | undefined,
-            quality: a.quality as any,
-            allowNormal: a.allowNormal as boolean | undefined,
-          }),
-        );
-
+        return wrap(getRandomWeapon({
+          category: a.category as string | undefined,
+          quality: a.quality as any,
+          allowNormal: a.allowNormal as boolean | undefined,
+        }));
       case 'get_random_operator':
         return wrap(getRandomOperator(a.category as string | undefined));
-
       case 'get_random_ammo':
         return wrap(getRandomAmmo({ caliber: a.caliber as string | undefined }));
-
       case 'find_weapon':
         return wrap(findWeaponById(a.id as string) ?? null);
-
       case 'find_operator':
         return wrap(findOperatorById(a.id as string) ?? null);
-
       case 'find_ammo':
         return wrap(findAmmoById(a.id as string) ?? null);
-
       case 'find_weapons_by_caliber':
         return wrap(findWeaponsByCaliber(a.caliber as string));
-
       case 'find_ammo_by_caliber':
         return wrap(findAmmoByCaliber(a.caliber as string));
-
       case 'list_weapons': {
         if (a.category) {
           const group = WEAPONS.find((g) => g.category === a.category);
@@ -260,7 +247,6 @@ export async function startMcpServer(): Promise<void> {
         }
         return wrap(listAllWeapons());
       }
-
       case 'list_operators': {
         if (a.category) {
           const group = OPERATORS.find((g) => g.category === a.category);
@@ -268,12 +254,16 @@ export async function startMcpServer(): Promise<void> {
         }
         return wrap(listAllOperators());
       }
-
       case 'list_categories':
         return wrap({
           weaponCategories: listWeaponCategories(),
           operatorCategories: listOperatorCategories(),
         });
+      // 🆕 执行搜索
+      case 'search_weapons':
+        return wrap(searchWeapons(a.keyword as string));
+      case 'search_operators':
+        return wrap(searchOperators(a.keyword as string));
 
       default:
         throw new Error(`Unknown tool: ${name}`);
@@ -285,26 +275,10 @@ export async function startMcpServer(): Promise<void> {
   // ---------------------------------------------------
   server.setRequestHandler(schemas.ListResourcesRequestSchema, async () => ({
     resources: [
-      {
-        uri: 'delta-force://weapons',
-        name: 'All weapons',
-        mimeType: 'application/json',
-      },
-      {
-        uri: 'delta-force://operators',
-        name: 'All operators',
-        mimeType: 'application/json',
-      },
-      {
-        uri: 'delta-force://equipment',
-        name: 'All equipment',
-        mimeType: 'application/json',
-      },
-      {
-        uri: 'delta-force://ammo',
-        name: 'All ammo',
-        mimeType: 'application/json',
-      },
+      { uri: 'delta-force://weapons', name: 'All weapons', mimeType: 'application/json' },
+      { uri: 'delta-force://operators', name: 'All operators', mimeType: 'application/json' },
+      { uri: 'delta-force://equipment', name: 'All equipment', mimeType: 'application/json' },
+      { uri: 'delta-force://ammo', name: 'All ammo', mimeType: 'application/json' },
     ],
   }));
 
@@ -319,13 +293,7 @@ export async function startMcpServer(): Promise<void> {
     const data = map[uri];
     if (data === undefined) throw new Error(`Unknown resource: ${uri}`);
     return {
-      contents: [
-        {
-          uri,
-          mimeType: 'application/json',
-          text: JSON.stringify(data, null, 2),
-        },
-      ],
+      contents: [{ uri, mimeType: 'application/json', text: JSON.stringify(data, null, 2) }],
     };
   });
 

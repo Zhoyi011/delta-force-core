@@ -50,6 +50,26 @@ export interface Ammo {
   image?: string;
 }
 
+// ---------- 配件 ----------
+export type AttachmentSlot =
+  | '弹匣'
+  | '瞄准镜'
+  | '护木'
+  | '枪管'
+  | '枪口'
+  | '枪托'
+  | '前握把'
+  | '后握把'
+  | '功能配件';
+
+export interface Attachment {
+  id: string;
+  name: string;
+  slot: AttachmentSlot;
+  /** 品质等级：1~6（配件目前是 2~4 级） */
+  tier?: number;
+}
+
 // ---------- 装备（护甲/头盔/背包/胸挂通用）----------
 export interface EquipmentItem {
   id: string;
