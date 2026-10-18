@@ -5,7 +5,7 @@
 // =====================================================
 
 import { OPERATORS } from './data/operators.js';
-import { WEAPONS }   from './data/weapons.js';
+import { WEAPONS }   from './data/weapons/index.js';   // 👈 修改了路径
 import { EQUIPMENT } from './data/equipment.js';
 import { AMMO }      from './data/ammo.js';
 

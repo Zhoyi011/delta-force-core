@@ -14,7 +14,7 @@ export * from './types.js';
 
 // ---------- 官方数据（只读） ----------
 export { OPERATORS } from './data/operators.js';
-export { WEAPONS }   from './data/weapons.js';
+export { WEAPONS }   from './data/weapons/index.js';   // 👈 修改了路径
 export { EQUIPMENT } from './data/equipment.js';
 export { AMMO }      from './data/ammo.js';
 

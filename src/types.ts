@@ -24,12 +24,41 @@ export interface Weapon {
   id: string;
   name: string;
   caliber?: string;
+  
+  // === 伤害数据 ===
   /** 裸枪伤害（霰弹枪为单颗弹丸伤害） */
   baseDamage?: number;
   /** 护甲伤害（霰弹枪为单颗弹丸护甲伤害） */
   armorDamage?: number;
   /** 弹丸数（仅霰弹枪；普通枪缺省视为 1） */
   pelletCount?: number;
+
+  // === 核心实战数据（逐步补全） ===
+  /** 优势射程 (米) */
+  effectiveRange?: number;
+  /** 后座力控制 (0-100) */
+  control?: number;
+  /** 操控速度 (0-100) */
+  handling?: number;
+  /** 举枪稳定性 (0-100) */
+  aimStability?: number;
+  /** 腰际射击精度 (0-100) */
+  hipFireAccuracy?: number;
+  /** 射速 (RPM) */
+  fireRate?: number;
+  /** 基础弹匣容量 */
+  magazineCapacity?: number;
+  /** 开火模式，如 ['全自动', '单发'] */
+  fireModes?: string[];
+  /** 枪口初速 (米/秒) */
+  muzzleVelocity?: number;
+  /** 枪声传播距离 (米) */
+  soundRadius?: number;
+
+  // === 槽位（为未来的配件兼容性预留） ===
+  /** 这把枪出厂自带的基础槽位 */
+  baseSlots?: AttachmentSlot[];
+
   description?: string;
   image?: string;
   /** 是否允许在普通模式使用（缺省视为 true） */
@@ -68,6 +97,30 @@ export interface Attachment {
   slot: AttachmentSlot;
   /** 品质等级：1~6（配件目前是 2~4 级） */
   tier?: number;
+
+  // === 属性加成（逐步补全） ===
+  /** 后座力控制 +X */
+  addedControl?: number;
+  /** 操控速度 +X */
+  addedHandling?: number;
+  /** 举枪稳定性 +X */
+  addedAimStability?: number;
+  /** 腰际射击精度 +X */
+  addedHipFireAccuracy?: number;
+  /** 射速 +X */
+  addedFireRate?: number;
+  /** 枪口初速 +X */
+  addedMuzzleVelocity?: number;
+  /** 优势射程 +X */
+  addedEffectiveRange?: number;
+
+  // === 兼容性影响（为未来的互斥/解锁预留） ===
+  /** 装上后新增的槽位 */
+  unlocksSlots?: AttachmentSlot[];
+  /** 装上后锁死的槽位 */
+  blocksSlots?: AttachmentSlot[];
+  /** 装上后不能同时装的其它配件 id */
+  incompatibleWith?: string[];
 }
 
 // ---------- 装备（护甲/头盔/背包/胸挂通用）----------
