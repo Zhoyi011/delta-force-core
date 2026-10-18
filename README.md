@@ -23,11 +23,11 @@
 <a id="status"></a>
 > ## 📢 项目状态
 >
-> **v0.4.x** — 稳定版本，覆盖 **干员 / 武器 / 装备 / 子弹** 四大模块。
+> **v0.6.x** — 稳定版本，覆盖 **干员 / 武器 / 装备 / 子弹 / 配件** 五大模块。
 >
-> **新增**：MCP Server（给 AI 客户端用）
+> **新增**：564 个配件数据、武器伤害数据、全库模糊搜索、MCP Server。
 >
-> **路线图**：配件系统、子弹细分（1~6 弹）、图片资源、多语言支持。
+> **路线图**：配件与武器的兼容关系、子弹细分（1~6 弹）、多语言支持。
 
 ---
 
@@ -56,12 +56,13 @@
 - [📘 API 参考](#api)
   - [引擎（Engine）](#api-engine)
   - [抽签函数](#api-random)
-  - [查询函数](#api-query)
+  - [查询与搜索函数](#api-query)
   - [列表函数](#api-list)
   - [用户覆盖层](#api-override)
 - [📚 数据模块](#data)
   - [干员（Operators）](#data-operators)
   - [武器（Weapons）](#data-weapons)
+  - [配件（Attachments）](#data-attachments)
   - [装备（Equipment）](#data-equipment)
   - [子弹（Ammo）](#data-ammo)
 - [📄 index.json](#index-json)
@@ -82,15 +83,15 @@
   <tr>
     <td align="center" width="25%">
       <h3>📚 完整数据</h3>
-      <p>干员 / 武器 / 装备 / 子弹<br/>四大模块官方字段全覆盖</p>
+      <p>干员 / 武器 / 装备 / 子弹<br/>564 个配件官方字段全覆盖</p>
     </td>
     <td align="center" width="25%">
       <h3>🎲 抽签工具</h3>
       <p>随机抽干员、武器、装备<br/>一键生成完整配装</p>
     </td>
     <td align="center" width="25%">
-      <h3>🔍 查询工具</h3>
-      <p>按 id / 口径 / 别名查询<br/>类型安全，IDE 智能提示</p>
+      <h3>🔍 搜索与查询</h3>
+      <p>按 id / 口径 / 关键字搜索<br/>类型安全，IDE 智能提示</p>
     </td>
     <td align="center" width="25%">
       <h3>🎨 用户覆盖层</h3>
@@ -101,9 +102,8 @@
 
 - ✅ **TypeScript 原生** —— 完整类型定义，IDE 智能提示
 - ✅ **ES Module** —— 现代模块规范，Tree-shaking 友好
-- ✅ **零依赖** —— 核心库不依赖任何第三方包
+- ✅ **零运行时依赖** —— 核心库不依赖任何第三方包
 - ✅ **向前兼容** —— 所有可选字段 `?:`，新版本不破坏老用户
-- ✅ **Node + 浏览器** —— 同时支持 Node.js ≥ 18 和现代浏览器
 - ✅ **MCP Server** —— 支持 Claude Desktop / Cursor / Cline 直接调用
 
 ---
@@ -122,7 +122,7 @@
   </tr>
   <tr>
     <td>📚 <b>Wiki / 资料站</b></td>
-    <td>直接消费结构化数据，渲染装备/武器列表</td>
+    <td>直接消费结构化数据，渲染装备/武器/配件列表</td>
   </tr>
   <tr>
     <td>🤖 <b>Discord / QQ 机器人</b></td>
@@ -130,7 +130,7 @@
   </tr>
   <tr>
     <td>🧪 <b>游戏数据研究</b></td>
-    <td>按口径、等级、模式自由筛选，做统计分析</td>
+    <td>按口径、等级、伤害、模式自由筛选，做统计分析</td>
   </tr>
   <tr>
     <td>🌐 <b>静态网站 / CDN</b></td>
@@ -150,27 +150,6 @@
 ### 1. 数据与逻辑分离
 
 **官方数据是只读的**，由库维护者持续更新；**用户偏好是运行时注入的**，不污染官方数据。
-
-```
-┌──────────────────────────────────────┐
-│  官方数据（硬编码、只读）              │
-│  OPERATORS / WEAPONS /               │
-│  EQUIPMENT / AMMO                    │
-└──────────────────┬───────────────────┘
-                   │
-                   ▼
-┌──────────────────────────────────────┐
-│  用户覆盖层（可选、运行时）            │
-│  qualityOverride / aliasOverride /   │
-│  tagOverride                         │
-└──────────────────┬───────────────────┘
-                   │
-                   ▼
-┌──────────────────────────────────────┐
-│  引擎（Engine）                       │
-│  · 抽签  · 查询  · MCP                │
-└──────────────────────────────────────┘
-```
 
 ### 2. 为什么 quality 不在官方数据里？
 
@@ -234,18 +213,6 @@ bun add delta-force-core
 npm install -g delta-force-core
 ```
 
-配置：
-
-```json
-{
-  "mcpServers": {
-    "delta-force": {
-      "command": "delta-force-mcp"
-    }
-  }
-}
-```
-
 </details>
 
 <details>
@@ -298,56 +265,61 @@ npm install -g delta-force-core
 | `get_random_weapon` | 随机武器 |
 | `get_random_operator` | 随机干员 |
 | `get_random_ammo` | 随机子弹 |
+| `search_weapons` | 搜索武器（匹配 id/名称/口径） |
+| `search_operators` | 搜索干员（匹配 id/名称/特性） |
 | `find_weapon` | 按 id 查武器 |
-| `find_operator` | 按 id 查干员 |
-| `find_ammo` | 按 id 查子弹 |
 | `find_weapons_by_caliber` | 按口径查武器 |
-| `find_ammo_by_caliber` | 按口径查子弹 |
 | `list_weapons` | 列出武器（可按分类） |
-| `list_operators` | 列出干员（可按分类） |
 | `list_categories` | 列出所有分类 |
-
-### 可用资源（Resources）
-
-- `delta-force://weapons` — 全部武器 JSON
-- `delta-force://operators` — 全部干员 JSON
-- `delta-force://equipment` — 全部装备 JSON
-- `delta-force://ammo` — 全部子弹 JSON
 
 ### 用户示例
 
 用户在 Claude Desktop 说：
-> "帮我抽一套三角洲配装"
+> "帮我找一下 5.56 口径的突击步枪"
 
-AI 会**自动调用** `get_random_loadout`，返回**真实数据**。
+AI 会**自动调用** `search_weapons`，返回**真实数据**。
 
 ---
 
 <a id="quick-start"></a>
 ## 🚀 快速开始
 
-### 场景 1 · 我只是想查数据（Wiki 用户）
+### 场景 1 · 查数据 / 搜索
 
 ```ts
-import { WEAPONS, OPERATORS, EQUIPMENT, AMMO } from 'delta-force-core';
+import { WEAPONS, ATTACHMENTS, searchWeapons } from 'delta-force-core';
 
 console.log(WEAPONS);            // 全部武器
-console.log(OPERATORS);          // 全部干员
-console.log(EQUIPMENT.armors);   // 全部护甲
-console.log(AMMO);               // 全部子弹
+console.log(ATTACHMENTS);        // 564 个配件
+
+const results = searchWeapons('m4'); // 搜索名称带 "m4" 的武器
+console.log(results); 
 ```
 
-### 场景 2 · 我想抽签（抽卡应用）
+### 场景 2 · 抽签（抽卡应用）
 
 ```ts
 import { getRandomWeapon, getRandomLoadout } from 'delta-force-core';
 
 console.log(getRandomWeapon());                          // 随机一把武器
-console.log(getRandomLoadout());                         // 随机一套完整配装
-console.log(getRandomLoadout({ allowNormal: true }));    // 只用普通模式
+console.log(getRandomLoadout({ allowNormal: true }));    // 随机一套普通模式配装
 ```
 
-### 场景 3 · 我有自己的品质评估
+### 场景 3 · 高级筛选武器
+
+```ts
+import { searchWeaponsAdvanced } from 'delta-force-core';
+
+// 找 5.56 口径，且伤害大于等于 30，且普通模式可用的武器
+const guns = searchWeaponsAdvanced({
+  caliber: '5.56x45mm',
+  minDamage: 30,
+  allowNormal: true
+});
+console.log(guns);
+```
+
+### 场景 4 · 自定义品质评估
 
 ```ts
 import { createEngine } from 'delta-force-core';
@@ -356,7 +328,6 @@ const engine = createEngine({
   qualityOverride: {
     m4a1: '金色',
     akm: '紫色',
-    k416: '金色',
   },
 });
 
@@ -364,58 +335,12 @@ console.log(engine.getRandomWeapon({ quality: '金色' }));
 console.log(engine.getWeaponQuality('m4a1'));  // '金色'
 ```
 
-### 场景 4 · 我在纯 JS / JSON 环境
-
-```js
-import data from 'delta-force-core/index.json' with { type: 'json' };
-
-console.log(data.weapons);
-console.log(data.equipment.helmets);
-```
-
-### 场景 5 · 我是 AI 用户
-
-配置 MCP Server（见 [MCP Server](#mcp) 段），然后对 AI 说：
-> "帮我抽一套三角洲配装"
-
----
-
-<a id="concepts"></a>
-## 🧩 核心概念
-
-### 引擎（Engine）
-
-`Engine` 是访问**所有抽签和查询能力**的统一入口。它由三层组成：
-
-> **官方数据（固定）** + **用户覆盖层（可选）** = **引擎**
-
-- **默认引擎**：`defaultEngine`，官方数据 + 空覆盖层，自动在入口注册
-- **自定义引擎**：通过 `createEngine(options)` 创建，注入你的覆盖层
-
-### 覆盖层（Override）
-
-| 覆盖类型 | 用途 | 影响 |
-|---|---|---|
-| `qualityOverride` | 武器品质评估 | 影响 `getRandomWeapon({ quality })` |
-| `aliasOverride` | 别名（如 `M4` → `m4a1`） | 影响 `findWeaponByAlias()` |
-| `tagOverride` | 个人标签 | 纯元数据，不影响抽签 |
-
-### 普通模式（allowNormal）
-
-| 值 | 行为 |
-|---|---|
-| `true` | 只在**普通模式可用**的物品中抽 |
-| `false` | 只在**禁止普通模式**的物品中抽（如 AWM / M82） |
-| `undefined` | 不筛选，全部进池 |
-
 ---
 
 <a id="api"></a>
 ## 📘 API 参考
 
 > 💡 **提示**：所有以 `defaultEngine` 形式导出的函数，等价于先 `createEngine()` 再调用。想自定义行为用 `createEngine`。
-
-> 📖 **完整 API**：见 [Wiki](https://github.com/Zhoyi011/delta-force-core/wiki) 或 [llms-full.txt](./llms-full.txt)。
 
 <a id="api-engine"></a>
 ### 引擎（Engine）
@@ -434,43 +359,6 @@ const engine = createEngine({
 });
 ```
 
-<details>
-<summary><b>查看 EngineOptions 类型</b></summary>
-
-```ts
-interface EngineOptions {
-  /** 武器品质评估：weaponId → '绿色' | '蓝色' | '紫色' | '金色' */
-  qualityOverride?: Record<string, WeaponQuality>;
-  /** 别名：entityId → string[] */
-  aliasOverride?: Record<string, string[]>;
-  /** 个人标签：entityId → string[] */
-  tagOverride?: Record<string, string[]>;
-}
-```
-
-</details>
-
----
-
-#### `defaultEngine`
-
-默认引擎，已自动注册官方数据 + 空覆盖层。
-
-```ts
-import { defaultEngine } from 'delta-force-core';
-
-defaultEngine.getRandomWeapon();
-```
-
-所有抽签/查询函数都以默认引擎的形式直接导出：
-
-```ts
-import { getRandomWeapon } from 'delta-force-core';
-// 等价于
-import { defaultEngine } from 'delta-force-core';
-defaultEngine.getRandomWeapon();
-```
-
 ---
 
 <a id="api-random"></a>
@@ -482,74 +370,20 @@ defaultEngine.getRandomWeapon();
 
 随机抽取一名干员。
 
-| 参数 | 类型 | 说明 |
-|---|---|---|
-| `category` | `string?` | 兵种分类（`突击兵` / `支援兵` / `工程兵` / `侦察兵`），不传则从全部干员中抽 |
-
 ```ts
 getRandomOperator();          // 任意干员
 getRandomOperator('突击兵');   // 只从突击兵里抽
 ```
 
----
-
 #### `getRandomWeapon(options?: WeaponOptions): Weapon`
 
 随机抽取一把武器。
-
-| 选项 | 类型 | 说明 |
-|---|---|---|
-| `category` | `string?` | 武器大类 |
-| `quality` | `WeaponQuality?` | 品质，**需要引擎有 qualityOverride 才有意义** |
-| `allowNormal` | `boolean?` | 普通模式筛选 |
 
 ```ts
 getRandomWeapon();
 getRandomWeapon({ category: '突击步枪' });
 getRandomWeapon({ allowNormal: true });
-getRandomWeapon({ category: '狙击步枪', allowNormal: false });
-engine.getRandomWeapon({ quality: '金色' });
 ```
-
----
-
-#### `getRandomAmmo(options?: AmmoOptions): Ammo`
-
-随机抽取一种子弹。
-
-| 选项 | 类型 | 说明 |
-|---|---|---|
-| `caliber` | `string?` | 口径筛选，如 `5.56x45mm` |
-
-```ts
-getRandomAmmo();
-getRandomAmmo({ caliber: '5.56x45mm' });
-```
-
----
-
-#### `getRandomArmor` / `getRandomHelmet` / `getRandomBackpack` / `getRandomChestRig`
-
-```ts
-getRandomArmor(options?: TierOptions): EquipmentItem
-getRandomHelmet(options?: TierOptions): EquipmentItem
-getRandomBackpack(options?: TierOptions): EquipmentItem
-getRandomChestRig(options?: TierOptions): EquipmentItem
-```
-
-| 选项 | 类型 | 说明 |
-|---|---|---|
-| `tier` | `number?` | 指定等级（1~6），不传则全等级 |
-| `allowNormal` | `boolean?` | 普通模式筛选（护甲/头盔支持） |
-
-```ts
-getRandomArmor();
-getRandomArmor({ tier: 5 });
-getRandomHelmet({ allowNormal: true });
-getRandomBackpack({ tier: 6 });
-```
-
----
 
 #### `getRandomLoadout(options?: LoadoutOptions): Loadout`
 
@@ -557,75 +391,27 @@ getRandomBackpack({ tier: 6 });
 
 ```ts
 const loadout = getRandomLoadout({ allowNormal: true });
-
-// 返回：
-// {
-//   operator: {...},   // 干员
-//   weapon:   {...},   // 武器
-//   armor:    {...},   // 护甲
-//   helmet:   {...},   // 头盔
-//   backpack: {...},   // 背包
-//   chestRig: {...}    // 胸挂
-// }
+// 返回：{ operator, weapon, armor, helmet, backpack, chestRig }
 ```
 
 ---
 
 <a id="api-query"></a>
-### 查询函数
+### 查询与搜索函数
 
 | 函数 | 说明 |
 |---|---|
+| `searchWeapons(keyword)` | 模糊搜索武器（匹配 id/名称/口径） |
+| `searchWeaponsAdvanced(options)` | 高级筛选武器（口径/分类/伤害区间/普通模式） |
+| `searchOperators(keyword)` | 模糊搜索干员 |
+| `searchOperatorsAdvanced(options)` | 高级筛选干员 |
 | `findOperatorById(id)` | 按 id 查干员 |
 | `findWeaponById(id)` | 按 id 查武器 |
-| `findAmmoById(id)` | 按 id 查子弹 |
-| `findArmorById(id)` | 按 id 查护甲 |
-| `findHelmetById(id)` | 按 id 查头盔 |
-| `findBackpackById(id)` | 按 id 查背包 |
-| `findChestRigById(id)` | 按 id 查胸挂 |
 | `findWeaponsByCaliber(caliber)` | 按口径查武器 |
-| `findAmmoByCaliber(caliber)` | 按口径查子弹 |
-| `findWeaponByAlias(alias)` | 按别名查武器（需 aliasOverride） |
 
 ```ts
 findWeaponById('m4a1');
-// { id: 'm4a1', name: 'M4A1突击步枪', allowNormal: true }
-
-findHelmetById('helmet_l4_gt1');
-findWeaponsByCaliber('5.56x45mm');
-```
-
----
-
-<a id="api-list"></a>
-### 列表函数
-
-```ts
-listOperatorCategories();
-// ['突击兵', '支援兵', '工程兵', '侦察兵']
-
-listWeaponCategories();
-// ['突击步枪', '冲锋枪', '精确射手步枪', '狙击步枪', '轻机枪', '霰弹枪', '手枪', '特殊武器']
-
-listAllOperators();  // 全部干员，拉平成一维数组
-listAllWeapons();    // 全部武器，拉平成一维数组
-```
-
----
-
-<a id="api-override"></a>
-### 用户覆盖层
-
-```ts
-const engine = createEngine({
-  qualityOverride: { m4a1: '金色' },
-  aliasOverride:   { m4a1: ['M4', 'M4卡宾枪'] },
-  tagOverride:     { m4a1: ['经典', '入门'] },
-});
-
-engine.getWeaponQuality('m4a1'); // '金色'
-engine.getAliases('m4a1');       // ['M4', 'M4卡宾枪']
-engine.getTags('m4a1');          // ['经典', '入门']
+// { id: 'm4a1', name: 'M4A1突击步枪', caliber: '5.56x45mm', baseDamage: 31, allowNormal: true }
 ```
 
 ---
@@ -633,195 +419,62 @@ engine.getTags('m4a1');          // ['经典', '入门']
 <a id="data"></a>
 ## 📚 数据模块
 
-<a id="data-operators"></a>
-### 干员（Operators）
-
-**结构**
-
-```ts
-interface Operator {
-  id: string;
-  name: string;
-  features?: string;
-  description?: string;
-  image?: string;
-}
-
-interface OperatorCategory {
-  category: string;
-  operators: Operator[];
-}
-```
-
-**导出**
-
-```ts
-import { OPERATORS } from 'delta-force-core';
-```
-
-**分类**：突击兵 / 支援兵 / 工程兵 / 侦察兵
-
-**当前条目**：
-
-| 分类 | 干员 |
-|---|---|
-| 突击兵 | 红狼 / 威龙 / 疾风 / 无名 |
-| 支援兵 | 蜂医 / 蛊 / 蝶 / 旅人 |
-| 工程兵 | 牧羊人 / 乌鲁鲁 / 深蓝 / 液氮 / 比特 |
-| 侦察兵 | 露娜 / 骇爪 / 回响 / 银翼 |
-
----
-
 <a id="data-weapons"></a>
 ### 武器（Weapons）
 
-**结构**
+**新增属性**：包含 `baseDamage`（裸枪伤害）、`armorDamage`（护甲伤害）、`pelletCount`（霰弹枪弹丸数）。
 
 ```ts
 interface Weapon {
   id: string;
   name: string;
-  caliber?: string;      // 口径
-  baseDamage?: number;   // 裸枪基础伤害
-  description?: string;
+  caliber?: string;
+  baseDamage?: number;   
+  armorDamage?: number;  
+  pelletCount?: number;  
   image?: string;
-  allowNormal?: boolean; // 缺省视为 true
-}
-```
-
-> ⚠️ **注意**：官方 `Weapon` **不含 `quality`**。品质由用户注入。
-
-**导出**
-
-```ts
-import { WEAPONS } from 'delta-force-core';
-```
-
-**分类与数量**：
-
-| 分类 | 数量 |
-|---|---|
-| 突击步枪 | 24 |
-| 冲锋枪 | 12 |
-| 精确射手步枪 | 10 |
-| 狙击步枪 | 5 |
-| 轻机枪 | 4 |
-| 霰弹枪 | 5 |
-| 手枪 | 7 |
-| 特殊武器 | 1 |
-| **合计** | **68** |
-
----
-
-<a id="data-equipment"></a>
-### 装备（Equipment）
-
-**结构**
-
-```ts
-interface EquipmentItem {
-  id: string;
-  name: string;
-  features?: string;
-  comment?: string;
-  description?: string;
-  image?: string;
-}
-
-interface EquipmentTier {
-  tier: number;
   allowNormal?: boolean;
-  items: EquipmentItem[];
-}
-
-interface Equipment {
-  armors: EquipmentTier[];
-  helmets: EquipmentTier[];
-  backpacks: EquipmentTier[];
-  chest_rigs: EquipmentTier[];
 }
 ```
 
-**导出**
-
-```ts
-import { EQUIPMENT } from 'delta-force-core';
-
-EQUIPMENT.armors;      // 护甲，1~6 级
-EQUIPMENT.helmets;     // 头盔，1~6 级
-EQUIPMENT.backpacks;   // 背包，1~6 级
-EQUIPMENT.chest_rigs;  // 胸挂，1~5 级
-```
+**合计 68 把武器。**
 
 ---
 
-<a id="data-ammo"></a>
-### 子弹（Ammo）
+<a id="data-attachments"></a>
+### 配件（Attachments）
 
-**结构**
+**全库包含 564 个配件**，涵盖 9 大分类。
 
 ```ts
-interface Ammo {
+type AttachmentSlot = '弹匣' | '瞄准镜' | '护木' | '枪管' | '枪口' | '枪托' | '前握把' | '后握把' | '功能配件';
+
+interface Attachment {
   id: string;
   name: string;
-  caliber: string;
-  description?: string;
-  image?: string;
+  slot: AttachmentSlot;
+  tier?: number; // 2(绿) / 3(蓝) / 4(紫)
 }
 ```
 
-> ⚠️ **当前粒度**：只到"口径"，同口径的 1~6 弹（如 M855 / M995）后续再加。
-
-**导出**
-
 ```ts
-import { AMMO } from 'delta-force-core';
+import { ATTACHMENTS } from 'delta-force-core';
+
+// 找所有紫色品质的枪管
+const barrels = ATTACHMENTS.filter(a => a.slot === '枪管' && a.tier === 4);
 ```
-
-**当前口径**（21 种）：
-
-| 手枪 / 霰弹 | 中间威力 | 全威力 | 其它 |
-|---|---|---|---|
-| `.357 Magnum` | `5.45x39mm` | `7.62x51mm` | `4.6x30mm` |
-| `.45 ACP` | `5.56x45mm` | `7.62x54mm` | `.300 Blackout` |
-| `.50 AE` | `5.7x28mm` | `12.7x55mm` | `箭矢` |
-| `.338` | `5.8x42mm` | `12.7x99mm` | `45-70 Govt` |
-| `12 Gauge` | `6.8x51mm` | | |
-| `9x19mm` | `7.62x39mm` | | |
-| `9x39mm` | | | |
 
 ---
 
 <a id="index-json"></a>
 ## 📄 index.json
 
-库在每次构建时生成一份 `index.json`，包含**当前官方数据的完整快照**：
-
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
-  "version": "0.4.0",
-  "generatedAt": "2026-10-14T00:34:01.102Z",
-  "operators": [...],
-  "weapons": [...],
-  "equipment": {...},
-  "ammo": [...]
-}
-```
-
-**用途**：
-
-- 🐍 非 JS 环境（如 Python 脚本）直接消费
-- 🌐 CDN 直接 fetch（`https://unpkg.com/delta-force-core/index.json`）
-- 📊 数据 diff 检查
-- 🧠 AI 直接读数据
+库在每次构建时生成一份 `index.json`，包含**当前官方数据的完整快照**（体积约 323 KB）：
 
 ```js
 // ESM
 import data from 'delta-force-core/index.json' with { type: 'json' };
-
-// CommonJS
-const data = require('delta-force-core/index.json');
+console.log(data.attachments);
 
 // HTTP
 const res = await fetch('https://unpkg.com/delta-force-core/index.json');
@@ -837,14 +490,7 @@ const data = await res.json();
 |---|---|
 | **Node.js** | `npm install delta-force-core` |
 | **浏览器** | `https://esm.sh/delta-force-core` |
-| **Deno** | `import ... from 'npm:delta-force-core'` |
-| **Bun** | `bun add delta-force-core` |
-| **Python** | 读 `index.json` |
-| **Discord.js** | 见下方示例 |
-| **Claude Desktop** | MCP Server |
-| **Cursor** | MCP Server |
-| **Cline / Continue.dev** | MCP Server |
-| **AI Studio / ChatGPT** | 读 `llms.txt` 或 fetch `index.json` |
+| **Claude Desktop / Cursor** | MCP Server |
 
 ### Discord.js 示例
 
@@ -872,61 +518,22 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 ```
 
-### Claude Desktop / Cursor MCP 配置
-
-```json
-{
-  "mcpServers": {
-    "delta-force": {
-      "command": "npx",
-      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
-    }
-  }
-}
-```
-
 ---
 
 <a id="contributing"></a>
 ## 🤝 贡献指南
 
-### 更新干员 / 武器 / 装备 / 子弹
+### 更新数据
 
 **只需要修改对应的数据文件**：
 
-```
+```text
 src/data/
 ├─ operators.ts    ← 干员
 ├─ weapons.ts      ← 武器
-├─ equipment.ts    ← 装备（护甲/头盔/背包/胸挂）
+├─ attachments.ts  ← 配件
+├─ equipment.ts    ← 装备
 └─ ammo.ts         ← 子弹
-```
-
-### 例子：新增一把武器
-
-```ts
-// src/data/weapons.ts
-{
-  category: '突击步枪',
-  weapons: [
-    // ...已有的
-    { id: 'new_rifle', name: '新突击步枪', allowNormal: true },  // ← 加一行
-  ],
-},
-```
-
-### 例子：新增一件头盔
-
-```ts
-// src/data/equipment.ts → EQUIPMENT.helmets
-{
-  tier: 4,
-  allowNormal: true,
-  items: [
-    // ...已有的
-    { id: 'helmet_l4_new', name: '新头盔', features: '属性描述' },  // ← 加一行
-  ],
-},
 ```
 
 ### 流程
@@ -938,21 +545,11 @@ vim src/data/weapons.ts
 # 2. 编译 + 重新生成 index.json
 npm run build
 
-# 3. 提交
+# 3. 提交（请使用规范的 commit 前缀）
 git add .
 git commit -m "data: 新增 XXX 武器"
 git push origin main
 ```
-
-### 注意事项
-
-| 项 | 说明 |
-|---|---|
-| `id` 必须全局唯一 | 用于查询和去重，重复会静默出 bug |
-| `quality` 不要加 | 官方数据不含品质，由用户层覆盖 |
-| `allowNormal` 缺省 = true | 只在需要禁止时写 `false` |
-| 可选字段全部用 `?:` | 保证向前兼容 |
-| 新增分类 | 直接在数组里追加 `{ category, weapons: [...] }` 块 |
 
 ### 提交规范
 
@@ -963,91 +560,8 @@ git push origin main
 | `feat:` | 新功能 |
 | `fix:` | Bug 修复 |
 | `data:` | 数据更新 |
-| `refactor:` | 重构 |
 | `docs:` | 文档 |
 | `chore:` | 杂项 |
-| `test:` | 测试 |
-
-例子：
-
-```
-feat: 新增 getRandomAmmo() 支持按口径抽签
-data: 新增 5 把突击步枪
-fix: 修正 AKM 的 allowNormal 字段
-docs: 更新 README 安装说明
-```
-
----
-
-<a id="dev"></a>
-## 🛠 开发
-
-### 环境要求
-
-- Node.js ≥ 18
-- TypeScript ≥ 5.4
-
-### 安装
-
-```bash
-git clone https://github.com/Zhoyi011/delta-force-core.git
-cd delta-force-core
-npm install
-```
-
-### 目录结构
-
-```text
-delta-force-core/
-├─ .gitignore
-├─ package.json
-├─ tsconfig.json
-├─ README.md
-├─ README.en.md
-├─ llms.txt                      ← AI 索引
-├─ llms-full.txt                 ← AI 全文
-├─ LICENSE
-├─ CONTRIBUTING.md
-├─ index.json                    ← 构建产物
-├─ bin/
-│  └─ mcp.js                     ← MCP CLI 入口
-├─ scripts/
-│  └─ emit-json.mjs              ← 生成 index.json
-├─ src/
-│  ├─ types.ts                   ← 所有类型定义
-│  ├─ engine.ts                  ← 引擎（createEngine + 全部方法）
-│  ├─ mcp.ts                     ← MCP Server 逻辑
-│  ├─ index.ts                   ← 主入口
-│  └─ data/
-│     ├─ index.ts                ← 数据统一导出
-│     ├─ operators.ts            ← 干员数据
-│     ├─ weapons.ts              ← 武器数据
-│     ├─ equipment.ts            ← 装备数据
-│     └─ ammo.ts                 ← 子弹数据
-├─ assets/
-│  └─ weapons/                   ← 武器图片
-└─ .github/
-   └─ workflows/                 ← CI / 自动发布
-```
-
-### 常用命令
-
-```bash
-npm run build        # 编译 + 生成 index.json
-npm run dev          # 开发模式（watch）
-npm run emit-json    # 只生成 index.json
-npm run mcp          # 启动 MCP Server
-```
-
-### 发布到 npm
-
-**已配置 GitHub Actions 自动发布**：
-
-- `feat:` 前缀 → minor bump
-- `fix:` / `data:` / `refactor:` / `perf:` → patch bump
-- `feat!:` 或 `BREAKING CHANGE` → major bump
-
-发布用 **OIDC Trusted Publisher**（无需 token），带 **Provenance 签名**。
 
 ---
 
@@ -1064,129 +578,11 @@ npm run mcp          # 启动 MCP Server
   <tr><td>✅ 已完成</td><td>引擎 + 用户覆盖层（quality / alias / tag）</td><td>v0.2</td></tr>
   <tr><td>✅ 已完成</td><td>完整 README + Wiki + AI 文档</td><td>v0.3</td></tr>
   <tr><td>✅ 已完成</td><td>MCP Server（AI 客户端集成）</td><td>v0.4</td></tr>
-  <tr><td>📋 计划中</td><td>配件系统（槽位 / 兼容关系）</td><td>v0.5</td></tr>
-  <tr><td>📋 计划中</td><td>子弹细分（1~6 弹，伤害 / 穿透）</td><td>v0.5</td></tr>
-  <tr><td>📋 计划中</td><td>图片资源（干员 / 武器 / 装备）</td><td>v0.6</td></tr>
-  <tr><td>💭 考虑中</td><td>多语言（English / 日本語）</td><td>v1.0</td></tr>
+  <tr><td>✅ 已完成</td><td>武器伤害数据 + 搜索函数</td><td>v0.5</td></tr>
+  <tr><td>✅ 已完成</td><td><strong>564 个配件数据全量录入</strong></td><td>v0.6</td></tr>
+  <tr><td>📋 计划中</td><td>配件与武器的兼容关系（Slots）</td><td>v0.7</td></tr>
+  <tr><td>📋 计划中</td><td>子弹细分（1~6 弹，穿透数据）</td><td>v0.8</td></tr>
 </table>
-
----
-
-<a id="faq"></a>
-## ❓ FAQ
-
-<details>
-<summary><b>Q1: 为什么官方武器里没有 <code>quality</code> 字段？</b></summary>
-
-品质是玩家**主观评估**，不是官方数据。我们把品质放到用户层 `qualityOverride` 里，让每个使用者用自己的标准。
-
-如果你的项目需要品质，用 `createEngine` 注入：
-
-```ts
-const engine = createEngine({
-  qualityOverride: { m4a1: '金色' },
-});
-```
-
-</details>
-
-<details>
-<summary><b>Q2: 默认引擎和自定义引擎有什么区别？</b></summary>
-
-**默认引擎** `defaultEngine` = 官方数据 + 空覆盖层。
-
-**自定义引擎** = 官方数据 + 你的覆盖层。所有查询和抽签方法行为一致，只是自定义引擎会应用你的 quality/alias/tag。
-
-</details>
-
-<details>
-<summary><b>Q3: 我能不能只拿数据，不用抽签功能？</b></summary>
-
-可以。直接 import 数据常量：
-
-```ts
-import { WEAPONS, OPERATORS, EQUIPMENT, AMMO } from 'delta-force-core';
-```
-
-或者用 `index.json`（适合非 JS 环境）。
-
-</details>
-
-<details>
-<summary><b>Q4: 数据多久更新一次？</b></summary>
-
-跟随游戏版本更新。新装备 / 武器 / 干员上线后，我们会尽快同步。
-
-你也可以提 PR 直接改数据文件。
-
-</details>
-
-<details>
-<summary><b>Q5: 支持 TypeScript 吗？</b></summary>
-
-原生 TypeScript 编写，完整类型定义。IDE 会有智能提示和类型检查。
-
-</details>
-
-<details>
-<summary><b>Q6: 支持 CommonJS 吗？</b></summary>
-
-主入口是 **ES Module**。如果是 CommonJS 项目：
-
-```js
-// 方式 1：动态 import
-const { getRandomLoadout } = await import('delta-force-core');
-
-// 方式 2：直接用 JSON
-const data = require('delta-force-core/index.json');
-```
-
-</details>
-
-<details>
-<summary><b>Q7: 什么是 MCP？怎么用？</b></summary>
-
-**MCP（Model Context Protocol）** 是 AI 客户端的"工具调用协议"。
-
-配置后，Claude Desktop / Cursor / Cline 可以**直接调用** `delta-force-core` 的工具：
-
-```json
-{
-  "mcpServers": {
-    "delta-force": {
-      "command": "npx",
-      "args": ["-y", "-p", "delta-force-core", "delta-force-mcp"]
-    }
-  }
-}
-```
-
-然后对 AI 说："帮我抽一套三角洲配装" → AI **直接调用**你的工具。
-
-</details>
-
-<details>
-<summary><b>Q8: 怎么让 AI 用我的库？</b></summary>
-
-**三种方式**：
-
-1. **MCP**（推荐）：配置 MCP Server → AI 直接调用
-2. **AI 读文档**：让 AI 读 [Wiki](https://github.com/Zhoyi011/delta-force-core/wiki) 或 [llms.txt](./llms.txt)
-3. **AI 读数据**：让 AI fetch `https://unpkg.com/delta-force-core/index.json`
-
-</details>
-
-<details>
-<summary><b>Q9: 怎么贡献数据修正？</b></summary>
-
-1. Fork 仓库
-2. 改 `src/data/*.ts`
-3. `npm run build` 确认编译通过
-4. 提交 PR，附上数据来源（截图 / 官方公告）
-
-详见 [贡献指南](#contributing)。
-
-</details>
 
 ---
 
@@ -1197,16 +593,6 @@ const data = require('delta-force-core/index.json');
 
 ---
 
-<a id="thanks"></a>
-## ❤️ 致谢
-
-- 感谢所有为三角洲行动数据整理做出贡献的玩家社区
-- 感谢 [Shields.io](https://shields.io/) 提供徽章服务
-- 感谢 [unpkg](https://unpkg.com/) / [esm.sh](https://esm.sh/) 提供 CDN
-- 感谢 [Anthropic MCP](https://modelcontextprotocol.io/) 提供 AI 工具协议
-
----
-
 <div align="center">
 
 **如果这个项目对你有帮助，请给一个 ⭐ Star 支持一下！**
@@ -1214,3 +600,4 @@ const data = require('delta-force-core/index.json');
 [⬆ 回到顶部](#delta-force-core)
 
 </div>
+```
