@@ -5,6 +5,19 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.7.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.6.0...v0.7.0) (2026-10-19)
+
+
+### ✨ 新功能
+
+* 武器数据拆分模块化，并新增 MDR 详细裸枪属性 ([3e00d3a](https://github.com/Zhoyi011/delta-force-core/commit/3e00d3a4bec15710eec953051adc40fe4c06b8b8))
+
+
+### 📊 数据更新
+
+* 补全全部 24 把突击步枪的完整裸枪底层数值 ([65fb9de](https://github.com/Zhoyi011/delta-force-core/commit/65fb9dea2b69dff7ddbf20e00599247a2d4b338c))
+* 补全全部武器的完整底层属性 ([da37444](https://github.com/Zhoyi011/delta-force-core/commit/da374447d5925e4291ae6e3cd9580e603afb856f))
+
 ## [0.6.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.5.1...v0.6.0) (2026-10-18)
 
 
