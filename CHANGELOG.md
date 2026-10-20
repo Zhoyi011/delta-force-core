@@ -5,6 +5,14 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.7.2](https://github.com/Zhoyi011/delta-force-core/compare/v0.7.1...v0.7.2) (2026-10-20)
+
+
+### 📊 数据更新
+
+* 手动录入 41 个枪口配件，包含所有数值与特殊机制 ([8da574d](https://github.com/Zhoyi011/delta-force-core/commit/8da574d3715e223f2fe5248dae4ce7f5b591c1cc))
+* 手动录入全部前握把和后握把数据，包含数值与特效 ([0c9000b](https://github.com/Zhoyi011/delta-force-core/commit/0c9000bb3422dfc7ef03dbe0fc4d65c239b7ccd1))
+
 ## [0.7.1](https://github.com/Zhoyi011/delta-force-core/compare/v0.7.0...v0.7.1) (2026-10-20)
 
 
