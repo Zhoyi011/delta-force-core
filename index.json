@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
   "version": "0.2.0",
-  "generatedAt": "2026-10-18T07:01:34.029Z",
+  "generatedAt": "2026-10-20T10:12:55.450Z",
   "operators": [
     {
       "category": "突击兵",
@@ -119,6 +119,19 @@
           "caliber": "5.56x45mm",
           "baseDamage": 31,
           "armorDamage": 33,
+          "effectiveRange": 40,
+          "control": 41,
+          "handling": 58,
+          "aimStability": 55,
+          "hipFireAccuracy": 55,
+          "fireRate": 800,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m4a1.png"
         },
@@ -128,6 +141,19 @@
           "caliber": "5.56x45mm",
           "baseDamage": 31,
           "armorDamage": 35,
+          "effectiveRange": 27,
+          "control": 44,
+          "handling": 61,
+          "aimStability": 52,
+          "hipFireAccuracy": 57,
+          "fireRate": 880,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/k416.png"
         },
@@ -137,6 +163,19 @@
           "caliber": "7.62x39mm",
           "baseDamage": 40,
           "armorDamage": 42,
+          "effectiveRange": 40,
+          "control": 39,
+          "handling": 54,
+          "aimStability": 55,
+          "hipFireAccuracy": 53,
+          "fireRate": 600,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 525,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/akm.png"
         },
@@ -146,6 +185,19 @@
           "caliber": "5.8x42mm",
           "baseDamage": 28,
           "armorDamage": 42,
+          "effectiveRange": 55,
+          "control": 52,
+          "handling": 55,
+          "aimStability": 58,
+          "hipFireAccuracy": 54,
+          "fireRate": 679,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qbz95_1.png"
         },
@@ -155,6 +207,19 @@
           "caliber": "9x39mm",
           "baseDamage": 28,
           "armorDamage": 44,
+          "effectiveRange": 21,
+          "control": 43,
+          "handling": 62,
+          "aimStability": 51,
+          "hipFireAccuracy": 57,
+          "fireRate": 972,
+          "magazineCapacity": 15,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 300,
+          "soundRadius": 100,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/as_val.png"
         },
@@ -164,6 +229,19 @@
           "caliber": "5.8x42mm",
           "baseDamage": 35,
           "armorDamage": 38,
+          "effectiveRange": 35,
+          "control": 40,
+          "handling": 60,
+          "aimStability": 50,
+          "hipFireAccuracy": 56,
+          "fireRate": 706,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/tenglong.png"
         },
@@ -173,6 +251,19 @@
           "caliber": "6.8x51mm",
           "baseDamage": 37,
           "armorDamage": 40,
+          "effectiveRange": 50,
+          "control": 34,
+          "handling": 51,
+          "aimStability": 58,
+          "hipFireAccuracy": 43,
+          "fireRate": 649,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 630,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m7.png"
         },
@@ -182,6 +273,19 @@
           "caliber": "7.62x51mm",
           "baseDamage": 40,
           "armorDamage": 41,
+          "effectiveRange": 40,
+          "control": 40,
+          "handling": 58,
+          "aimStability": 55,
+          "hipFireAccuracy": 45,
+          "fireRate": 585,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 630,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/scar_h.png"
         },
@@ -191,6 +295,19 @@
           "caliber": "7.62x51mm",
           "baseDamage": 39,
           "armorDamage": 42,
+          "effectiveRange": 55,
+          "control": 32,
+          "handling": 51,
+          "aimStability": 62,
+          "hipFireAccuracy": 45,
+          "fireRate": 533,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 630,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/g3.png"
         },
@@ -200,6 +317,20 @@
           "caliber": "5.45x39mm",
           "baseDamage": 30,
           "armorDamage": 42,
+          "effectiveRange": 40,
+          "control": 48,
+          "handling": 57,
+          "aimStability": 56,
+          "hipFireAccuracy": 54,
+          "fireRate": 735,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "单发",
+            "连发",
+            "全自动"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ak12.png"
         },
@@ -209,6 +340,19 @@
           "caliber": "5.56x45mm",
           "baseDamage": 32,
           "armorDamage": 35,
+          "effectiveRange": 55,
+          "control": 60,
+          "handling": 54,
+          "aimStability": 59,
+          "hipFireAccuracy": 53,
+          "fireRate": 679,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/aug.png"
         },
@@ -218,6 +362,20 @@
           "caliber": "5.56x45mm",
           "baseDamage": 25,
           "armorDamage": 34,
+          "effectiveRange": 35,
+          "control": 46,
+          "handling": 61,
+          "aimStability": 52,
+          "hipFireAccuracy": 53,
+          "fireRate": 906,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "单发",
+            "全自动",
+            "连发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sg552.png"
         },
@@ -227,6 +385,19 @@
           "caliber": "5.56x45mm",
           "baseDamage": 33,
           "armorDamage": 39,
+          "effectiveRange": 55,
+          "control": 40,
+          "handling": 56,
+          "aimStability": 57,
+          "hipFireAccuracy": 54,
+          "fireRate": 508,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "连发",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m16a4.png"
         },
@@ -236,6 +407,19 @@
           "caliber": "5.56x45mm",
           "baseDamage": 27,
           "armorDamage": 32,
+          "effectiveRange": 40,
+          "control": 50,
+          "handling": 58,
+          "aimStability": 55,
+          "hipFireAccuracy": 53,
+          "fireRate": 632,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/car15.png"
         },
@@ -245,6 +429,19 @@
           "caliber": "5.45x39mm",
           "baseDamage": 34,
           "armorDamage": 36,
+          "effectiveRange": 40,
+          "control": 35,
+          "handling": 60,
+          "aimStability": 53,
+          "hipFireAccuracy": 52,
+          "fireRate": 533,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/aks74u.png"
         },
@@ -254,6 +451,19 @@
           "caliber": "5.56x45mm",
           "baseDamage": 36,
           "armorDamage": 32,
+          "effectiveRange": 35,
+          "control": 45,
+          "handling": 48,
+          "aimStability": 53,
+          "hipFireAccuracy": 49,
+          "fireRate": 780,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/k437.png"
         },
@@ -263,6 +473,19 @@
           "caliber": "7.62x39mm",
           "baseDamage": 36,
           "armorDamage": 37,
+          "effectiveRange": 40,
+          "control": 32,
+          "handling": 56,
+          "aimStability": 57,
+          "hipFireAccuracy": 45,
+          "fireRate": 632,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 630,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ptr32.png"
         },
@@ -272,6 +495,19 @@
           "caliber": "12.7x55mm",
           "baseDamage": 56,
           "armorDamage": 55,
+          "effectiveRange": 55,
+          "control": 24,
+          "handling": 57,
+          "aimStability": 61,
+          "hipFireAccuracy": 43,
+          "fireRate": 500,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 340,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ash12.png"
         },
@@ -279,8 +515,21 @@
           "id": "kc17",
           "name": "KC17突击步枪",
           "caliber": "5.56x45mm",
-          "baseDamage": 32,
+          "baseDamage": 31,
           "armorDamage": 48,
+          "effectiveRange": 55,
+          "control": 53,
+          "handling": 53,
+          "aimStability": 48,
+          "hipFireAccuracy": 45,
+          "fireRate": 740,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/kc17.png"
         },
@@ -290,6 +539,19 @@
           "caliber": "7.62x39mm",
           "baseDamage": 42,
           "armorDamage": 46,
+          "effectiveRange": 30,
+          "control": 35,
+          "handling": 55,
+          "aimStability": 50,
+          "hipFireAccuracy": 53,
+          "fireRate": 625,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 525,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mk47.png"
         },
@@ -297,8 +559,21 @@
           "id": "mcx_lt",
           "name": "MCX LT突击步枪",
           "caliber": ".300 Blackout",
-          "baseDamage": 35,
+          "baseDamage": 34,
           "armorDamage": 26,
+          "effectiveRange": 30,
+          "control": 44,
+          "handling": 61,
+          "aimStability": 52,
+          "hipFireAccuracy": 57,
+          "fireRate": 840,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mcx_lt.png"
         },
@@ -308,6 +583,19 @@
           "caliber": "5.7x28mm",
           "baseDamage": 30,
           "armorDamage": 31,
+          "effectiveRange": 35,
+          "control": 41,
+          "handling": 58,
+          "aimStability": 40,
+          "hipFireAccuracy": 60,
+          "fireRate": 900,
+          "magazineCapacity": 50,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 525,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/ar57.png"
         },
@@ -317,6 +605,19 @@
           "caliber": "6.8x51mm",
           "baseDamage": 41,
           "armorDamage": 42,
+          "effectiveRange": 55,
+          "control": 48,
+          "handling": 50,
+          "aimStability": 59,
+          "hipFireAccuracy": 44,
+          "fireRate": 550,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 650,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/rm277.png"
         },
@@ -353,6 +654,19 @@
           "caliber": "9x19mm",
           "baseDamage": 28,
           "armorDamage": 35,
+          "effectiveRange": 20,
+          "control": 50,
+          "handling": 68,
+          "aimStability": 43,
+          "hipFireAccuracy": 66,
+          "fireRate": 780,
+          "magazineCapacity": 25,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/uzi.png"
         },
@@ -362,6 +676,19 @@
           "caliber": "9x19mm",
           "baseDamage": 32,
           "armorDamage": 35,
+          "effectiveRange": 20,
+          "control": 43,
+          "handling": 62,
+          "aimStability": 49,
+          "hipFireAccuracy": 63,
+          "fireRate": 659,
+          "magazineCapacity": 32,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/bizon.png"
         },
@@ -371,6 +698,19 @@
           "caliber": "9x19mm",
           "baseDamage": 36,
           "armorDamage": 35,
+          "effectiveRange": 20,
+          "control": 40,
+          "handling": 63,
+          "aimStability": 48,
+          "hipFireAccuracy": 48,
+          "fireRate": 700,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/vityaz.png"
         },
@@ -380,6 +720,20 @@
           "caliber": "9x19mm",
           "baseDamage": 30,
           "armorDamage": 32,
+          "effectiveRange": 20,
+          "control": 53,
+          "handling": 66,
+          "aimStability": 45,
+          "hipFireAccuracy": 68,
+          "fireRate": 820,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发",
+            "连发"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mp5.png"
         },
@@ -389,6 +743,19 @@
           "caliber": ".45 ACP",
           "baseDamage": 35,
           "armorDamage": 40,
+          "effectiveRange": 27,
+          "control": 52,
+          "handling": 70,
+          "aimStability": 41,
+          "hipFireAccuracy": 65,
+          "fireRate": 605,
+          "magazineCapacity": 25,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/smg45.png"
         },
@@ -398,6 +765,19 @@
           "caliber": "9x39mm",
           "baseDamage": 36,
           "armorDamage": 48,
+          "effectiveRange": 15,
+          "control": 45,
+          "handling": 63,
+          "aimStability": 43,
+          "hipFireAccuracy": 68,
+          "fireRate": 747,
+          "magazineCapacity": 15,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 330,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sr3m.png"
         },
@@ -407,6 +787,19 @@
           "caliber": "5.7x28mm",
           "baseDamage": 32,
           "armorDamage": 35,
+          "effectiveRange": 20,
+          "control": 48,
+          "handling": 56,
+          "aimStability": 45,
+          "hipFireAccuracy": 60,
+          "fireRate": 898,
+          "magazineCapacity": 50,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/p90.png"
         },
@@ -416,6 +809,19 @@
           "caliber": "4.6x30mm",
           "baseDamage": 32,
           "armorDamage": 28,
+          "effectiveRange": 20,
+          "control": 55,
+          "handling": 67,
+          "aimStability": 44,
+          "hipFireAccuracy": 68,
+          "fireRate": 950,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mp7.png"
         },
@@ -425,6 +831,20 @@
           "caliber": ".45 ACP",
           "baseDamage": 32,
           "armorDamage": 28,
+          "effectiveRange": 20,
+          "control": 38,
+          "handling": 69,
+          "aimStability": 42,
+          "hipFireAccuracy": 52,
+          "fireRate": 1091,
+          "magazineCapacity": 17,
+          "fireModes": [
+            "全自动",
+            "单发",
+            "连发"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/vector.png"
         },
@@ -434,6 +854,19 @@
           "caliber": "9x19mm",
           "baseDamage": 36,
           "armorDamage": 33,
+          "effectiveRange": 20,
+          "control": 47,
+          "handling": 60,
+          "aimStability": 46,
+          "hipFireAccuracy": 58,
+          "fireRate": 763,
+          "magazineCapacity": 30,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qcq171.png"
         },
@@ -443,6 +876,19 @@
           "caliber": "9x19mm",
           "baseDamage": 34,
           "armorDamage": 30,
+          "effectiveRange": 20,
+          "control": 46,
+          "handling": 60,
+          "aimStability": 51,
+          "hipFireAccuracy": 50,
+          "fireRate": 793,
+          "magazineCapacity": 24,
+          "fireModes": [
+            "单发",
+            "连发"
+          ],
+          "muzzleVelocity": 475,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mk4.png"
         },
@@ -452,6 +898,19 @@
           "caliber": ".45 ACP",
           "baseDamage": 34,
           "armorDamage": 36,
+          "effectiveRange": 18,
+          "control": 40,
+          "handling": 67,
+          "aimStability": 48,
+          "hipFireAccuracy": 60,
+          "fireRate": 900,
+          "magazineCapacity": 20,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/thompson.png"
         }
@@ -466,6 +925,18 @@
           "caliber": "7.62x51mm",
           "baseDamage": 50,
           "armorDamage": 55,
+          "effectiveRange": 90,
+          "control": 45,
+          "handling": 43,
+          "aimStability": 57,
+          "hipFireAccuracy": 31,
+          "fireRate": 261,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 550,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sr9.png"
         },
@@ -475,6 +946,18 @@
           "caliber": "5.56x45mm",
           "baseDamage": 34,
           "armorDamage": 38,
+          "effectiveRange": 90,
+          "control": 60,
+          "handling": 52,
+          "aimStability": 63,
+          "hipFireAccuracy": 37,
+          "fireRate": 590,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 650,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/mini14.png"
         },
@@ -484,6 +967,19 @@
           "caliber": "7.62x51mm",
           "baseDamage": 39,
           "armorDamage": 41,
+          "effectiveRange": 40,
+          "control": 26,
+          "handling": 52,
+          "aimStability": 55,
+          "hipFireAccuracy": 48,
+          "fireRate": 727,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m14.png"
         },
@@ -493,6 +989,18 @@
           "caliber": "7.62x39mm",
           "baseDamage": 48,
           "armorDamage": 49,
+          "effectiveRange": 55,
+          "control": 30,
+          "handling": 55,
+          "aimStability": 60,
+          "hipFireAccuracy": 38,
+          "fireRate": 510,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sks.png"
         },
@@ -502,6 +1010,18 @@
           "caliber": "7.62x51mm",
           "baseDamage": 50,
           "armorDamage": 55,
+          "effectiveRange": 90,
+          "control": 60,
+          "handling": 49,
+          "aimStability": 66,
+          "hipFireAccuracy": 34,
+          "fireRate": 300,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 550,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/psg1.png"
         },
@@ -511,6 +1031,19 @@
           "caliber": "9x39mm",
           "baseDamage": 40,
           "armorDamage": 48,
+          "effectiveRange": 120,
+          "control": 46,
+          "handling": 54,
+          "aimStability": 61,
+          "hipFireAccuracy": 38,
+          "fireRate": 480,
+          "magazineCapacity": 15,
+          "fireModes": [
+            "单发",
+            "全自动"
+          ],
+          "muzzleVelocity": 330,
+          "soundRadius": 100,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/vss.png"
         },
@@ -520,6 +1053,18 @@
           "caliber": "7.62x54mm",
           "baseDamage": 56,
           "armorDamage": 56,
+          "effectiveRange": 70,
+          "control": 42,
+          "handling": 48,
+          "aimStability": 67,
+          "hipFireAccuracy": 34,
+          "fireRate": 300,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 500,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/svd.png"
         },
@@ -528,7 +1073,19 @@
           "name": "SR-25射手步枪",
           "caliber": "7.62x51mm",
           "baseDamage": 50,
-          "armorDamage": 56,
+          "armorDamage": 55,
+          "effectiveRange": 60,
+          "control": 56,
+          "handling": 56,
+          "aimStability": 59,
+          "hipFireAccuracy": 40,
+          "fireRate": 364,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 550,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sr25.png"
         },
@@ -538,6 +1095,18 @@
           "caliber": "45-70 Govt",
           "baseDamage": 70,
           "armorDamage": 25,
+          "effectiveRange": 30,
+          "control": 47,
+          "handling": 55,
+          "aimStability": 49,
+          "hipFireAccuracy": 43,
+          "fireRate": 100,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 750,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/marlin.png"
         },
@@ -547,6 +1116,18 @@
           "caliber": "7.62x54mm",
           "baseDamage": 47,
           "armorDamage": 46,
+          "effectiveRange": 65,
+          "control": 40,
+          "handling": 42,
+          "aimStability": 50,
+          "hipFireAccuracy": 35,
+          "fireRate": 600,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 680,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/svch.png"
         }
@@ -561,6 +1142,18 @@
           "caliber": "7.62x54mm",
           "baseDamage": 60,
           "armorDamage": 58,
+          "effectiveRange": 150,
+          "control": 55,
+          "handling": 49,
+          "aimStability": 74,
+          "hipFireAccuracy": 26,
+          "fireRate": 44,
+          "magazineCapacity": 7,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 650,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/sv98.png"
         },
@@ -570,6 +1163,18 @@
           "caliber": "7.62x51mm",
           "baseDamage": 61,
           "armorDamage": 58,
+          "effectiveRange": 150,
+          "control": 55,
+          "handling": 57,
+          "aimStability": 66,
+          "hipFireAccuracy": 28,
+          "fireRate": 56,
+          "magazineCapacity": 10,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 550,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/r93.png"
         },
@@ -579,6 +1184,18 @@
           "caliber": "7.62x51mm",
           "baseDamage": 61,
           "armorDamage": 58,
+          "effectiveRange": 150,
+          "control": 24,
+          "handling": 48,
+          "aimStability": 70,
+          "hipFireAccuracy": 27,
+          "fireRate": 48,
+          "magazineCapacity": 5,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 650,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m700.png"
         },
@@ -588,6 +1205,18 @@
           "caliber": ".338",
           "baseDamage": 100,
           "armorDamage": 10,
+          "effectiveRange": 200,
+          "control": 20,
+          "handling": 44,
+          "aimStability": 74,
+          "hipFireAccuracy": 23,
+          "fireRate": 35,
+          "magazineCapacity": 5,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 750,
+          "soundRadius": 800,
           "allowNormal": false,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/awm.png"
         },
@@ -597,6 +1226,18 @@
           "caliber": "12.7x99mm",
           "baseDamage": 100,
           "armorDamage": 20,
+          "effectiveRange": 200,
+          "control": 10,
+          "handling": 20,
+          "aimStability": 66,
+          "hipFireAccuracy": 15,
+          "fireRate": 100,
+          "magazineCapacity": 5,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 525,
+          "soundRadius": 1000,
           "allowNormal": false,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m82.png"
         }
@@ -611,6 +1252,18 @@
           "caliber": "5.56x45mm",
           "baseDamage": 30,
           "armorDamage": 38,
+          "effectiveRange": 40,
+          "control": 44,
+          "handling": 47,
+          "aimStability": 55,
+          "hipFireAccuracy": 48,
+          "fireRate": 858,
+          "magazineCapacity": 100,
+          "fireModes": [
+            "全自动"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m249.png"
         },
@@ -618,8 +1271,20 @@
           "id": "pkm",
           "name": "PKM通用机枪",
           "caliber": "7.62x54mm",
-          "baseDamage": 25,
+          "baseDamage": 45,
           "armorDamage": 42,
+          "effectiveRange": 40,
+          "control": 36,
+          "handling": 42,
+          "aimStability": 59,
+          "hipFireAccuracy": 45,
+          "fireRate": 669,
+          "magazineCapacity": 75,
+          "fireModes": [
+            "全自动"
+          ],
+          "muzzleVelocity": 630,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/pkm.png"
         },
@@ -629,6 +1294,18 @@
           "caliber": "5.8x42mm",
           "baseDamage": 32,
           "armorDamage": 38,
+          "effectiveRange": 40,
+          "control": 52,
+          "handling": 50,
+          "aimStability": 56,
+          "hipFireAccuracy": 50,
+          "fireRate": 785,
+          "magazineCapacity": 125,
+          "fireModes": [
+            "全自动"
+          ],
+          "muzzleVelocity": 575,
+          "soundRadius": 600,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qjb201.png"
         },
@@ -638,6 +1315,19 @@
           "caliber": "6.8x51mm",
           "baseDamage": 55,
           "armorDamage": 53,
+          "effectiveRange": 40,
+          "control": 40,
+          "handling": 38,
+          "aimStability": 50,
+          "hipFireAccuracy": 45,
+          "fireRate": 550,
+          "magazineCapacity": 125,
+          "fireModes": [
+            "全自动",
+            "单发"
+          ],
+          "muzzleVelocity": 630,
+          "soundRadius": 600,
           "allowNormal": false,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m250.png"
         }
@@ -653,6 +1343,18 @@
           "baseDamage": 17,
           "armorDamage": 16,
           "pelletCount": 8,
+          "effectiveRange": 12,
+          "control": 26,
+          "handling": 57,
+          "aimStability": 41,
+          "hipFireAccuracy": 49,
+          "fireRate": 74,
+          "magazineCapacity": 6,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m870.png"
         },
@@ -663,6 +1365,18 @@
           "baseDamage": 14,
           "armorDamage": 16,
           "pelletCount": 8,
+          "effectiveRange": 12,
+          "control": 28,
+          "handling": 53,
+          "aimStability": 45,
+          "hipFireAccuracy": 52,
+          "fireRate": 261,
+          "magazineCapacity": 7,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m1014.png"
         },
@@ -673,6 +1387,18 @@
           "baseDamage": 13,
           "armorDamage": 16,
           "pelletCount": 8,
+          "effectiveRange": 10,
+          "control": 36,
+          "handling": 55,
+          "aimStability": 49,
+          "hipFireAccuracy": 48,
+          "fireRate": 300,
+          "magazineCapacity": 5,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 300,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/s12k.png"
         },
@@ -683,6 +1409,18 @@
           "baseDamage": 17,
           "armorDamage": 18,
           "pelletCount": 8,
+          "effectiveRange": 15,
+          "control": 25,
+          "handling": 50,
+          "aimStability": 48,
+          "hipFireAccuracy": 47,
+          "fireRate": 375,
+          "magazineCapacity": 2,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/double_barrel_725.png"
         },
@@ -690,9 +1428,22 @@
           "id": "fs12",
           "name": "FS12霰弹枪",
           "caliber": "12 Gauge",
-          "baseDamage": 16,
+          "baseDamage": 14,
           "armorDamage": 16,
           "pelletCount": 8,
+          "effectiveRange": 12,
+          "control": 30,
+          "handling": 52,
+          "aimStability": 47,
+          "hipFireAccuracy": 51,
+          "fireRate": 300,
+          "magazineCapacity": 6,
+          "fireModes": [
+            "单发",
+            "泵动"
+          ],
+          "muzzleVelocity": 450,
+          "soundRadius": 500,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/fs12.png"
         }
@@ -707,6 +1458,18 @@
           "caliber": "9x19mm",
           "baseDamage": 27,
           "armorDamage": 25,
+          "effectiveRange": 27,
+          "control": 42,
+          "handling": 70,
+          "aimStability": 35,
+          "hipFireAccuracy": 75,
+          "fireRate": 462,
+          "magazineCapacity": 17,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/g17.png"
         },
@@ -714,8 +1477,20 @@
           "id": "qsz92g",
           "name": "QSZ92G手枪",
           "caliber": "9x19mm",
-          "baseDamage": 32,
+          "baseDamage": 34,
           "armorDamage": 32,
+          "effectiveRange": 27,
+          "control": 55,
+          "handling": 64,
+          "aimStability": 41,
+          "hipFireAccuracy": 77,
+          "fireRate": 375,
+          "magazineCapacity": 15,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/qsz92g.png"
         },
@@ -725,6 +1500,18 @@
           "caliber": ".50 AE",
           "baseDamage": 56,
           "armorDamage": 53,
+          "effectiveRange": 15,
+          "control": 40,
+          "handling": 66,
+          "aimStability": 39,
+          "hipFireAccuracy": 71,
+          "fireRate": 207,
+          "magazineCapacity": 7,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 340,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/desert_eagle.png"
         },
@@ -734,6 +1521,18 @@
           "caliber": "9x19mm",
           "baseDamage": 34,
           "armorDamage": 32,
+          "effectiveRange": 22,
+          "control": 44,
+          "handling": 67,
+          "aimStability": 38,
+          "hipFireAccuracy": 78,
+          "fireRate": 508,
+          "magazineCapacity": 12,
+          "fireModes": [
+            "连发"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/93r.png"
         },
@@ -743,6 +1542,18 @@
           "caliber": "9x19mm",
           "baseDamage": 23,
           "armorDamage": 16,
+          "effectiveRange": 10,
+          "control": 30,
+          "handling": 62,
+          "aimStability": 43,
+          "hipFireAccuracy": 67,
+          "fireRate": 1172,
+          "magazineCapacity": 17,
+          "fireModes": [
+            "全自动"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/g18.png"
         },
@@ -752,6 +1563,18 @@
           "caliber": ".357 Magnum",
           "baseDamage": 56,
           "armorDamage": 39,
+          "effectiveRange": 35,
+          "control": 34,
+          "handling": 62,
+          "aimStability": 43,
+          "hipFireAccuracy": 65,
+          "fireRate": 182,
+          "magazineCapacity": 6,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 340,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/revolver_357.png"
         },
@@ -761,6 +1584,18 @@
           "caliber": ".45 ACP",
           "baseDamage": 40,
           "armorDamage": 30,
+          "effectiveRange": 15,
+          "control": 39,
+          "handling": 65,
+          "aimStability": 40,
+          "hipFireAccuracy": 67,
+          "fireRate": 373,
+          "magazineCapacity": 7,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 400,
+          "soundRadius": 300,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/m1911.png"
         }
@@ -775,6 +1610,18 @@
           "caliber": "箭矢",
           "baseDamage": 90,
           "armorDamage": 65,
+          "effectiveRange": 65,
+          "control": 32,
+          "handling": 66,
+          "aimStability": 55,
+          "hipFireAccuracy": 57,
+          "fireRate": 182,
+          "magazineCapacity": 1,
+          "fireModes": [
+            "单发"
+          ],
+          "muzzleVelocity": 300,
+          "soundRadius": 30,
           "allowNormal": true,
           "image": "https://raw.githubusercontent.com/Zhoyi011/delta-force-core/main/assets/weapons/compound_bow.png"
         }

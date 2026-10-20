@@ -113,6 +113,13 @@ export interface Attachment {
   addedMuzzleVelocity?: number;
   /** 优势射程 +X */
   addedEffectiveRange?: number;
+  /** 弹匣容量 +X */
+  addedMagazineCapacity?: number;
+  /** 换弹时间变化（单位：秒） */
+  addedReloadTime?: number;
+
+  /** 特殊机制描述（例如火控系统、夜视仪等） */
+  description?: string; 
 
   // === 兼容性影响（为未来的互斥/解锁预留） ===
   /** 装上后新增的槽位 */
