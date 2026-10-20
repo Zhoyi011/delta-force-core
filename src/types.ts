@@ -121,6 +121,9 @@ export interface Attachment {
   /** 特殊机制描述（例如火控系统、夜视仪等） */
   description?: string; 
 
+  // 🆕 专门用于存“高/中/低”或者其他文字效果（如枪声抑制、倍率、火光等）
+  specialEffects?: string[]; 
+
   // === 兼容性影响（为未来的互斥/解锁预留） ===
   /** 装上后新增的槽位 */
   unlocksSlots?: AttachmentSlot[];
