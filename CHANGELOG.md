@@ -5,6 +5,13 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.7.1](https://github.com/Zhoyi011/delta-force-core/compare/v0.7.0...v0.7.1) (2026-10-20)
+
+
+### 📊 数据更新
+
+* 补全 47 个瞄准镜的特殊战术描述，配合 AI 查询 ([754779f](https://github.com/Zhoyi011/delta-force-core/commit/754779f36cc0e5343d9ca6aabaae20d7b58e9ad7))
+
 ## [0.7.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.6.0...v0.7.0) (2026-10-19)
 
 
