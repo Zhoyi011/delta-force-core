@@ -10,18 +10,20 @@ import {
   findWeaponById,
   findOperatorById,
   findAmmoById,
+  findItemById,        // 🆕
   findWeaponsByCaliber,
   findAmmoByCaliber,
   listAllWeapons,
   listAllOperators,
   listWeaponCategories,
   listOperatorCategories,
-  searchWeapons,       // 🆕
-  searchOperators,     // 🆕
+  searchWeapons,       
+  searchOperators,     
   WEAPONS,
   OPERATORS,
   EQUIPMENT,
   AMMO,
+  ITEMS,               // 🆕
 } from './index.js';
 
 /**
@@ -59,7 +61,7 @@ export async function startMcpServer(): Promise<void> {
   }
 
   const server = new Server(
-    { name: 'delta-force-core', version: '0.5.1' },
+    { name: 'delta-force-core', version: '0.7.3' }, // 稍微升级一下版本号标识
     { capabilities: { tools: {}, resources: {} } },
   );
 
@@ -138,6 +140,15 @@ export async function startMcpServer(): Promise<void> {
         },
       },
       {
+        name: 'find_item', // 🆕
+        description: 'Find a consumable or item by its id (e.g., medical supplies, keys).',
+        inputSchema: {
+          type: 'object',
+          properties: { id: { type: 'string' } },
+          required: ['id'],
+        },
+      },
+      {
         name: 'find_weapons_by_caliber',
         description: 'Find all weapons that use the given caliber.',
         inputSchema: {
@@ -180,7 +191,6 @@ export async function startMcpServer(): Promise<void> {
         description: 'List available weapon and operator categories.',
         inputSchema: { type: 'object', properties: {} },
       },
-      // 🆕 新增搜索工具
       {
         name: 'search_weapons',
         description: 'Search weapons by keyword (matches id / name / caliber, case-insensitive).',
@@ -207,7 +217,7 @@ export async function startMcpServer(): Promise<void> {
   }));
 
   // ---------------------------------------------------
-  // Tools 执行逻辑（🚨 这里是 switch）
+  // Tools 执行逻辑
   // ---------------------------------------------------
   server.setRequestHandler(schemas.CallToolRequestSchema, async (request: any) => {
     const { name, arguments: args } = request.params;
@@ -236,6 +246,8 @@ export async function startMcpServer(): Promise<void> {
         return wrap(findOperatorById(a.id as string) ?? null);
       case 'find_ammo':
         return wrap(findAmmoById(a.id as string) ?? null);
+      case 'find_item': // 🆕
+        return wrap(findItemById(a.id as string) ?? null);
       case 'find_weapons_by_caliber':
         return wrap(findWeaponsByCaliber(a.caliber as string));
       case 'find_ammo_by_caliber':
@@ -259,7 +271,6 @@ export async function startMcpServer(): Promise<void> {
           weaponCategories: listWeaponCategories(),
           operatorCategories: listOperatorCategories(),
         });
-      // 🆕 执行搜索
       case 'search_weapons':
         return wrap(searchWeapons(a.keyword as string));
       case 'search_operators':
@@ -279,6 +290,7 @@ export async function startMcpServer(): Promise<void> {
       { uri: 'delta-force://operators', name: 'All operators', mimeType: 'application/json' },
       { uri: 'delta-force://equipment', name: 'All equipment', mimeType: 'application/json' },
       { uri: 'delta-force://ammo', name: 'All ammo', mimeType: 'application/json' },
+      { uri: 'delta-force://items', name: 'All consumable items', mimeType: 'application/json' }, // 🆕
     ],
   }));
 
@@ -289,6 +301,7 @@ export async function startMcpServer(): Promise<void> {
       'delta-force://operators': OPERATORS,
       'delta-force://equipment': EQUIPMENT,
       'delta-force://ammo': AMMO,
+      'delta-force://items': ITEMS, // 🆕
     };
     const data = map[uri];
     if (data === undefined) throw new Error(`Unknown resource: ${uri}`);

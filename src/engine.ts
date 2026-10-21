@@ -8,6 +8,7 @@ import { OPERATORS } from './data/operators.js';
 import { WEAPONS }   from './data/weapons/index.js';   // 👈 修改了路径
 import { EQUIPMENT } from './data/equipment.js';
 import { AMMO }      from './data/ammo.js';
+import { ITEMS }     from './data/items.js';           // 🆕 导入物品
 
 import type {
   Engine,
@@ -28,6 +29,7 @@ import type {
   TierOptions,
   Loadout,
   LoadoutOptions,
+  GameItem, // 🆕
 } from './types.js';
 
 // -----------------------------------------------------
@@ -84,6 +86,7 @@ export function createEngine(options: EngineOptions = {}): Engine {
   const getWeapons   = () => WEAPONS;
   const getAmmo      = () => AMMO;
   const getEquipment = () => EQUIPMENT;
+  const getItems     = () => ITEMS; // 🆕
 
   const listAllOperators = (): Operator[] =>
     OPERATORS.flatMap((g) => g.operators);
@@ -155,6 +158,8 @@ export function createEngine(options: EngineOptions = {}): Engine {
     listAllWeapons().find((w) => w.id === id);
   const findAmmoById = (id: string) =>
     AMMO.find((a) => a.id === id);
+  const findItemById = (id: string) =>  // 🆕
+    ITEMS.find((i) => i.id === id);
 
   const findArmorById    = (id: string) => findInTiers(EQUIPMENT.armors, id);
   const findHelmetById   = (id: string) => findInTiers(EQUIPMENT.helmets, id);
@@ -257,7 +262,7 @@ export function createEngine(options: EngineOptions = {}): Engine {
 
   return {
     // 数据视图
-    getOperators, getWeapons, getAmmo, getEquipment,
+    getOperators, getWeapons, getAmmo, getEquipment, getItems,
 
     // 抽签
     getRandomOperator, getRandomWeapon, getRandomAmmo,
@@ -265,7 +270,7 @@ export function createEngine(options: EngineOptions = {}): Engine {
     getRandomLoadout,
 
     // 查询
-    findOperatorById, findWeaponById, findAmmoById,
+    findOperatorById, findWeaponById, findAmmoById, findItemById,
     findArmorById, findHelmetById, findBackpackById, findChestRigById,
     findWeaponsByCaliber, findAmmoByCaliber, findWeaponByAlias,
 

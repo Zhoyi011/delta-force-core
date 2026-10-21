@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/delta-force-core/schema/main/v1.json",
   "version": "0.2.0",
-  "generatedAt": "2026-10-21T10:20:37.951Z",
+  "generatedAt": "2026-10-21T10:42:44.812Z",
   "operators": [
     {
       "category": "突击兵",

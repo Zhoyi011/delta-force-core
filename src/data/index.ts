@@ -7,3 +7,4 @@ export { WEAPONS }   from './weapons/index.js';
 export { EQUIPMENT } from './equipment.js';
 export { AMMO }      from './ammo.js';
 export { ATTACHMENTS } from './attachments.js';
+export { ITEMS }     from './items.js'; // 🆕 导出物品

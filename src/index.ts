@@ -17,6 +17,8 @@ export { OPERATORS } from './data/operators.js';
 export { WEAPONS }   from './data/weapons/index.js';   // 👈 修改了路径
 export { EQUIPMENT } from './data/equipment.js';
 export { AMMO }      from './data/ammo.js';
+export { ATTACHMENTS } from './data/attachments.js';
+export { ITEMS }     from './data/items.js';           // 🆕 导出物品
 
 // ---------- 引擎工厂 ----------
 export { createEngine } from './engine.js';
@@ -32,6 +34,7 @@ export const {
   getWeapons,
   getAmmo,
   getEquipment,
+  getItems, // 🆕
 
   // 抽签
   getRandomOperator,
@@ -47,6 +50,7 @@ export const {
   findOperatorById,
   findWeaponById,
   findAmmoById,
+  findItemById, // 🆕
   findArmorById,
   findHelmetById,
   findBackpackById,

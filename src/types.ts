@@ -154,6 +154,32 @@ export interface Equipment {
   chest_rigs: EquipmentTier[];
 }
 
+// ---------- 消耗品 / 物品 ----------
+export type ItemCategory = '药品' | '维修套件' | '针剂' | '高价值' | '钥匙';
+
+export interface GameItem {
+  id: string;
+  name: string;
+  category: ItemCategory;
+  /** 品质等级：1~6 (如药品的 2级绿/3级蓝/4级紫/5级金) */
+  tier?: number;
+  /** 参考基础价格（哈夫币） */
+  basePrice?: number;
+  /** 占格大小 (如 '1x2') */
+  size?: string;
+  /** 启用时间 (秒) */
+  useTime?: number;
+  /** 可用次数 (如 '7/7') */
+  uses?: string;
+  /** 耐久度 (如 '800/800') */
+  durability?: string;
+  /** 回复生命值 (每秒) */
+  healRate?: number;
+  /** 物品功能描述 */
+  description?: string;
+  image?: string;
+}
+
 // ---------- 完整配装 ----------
 export interface Loadout {
   operator: Operator;
@@ -227,6 +253,7 @@ export interface Engine {
   getWeapons(): readonly WeaponCategory[];
   getAmmo(): readonly Ammo[];
   getEquipment(): Equipment;
+  getItems(): readonly GameItem[]; // 🆕 获取所有物品
 
   // 抽签
   getRandomOperator(category?: string): Operator;
@@ -246,6 +273,7 @@ export interface Engine {
   findHelmetById(id: string): EquipmentItem | undefined;
   findBackpackById(id: string): EquipmentItem | undefined;
   findChestRigById(id: string): EquipmentItem | undefined;
+  findItemById(id: string): GameItem | undefined; // 🆕 按 id 查物品
   findWeaponsByCaliber(caliber: string): Weapon[];
   findAmmoByCaliber(caliber: string): Ammo[];
   findWeaponByAlias(alias: string): Weapon | undefined;
