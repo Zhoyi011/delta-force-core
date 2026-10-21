@@ -151,5 +151,188 @@ export const ITEMS: GameItem[] = [
     uses: '2/2',
     useTime: 3,
     description: '启用后可以治疗1处伤口，最多可以使用2次；启用时间3秒。'
-  }
+  },
+
+  // ---------------------------------------------------
+  // 维修套件（护甲）
+  // ---------------------------------------------------
+  {
+    id: 'item_repair_armor_t6',
+    name: '高级护甲维修组合',
+    category: '维修套件',
+    tier: 6,
+    basePrice: 487190,
+    size: '2x2', // 维修套件通常是 2x2
+    durability: '200/200', // 维修点数
+    useTime: 4.5,
+    description: '针对6级装备的局内维修工具，能快速修复护甲耐久度。每块插板消耗工具包50点耐久度；启用时间4.5秒。'
+  },
+  {
+    id: 'item_repair_armor_t5',
+    name: '精密护甲维修包',
+    category: '维修套件',
+    tier: 5,
+    basePrice: 238050,
+    size: '2x2',
+    durability: '120/120',
+    useTime: 4.5,
+    description: '针对5级装备的局内维修工具，能快速修复护甲耐久度。每块插板消耗工具包40点耐久度；启用时间4.5秒。'
+  },
+  {
+    id: 'item_repair_armor_t4',
+    name: '标准护甲维修包',
+    category: '维修套件',
+    tier: 4,
+    basePrice: 46615,
+    size: '2x2',
+    durability: '75/75',
+    useTime: 4.5,
+    description: '针对4级装备的局内维修工具，能快速修复护甲耐久度。每块插板消耗工具包40点耐久度。'
+  },
+  {
+    id: 'item_repair_armor_t3',
+    name: '自制护甲维修包',
+    category: '维修套件',
+    tier: 3,
+    basePrice: 22180,
+    size: '2x2',
+    durability: '50/50',
+    useTime: 4.5,
+    description: '针对3级装备的局内维修工具，能快速修复护甲耐久度。每块插板消耗工具包25点耐久度。'
+  },
+
+  // ---------------------------------------------------
+  // 维修套件（头盔）
+  // ---------------------------------------------------
+  {
+    id: 'item_repair_helmet_t6',
+    name: '高级头盔维修组合',
+    category: '维修套件',
+    tier: 6,
+    basePrice: 376400,
+    size: '1x1', // 头盔维修包体积可能比护甲小
+    durability: '100/100',
+    useTime: 4.5,
+    description: '针对6级装备的局内维修工具，能快速修复头盔耐久度。每块插板消耗工具包25点耐久度；启用时间4.5秒。'
+  },
+  {
+    id: 'item_repair_helmet_t5',
+    name: '精密头盔维修包',
+    category: '维修套件',
+    tier: 5,
+    basePrice: 171055,
+    size: '1x1',
+    durability: '75/75',
+    useTime: 4.5,
+    description: '针对5级装备的局内维修工具，能快速修复头盔耐久度。每块插板消耗工具包25点耐久度；启用时间4.5秒。'
+  },
+  {
+    id: 'item_repair_helmet_t4',
+    name: '标准头盔维修包',
+    category: '维修套件',
+    tier: 4,
+    basePrice: 59245,
+    size: '1x1',
+    durability: '50/50',
+    useTime: 4.5,
+    description: '针对4级装备的局内维修工具，能快速修复头盔耐久度。每块插板消耗工具包25点耐久度。'
+  },
+  {
+    id: 'item_repair_helmet_t3',
+    name: '自制头盔维修包',
+    category: '维修套件',
+    tier: 3,
+    basePrice: 17584,
+    size: '1x1',
+    durability: '30/30',
+    useTime: 4.5,
+    description: '针对3级装备的局内维修工具，能快速修复头盔耐久度。每块插板消耗工具包15点耐久度。'
+  },
+  // ---------------------------------------------------
+  // 针剂（四级 / 紫色）
+  // ---------------------------------------------------
+  {
+    id: 'item_stim_stamina_purple',
+    name: '体能针',
+    category: '针剂',
+    tier: 4,
+    basePrice: 81715,
+    size: '1x1',
+    useTime: 3,
+    description: '提升体力上限，提升体力恢复速度，持续300秒。'
+  },
+  {
+    id: 'item_stim_perception_purple',
+    name: '感知强化剂',
+    category: '针剂',
+    tier: 4,
+    basePrice: 57000,
+    size: '1x1',
+    useTime: 3,
+    description: '提升10%拾音范围，持续300秒。'
+  },
+  {
+    id: 'item_stim_weight_purple',
+    name: 'M2肌肉注射剂',
+    category: '针剂',
+    tier: 4,
+    basePrice: 48125,
+    size: '1x1',
+    useTime: 3,
+    description: '提升负重能力，持续300秒。'
+  },
+
+  // ---------------------------------------------------
+  // 针剂（三级 / 蓝色）
+  // ---------------------------------------------------
+  {
+    id: 'item_stim_stamina_blue',
+    name: '体能活化针',
+    category: '针剂',
+    tier: 3,
+    basePrice: 32720,
+    size: '1x1',
+    useTime: 3,
+    description: '提升体力上限，提升体力恢复速度，持续180秒。'
+  },
+  {
+    id: 'item_stim_combat_blue',
+    name: 'OE2战斗兴奋剂',
+    category: '针剂',
+    tier: 3,
+    basePrice: 29723,
+    size: '1x1',
+    useTime: 3,
+    description: '在紧急情况下用于恢复体力的注射剂，能在短时间内恢复大量体力，单次使用。'
+  },
+  {
+    id: 'item_stim_perception_blue',
+    name: '感知活化针',
+    category: '针剂',
+    tier: 3,
+    basePrice: 22500,
+    size: '1x1',
+    useTime: 3,
+    description: '提升10%拾音范围，持续180秒。'
+  },
+  {
+    id: 'item_stim_weight_blue',
+    name: 'M1肌肉强化针',
+    category: '针剂',
+    tier: 3,
+    basePrice: 15750,
+    size: '1x1',
+    useTime: 3,
+    description: '提升负重能力，持续180秒。'
+  },
+  {
+    id: 'item_stim_adrenaline_blue',
+    name: '去甲肾上腺素',
+    category: '针剂',
+    tier: 3,
+    basePrice: 13200,
+    size: '1x1',
+    useTime: 3,
+    description: '可有效增加肌肉耐力的注射剂，能提升体力上限，持续120秒。'
+  },
 ];
