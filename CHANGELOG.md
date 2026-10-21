@@ -5,6 +5,21 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.8.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.7.2...v0.8.0) (2026-10-21)
+
+
+### ✨ 新功能
+
+* 新增医疗与消耗品系统，支持药品全属性查询与 MCP 接入 ([8603f91](https://github.com/Zhoyi011/delta-force-core/commit/8603f91bf477c40884cc46f99684c40fb050b59f))
+* 新增长弓溪谷房卡数据，支持地图与房间检索 ([defdeaf](https://github.com/Zhoyi011/delta-force-core/commit/defdeaf3abb7008a98b4afedcc3939bb720a274c))
+
+
+### 📊 数据更新
+
+* 新增全部维修套件与针剂数据，完善消耗品系统 ([d6149fb](https://github.com/Zhoyi011/delta-force-core/commit/d6149fbff0ee5059abfa2ea0bd15c129e40972dc))
+* 补全全部功能配件的数值与特殊机制，并新增部分遗漏配件 ([76bb305](https://github.com/Zhoyi011/delta-force-core/commit/76bb305506d44eb350cbdbadce54a9b3ad50e210))
+* 补全全部地图的房卡数据（共 76 张） ([35e791a](https://github.com/Zhoyi011/delta-force-core/commit/35e791ad7820a8f07acf345a985b4e357ef00875))
+
 ## [0.7.2](https://github.com/Zhoyi011/delta-force-core/compare/v0.7.1...v0.7.2) (2026-10-20)
 
 
