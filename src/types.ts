@@ -178,6 +178,12 @@ export interface GameItem {
   /** 物品功能描述 */
   description?: string;
   image?: string;
+  
+  // 🆕 房卡/钥匙专属字段
+  /** 所属地图（如 '长弓溪谷'） */
+  map?: string;
+  /** 房间名或钥匙具体位置（如 '技术室'） */
+  room?: string;
 }
 
 // ---------- 完整配装 ----------

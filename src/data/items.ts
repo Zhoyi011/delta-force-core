@@ -335,4 +335,223 @@ export const ITEMS: GameItem[] = [
     useTime: 3,
     description: '可有效增加肌肉耐力的注射剂，能提升体力上限，持续120秒。'
   },
+  // ---------------------------------------------------
+  // 房卡（红色 / 六级）
+  // ---------------------------------------------------
+  {
+    id: 'key_hotel_king',
+    name: '饭店国王房',
+    category: '钥匙',
+    tier: 6,
+    basePrice: 4253556,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '钻石皇后饭店',
+    description: '用于开启饭店国王房的门禁卡。'
+  },
+  {
+    id: 'key_radar_drone',
+    name: '雷达站无人机平台',
+    category: '钥匙',
+    tier: 6,
+    basePrice: 3633514,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启雷达站无人机平台的门禁卡。'
+  },
+
+  // ---------------------------------------------------
+  // 房卡（金色 / 五级）
+  // ---------------------------------------------------
+  {
+    id: 'key_hotel_prince',
+    name: '饭店王子房',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 1344723,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '钻石皇后饭店',
+    description: '用于开启饭店王子房的门禁卡。'
+  },
+  {
+    id: 'key_radar_datacenter',
+    name: '雷达站数据中心',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 1176473,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启雷达站数据中心的门禁卡。'
+  },
+  {
+    id: 'key_lab_archive',
+    name: '实验楼资料室',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 932288,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启实验楼资料室的门禁卡。'
+  },
+  {
+    id: 'key_hotel_peach',
+    name: '饭店黑桃房',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 839468,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '钻石皇后饭店',
+    description: '用于开启饭店黑桃房的门禁卡。'
+  },
+  {
+    id: 'key_radar_control',
+    name: '雷达站控制室',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 815543,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启雷达站控制室的门禁卡。'
+  },
+  {
+    id: 'key_lab_office',
+    name: '实验楼办公室',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 657037,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启实验楼办公室的门禁卡。'
+  },
+  {
+    id: 'key_hotel_general',
+    name: '饭店将军房',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 755096,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '钻石皇后饭店',
+    description: '用于开启饭店将军房的门禁卡。'
+  },
+  {
+    id: 'key_hotel_diamond',
+    name: '饭店方块房',
+    category: '钥匙',
+    tier: 5,
+    basePrice: 846044,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '钻石皇后饭店',
+    description: '用于开启饭店方块房的门禁卡。'
+  },
+
+  // ---------------------------------------------------
+  // 房卡（紫色 / 四级）
+  // ---------------------------------------------------
+  {
+    id: 'key_town_restaurant',
+    name: '小镇餐厅',
+    category: '钥匙',
+    tier: 4,
+    basePrice: 500251,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '阿米亚小镇',
+    description: '用于开启小镇餐厅的门禁卡。'
+  },
+  {
+    id: 'key_cargo_meeting',
+    name: '运输机会议室',
+    category: '钥匙',
+    tier: 4,
+    basePrice: 487030,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '坠机之地',
+    description: '用于开启运输机会议室的门禁卡。'
+  },
+  {
+    id: 'key_radar_meeting',
+    name: '雷达站会议室',
+    category: '钥匙',
+    tier: 4,
+    basePrice: 466783,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启雷达站会议室的门禁卡。'
+  },
+
+  // ---------------------------------------------------
+  // 房卡（蓝色 / 三级）
+  // ---------------------------------------------------
+  {
+    id: 'key_checkpoint_armory',
+    name: '检查站库房',
+    category: '钥匙',
+    tier: 3,
+    basePrice: 239400,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '检查站',
+    description: '用于开启检查站库房的门禁卡。'
+  },
+  {
+    id: 'key_radar_side_door',
+    name: '雷达站侧门',
+    category: '钥匙',
+    tier: 3,
+    basePrice: 220000,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '哈夫克雷达站',
+    description: '用于开启雷达站侧门的门禁卡。'
+  },
+  {
+    id: 'key_ranch_office',
+    name: '牧场管理房',
+    category: '钥匙',
+    tier: 3,
+    basePrice: 48300,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '沙径牧场',
+    description: '用于开启牧场管理房的门禁卡。'
+  },
+  {
+    id: 'key_train_station_ticket',
+    name: '铁脊车站售票室',
+    category: '钥匙',
+    tier: 3,
+    basePrice: 42000,
+    size: '1x1',
+    durability: '20/20',
+    map: '长弓溪谷',
+    room: '小火车站',
+    description: '用于开启铁脊车站售票室的门禁卡。'
+  },
 ];
