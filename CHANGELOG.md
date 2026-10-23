@@ -5,6 +5,13 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 版本号遵循 [Semantic Versioning](https://semver.org/)。
 
+## [0.9.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.8.0...v0.9.0) (2026-10-23)
+
+
+### ✨ 新功能
+
+* add red quality item categories and high-value items data ([e6ed0c1](https://github.com/Zhoyi011/delta-force-core/commit/e6ed0c1f54c75d9f5e4b708a78990cdfc46de77f))
+
 ## [0.8.0](https://github.com/Zhoyi011/delta-force-core/compare/v0.7.2...v0.8.0) (2026-10-21)
 
 
