@@ -3,7 +3,7 @@
 // =====================================================
 
 /** 品质 —— 官方数据不提供，由用户层评估 */
-export type WeaponQuality = '绿色' | '蓝色' | '紫色' | '金色';
+export type WeaponQuality = '红色' | '金色' | '紫色' | '蓝色' | '绿色' | '灰色';
 
 // ---------- 干员 ----------
 export interface Operator {
@@ -155,16 +155,32 @@ export interface Equipment {
 }
 
 // ---------- 消耗品 / 物品 ----------
-export type ItemCategory = '药品' | '维修套件' | '针剂' | '高价值' | '钥匙';
+export type ItemCategory =
+  | '药品'
+  | '维修套件'
+  | '针剂'
+  | '高价值'
+  | '钥匙'
+  | '工艺收藏'
+  | '电子产品'
+  | '医疗用品'
+  | '家居物品'
+  | '工具材料'
+  | '资料情报'
+  | '能源燃料';
 
 export interface GameItem {
   id: string;
   name: string;
   category: ItemCategory;
+  /** 品质颜色 */
+  quality?: WeaponQuality;
   /** 品质等级：1~6 (如药品的 2级绿/3级蓝/4级紫/5级金) */
   tier?: number;
   /** 参考基础价格（哈夫币） */
   basePrice?: number;
+  /** 参考基础价值（哈夫币） */
+  baseValue?: number;
   /** 占格大小 (如 '1x2') */
   size?: string;
   /** 启用时间 (秒) */

@@ -1369,4 +1369,466 @@ export const ITEMS: GameItem[] = [
     room: '运输仓库',
     description: '用于开启铁路通道的门禁卡。'
   },
+
+  // ---------------------------------------------------
+  // 工艺收藏（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_heart_of_africa',
+    name: '非洲之心',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 14455454
+  },
+  {
+    id: 'item_tears_of_the_ocean',
+    name: '海洋之泪',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 52773323
+  },
+  {
+    id: 'item_mbt_model',
+    name: '主战坦克模型',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 2480354
+  },
+  {
+    id: 'item_zongheng',
+    name: '「纵横」',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 13964552
+  },
+  {
+    id: 'item_impressionist_painting',
+    name: '印象派名画',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 2216389
+  },
+  {
+    id: 'item_golden_tear_crown',
+    name: '萬金淚冠',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 13947732
+  },
+  {
+    id: 'item_famous_kiln_porcelain',
+    name: '名窯瓷器',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 1495216
+  },
+  {
+    id: 'item_ifv_model',
+    name: '步戰車模型',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 1386437
+  },
+  {
+    id: 'item_reass_gramophone',
+    name: '雷斯的留聲機',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 1282036
+  },
+  {
+    id: 'item_claudius_bust',
+    name: '克勞迪烏斯半身像',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 2188838
+  },
+  {
+    id: 'item_fish_moon_scepter_top',
+    name: '魚月徽章權杖首',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 8350498
+  },
+  {
+    id: 'item_portable_life_support',
+    name: '便攜式生命維持系統',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 648781
+  },
+  {
+    id: 'item_musket_exhibit',
+    name: '滑膛槍展品',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 2107910
+  },
+  {
+    id: 'item_golden_mullet_statue',
+    name: '黃金鯔魚頭雕像',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 521227
+  },
+  {
+    id: 'item_tianyuan_difang',
+    name: '「天圓地方」',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 2866098
+  },
+  {
+    id: 'item_golden_gazelle',
+    name: '黃金瞪羚',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 432780
+  },
+  {
+    id: 'item_spinosaurus_claw_fossil',
+    name: '棘龍爪化石',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 350040
+  },
+  {
+    id: 'item_pure_gold_bar',
+    name: '萬足金條',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 333903
+  },
+  {
+    id: 'item_saeed_pocket_watch',
+    name: '賽伊德的懷錶',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 216831
+  },
+  {
+    id: 'item_luxury_mechanical_watch',
+    name: '名貴機械錶',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 212469
+  },
+  {
+    id: 'item_gilded_playing_card',
+    name: '鎏金卡牌',
+    category: '工艺收藏',
+    quality: '红色',
+    baseValue: 197787
+  },
+
+  // ---------------------------------------------------
+  // 电子产品（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_portable_military_radar',
+    name: '便攜軍用雷達',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 2154765
+  },
+  {
+    id: 'item_mandel_supercomputing_unit',
+    name: '曼德爾超算單元',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 2029029
+  },
+  {
+    id: 'item_high_speed_disk_array',
+    name: '高速磁碟陣列',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 1871209
+  },
+  {
+    id: 'item_blade_server',
+    name: '刀片伺服器',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 1516045
+  },
+  {
+    id: 'item_flight_recorder',
+    name: '飛行記錄儀',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 2621255
+  },
+  {
+    id: 'item_laptop_computer',
+    name: '手提電腦',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 4573511
+  },
+  {
+    id: 'item_military_info_terminal',
+    name: '軍用資訊終端',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 995655
+  },
+  {
+    id: 'item_military_radio',
+    name: '軍用電台',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 1937701
+  },
+  {
+    id: 'item_camcorder',
+    name: '攝影機',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 652598
+  },
+  {
+    id: 'item_military_drone',
+    name: '軍用無人機',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 633930
+  },
+  {
+    id: 'item_military_control_terminal',
+    name: '軍用控制終端',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 388595
+  },
+  {
+    id: 'item_graphics_card',
+    name: '顯示卡',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 335213
+  },
+  {
+    id: 'item_electronic_shackles',
+    name: '電子鐐銬',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 1485038
+  },
+  {
+    id: 'item_positioning_receiver',
+    name: '定位接收器',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 185124
+  },
+  {
+    id: 'item_stellar_sensor',
+    name: '恆星感測器',
+    category: '电子产品',
+    quality: '红色',
+    baseValue: 192953
+  },
+
+  // ---------------------------------------------------
+  // 医疗用品（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_resuscitation_ventilator',
+    name: '復甦呼吸機',
+    category: '医疗用品',
+    quality: '红色',
+    baseValue: 7057586
+  },
+  {
+    id: 'item_ecmo_machine',
+    name: 'ECMO',
+    category: '医疗用品',
+    quality: '红色',
+    baseValue: 2912662
+  },
+  {
+    id: 'item_aed_defibrillator',
+    name: '自動體外除顫器',
+    category: '医疗用品',
+    quality: '红色',
+    baseValue: 2312586
+  },
+  {
+    id: 'item_medical_robot',
+    name: '醫療機器人',
+    category: '医疗用品',
+    quality: '红色',
+    baseValue: 1331651
+  },
+  {
+    id: 'item_ventilator',
+    name: '呼吸機',
+    category: '医疗用品',
+    quality: '红色',
+    baseValue: 471166
+  },
+
+  // ---------------------------------------------------
+  // 家居物品（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_robot_vacuum_mop',
+    name: '掃拖一體機器人',
+    category: '家居物品',
+    quality: '红色',
+    baseValue: 2035478
+  },
+  {
+    id: 'item_heavy_duty_vacuum',
+    name: '強力吸塵器',
+    category: '家居物品',
+    quality: '红色',
+    baseValue: 1670218
+  },
+  {
+    id: 'item_olivia_champagne',
+    name: '奧莉薇婭香檳',
+    category: '家居物品',
+    quality: '红色',
+    baseValue: 340710
+  },
+  {
+    id: 'item_diamond_caviar',
+    name: '「鑽石」魚子醬',
+    category: '家居物品',
+    quality: '红色',
+    baseValue: 175607
+  },
+
+  // ---------------------------------------------------
+  // 工具材料（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_reinforced_carbon_fiber_plate',
+    name: '強化碳纖維板',
+    category: '工具材料',
+    quality: '红色',
+    baseValue: 2264311
+  },
+  {
+    id: 'item_military_artillery_shell',
+    name: '軍用砲彈',
+    category: '工具材料',
+    quality: '红色',
+    baseValue: 1459184
+  },
+  {
+    id: 'item_femtosecond_laser',
+    name: '飛秒雷射器',
+    category: '工具材料',
+    quality: '红色',
+    baseValue: 565956
+  },
+  {
+    id: 'item_ultrasonic_cutter',
+    name: '超音波切割刀',
+    category: '工具材料',
+    quality: '红色',
+    baseValue: 200191
+  },
+
+  // ---------------------------------------------------
+  // 资料情报（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_top_secret_server',
+    name: '絕密伺服器',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 2189874
+  },
+  {
+    id: 'item_cloud_storage_array',
+    name: '雲儲存陣列',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 2014866
+  },
+  {
+    id: 'item_alpha_bci_experiment_data_raven',
+    name: 'Alpha腦机實驗數據-渡鴉',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 1455292
+  },
+  {
+    id: 'item_tide_prison_map_4',
+    name: '潮汐監獄地圖-4',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 605034
+  },
+  {
+    id: 'item_archived_audio',
+    name: '已封存音訊',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 503253
+  },
+  {
+    id: 'item_quantum_storage',
+    name: '量子儲存器',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 291888
+  },
+  {
+    id: 'item_experimental_data',
+    name: '實驗數據',
+    category: '资料情报',
+    quality: '红色',
+    baseValue: 228243
+  },
+
+  // ---------------------------------------------------
+  // 能源燃料（红色 / 大红）
+  // ---------------------------------------------------
+  {
+    id: 'item_armored_vehicle_battery',
+    name: '裝甲車電池',
+    category: '能源燃料',
+    quality: '红色',
+    baseValue: 7845732
+  },
+  {
+    id: 'item_micro_reactor',
+    name: '微型反應爐',
+    category: '能源燃料',
+    quality: '红色',
+    baseValue: 6087614
+  },
+  {
+    id: 'item_power_battery_pack',
+    name: '動力電池組',
+    category: '能源燃料',
+    quality: '红色',
+    baseValue: 2554876
+  },
+  {
+    id: 'item_reactor_cooling_core',
+    name: '反應堆冷卻核心',
+    category: '能源燃料',
+    quality: '红色',
+    baseValue: 2399032
+  },
+  {
+    id: 'item_prototype_fusion_power_unit',
+    name: '試製聚變供能單元',
+    category: '能源燃料',
+    quality: '红色',
+    baseValue: 2238921
+  },
+  {
+    id: 'item_high_energy_gas_canister',
+    name: '高能瓦斯罐',
+    category: '能源燃料',
+    quality: '红色',
+    baseValue: 554025
+  },
 ];
